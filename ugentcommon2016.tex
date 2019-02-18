@@ -1,0 +1,123 @@
+%%
+%% Common code for report/book class
+%% Author: strij
+%% 16/02/2019
+%%
+
+% These packages need to be loaded after the class and options to prevent issues.
+\RequirePackage{xstring}
+\RequirePackage{ulem}
+\RequirePackage{scrlayer-scrpage}
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{textcase}
+\RequirePackage{hyperref}
+\RequirePackage{ugentstyle2016}
+
+% Applied when the user wants the margins to be set, but nothing else.
+\IfStringInList{\ugentcls@layout}{margins,colours,titlestyle,titlefont,all}{
+\newgeometry{margin=2\smallblock}
+}{}
+
+\newcommand*{\@showfooter}{0}
+
+\ifugentcls@footer
+\gdef\@showfooter{1}
+\else
+\IfStrEq{\ugentcls@style}{notes}{
+\gdef\@showfooter{1}
+}{
+\gdef\@showfooter{0}
+}
+\fi
+
+% This block is applied when the user wants full UGent style.
+% It sets the main font to Arial; we don't use Panno, since the UGent doesn't
+% have a license for italic versions.
+\IfStrEq{\ugentcls@layout}{all}{
+\setmainfont{Arial}
+}{}
+
+% Applied when the user wants the titles in the correct colours, but nothing else.
+\IfStringInList{\ugentcls@layout}{colours,titlestyle,titlefont,all}{
+\addtokomafont{disposition}{\color{ugent-blue}}
+}{}
+
+\IfStringInList{\ugentcls@layout}{titlestyle,titlefont,all}{
+\renewcommand\partlineswithprefixformat[3]{#2{\MakeUppercase{#3}}}
+\renewcommand{\ULthickness}{0.7mm}
+\renewcommand{\ULdepth}{1.6mm}
+\addtokomafont{chapter}{\selectfont\bfseries}
+\renewcommand\chapterlineswithprefixformat[3]{#2{\MakeUppercase{\uline{#3}}}}
+\renewcommand{\chapterlinesformat}[3]{\@hangfrom{#2}{\uline{\MakeUppercase{#3}}}}
+\addtokomafont{section}{\bfseries}
+\addtokomafont{subsection}{\bfseries}
+\addtokomafont{subsubsection}{\bfseries}
+}{}
+
+% This block is applied when the user wants the titles in UGent style, but not the main text.
+% Format the titles according to the UGent style (fonts and text decorations)
+% Sizes are not set, allowing for more flexibility for the user.
+\IfStringInList{\ugentcls@layout}{titlefont,all}{
+\addtokomafont{disposition}{\pannofamily}
+\renewcommand{\ULthickness}{0.5mm}
+\renewcommand{\ULdepth}{1.25mm}
+\newcommand*\tocentryformat[1]{{\pannofamily#1}}
+\RedeclareSectionCommands
+[
+tocentryformat=\tocentryformat,
+tocpagenumberformat=\tocentryformat
+]
+{section,subsection,subsubsection,paragraph,subparagraph}
+}{}
+
+\NewTranslationFallback{title}{Titel}
+\NewTranslation{english}{title}{Title}
+\NewTranslationFallback{date}{Datum}
+\NewTranslation{english}{date}{Date}
+\NewTranslationFallback{page}{Pagina}
+\NewTranslation{english}{page}{Page}
+
+% These need to be defined outside of cfoot, otherwise GetTranslation is expanded too early.
+\newcommand*{\foot@title}{\GetTranslation{title}}
+\newcommand*{\foot@date}{\GetTranslation{date}}
+\newcommand*{\foot@page}{\GetTranslation{page}}
+
+% If enabled, add the footer. This is only enabled by default when using style=notes,
+% but can be overridden.
+\IfEq{\@showfooter}{1}{
+\RequirePackage{lastpage} % Only needed if we use this
+
+% Define translations
+
+
+\setkomafont{pagefoot}{\normalfont} % No italics please
+\setkomafont{pagenumber}{} % Nothing please
+\ifoot*{} % Empty the inner footer.
+\cfoot*{
+\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
+    \node[anchor=south west] (footer) at ([shift={(1.52\smallblock,0)}]current page.south west) {
+    \includegraphics[height=2\smallblock]{\@campusname}
+    };
+    \node[anchor=south west, align=left] (title) at ([shift={(6\smallblock,0.5\smallblock)}]current page.south west) {
+    \begin{minipage}[c][1\smallblock][s]{6\smallblock}
+        \raggedright
+        \pannosemibold[8pt][10pt]{\color{ugent-blue}\MakeTextUppercase{\foot@title}} \\
+        \panno[10pt][15pt]{\@title}
+    \end{minipage}};
+    \node[anchor=south west, align=left] (title) at ([shift={(13\smallblock,0.5\smallblock)}]current page.south west) {
+    \begin{minipage}[c][1\smallblock][s]{2\smallblock}
+        \raggedright
+        \pannosemibold[8pt][10pt]{\color{ugent-blue}\MakeTextUppercase{\foot@date}} \\
+        \panno[10pt][15pt]{\@date}
+    \end{minipage}};
+    \node[anchor=south west, align=left] (title) at ([shift={(16\smallblock,0.5\smallblock)}]current page.south west) {
+    \begin{minipage}[c][1\smallblock][s]{1\smallblock}
+        \raggedright
+        \pannosemibold[8pt][10pt]{\color{ugent-blue}\MakeTextUppercase{\foot@page}} \\
+        \panno[10pt][15pt]{\pagemark/\pageref*{LastPage}}
+    \end{minipage}};
+\end{tikzpicture}}
+\ofoot*{} % Empty the outer footer.
+}{}
+

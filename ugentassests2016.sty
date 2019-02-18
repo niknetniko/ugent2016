@@ -1,0 +1,105 @@
+% Provides the official Ghent University style elements.
+%
+% The available colours are:
+% - Main colours: ugent-blue and ugent-yellow
+% - Faculty colours: ugent-{lettercode}, where lettrecode is the two-letter code
+%
+% The available fonts are:
+% - /panofamily -> general fontspec font
+% - /pano[size]{text}
+% - /panosemibold[size]{text}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ugentassests2016}[2019/02/13 package ugentassests2016]
+
+\RequirePackage{babel}
+\RequirePackage{xcolor}
+\RequirePackage{fontspec}
+\RequirePackage{xparse}
+\RequirePackage{translations}
+
+% Define global Ghent University colours
+\definecolor{ugent-blue}{RGB}{30, 100, 200}		% traffic blue		/ verkeersblauw
+\definecolor{ugent-yellow}{RGB}{255, 210, 0}	% zinc yellow		/ zinkgeel
+
+% Define faculty colours
+\definecolor{ugent-lw}{RGB}{241, 164, 43}		% signal yellow		/ signaalgeel
+\definecolor{ugent-re}{RGB}{220, 78, 40}		% vermilion			/ vermiljoen
+\definecolor{ugent-we}{RGB}{45, 140, 168}		% no match
+\definecolor{ugent-ge}{RGB}{232, 94, 113}		% rose				/ bleekrood
+\definecolor{ugent-ea}{RGB}{111, 113, 185}		% distant blue		/ verblauw
+\definecolor{ugent-eb}{RGB}{174, 176, 80}		% no match
+\definecolor{ugent-di}{RGB}{130, 84, 145}		% signal violet		/ signaalviolet
+\definecolor{ugent-pp}{RGB}{251, 126, 58}		% deep orange		/ dieporanje
+\definecolor{ugent-bw}{RGB}{39, 171, 173}		% turquoise blue	/ turkooisblauw
+\definecolor{ugent-fw}{RGB}{190, 81, 144}		% traffic purple	/ verkeerspurper
+\definecolor{ugent-ps}{RGB}{113, 168, 96}		% yellow green		/ geelgroen
+
+
+% Define the font
+\newfontfamily\pannofamily{UGent Panno Text}[
+    BoldFont	= UGent Panno Text SemiBold
+]
+
+% Define useful fonts commands that set the text to Pano, with an optional size
+\NewDocumentCommand{\panno}{ o O{#1} m } {%
+    \IfNoValueTF {#1} {%
+        {\pannofamily #3}
+    }{%
+        {\fontsize{#1}{#2}\pannofamily #3}
+    }%
+}
+\NewDocumentCommand{\pannosemibold}{ o O{#1} m } {%
+    \IfNoValueTF {#1} {%
+        {\textbf{\pannofamily #3}}
+    }{%
+        {\textbf{\fontsize{#1}{#2}\pannofamily #3}}
+    }%
+}
+
+% Define the names of all faculties
+\NewTranslationFallback{we}{Faculteit Wetenschappen}
+\NewTranslation{english}{we}{Faculty of Sciences}
+\NewTranslationFallback{re}{Faculteit Recht en Criminologie}
+\NewTranslation{english}{re}{Faculty of Law and Criminology}
+\NewTranslationFallback{lw}{Faculteit Letteren en Wijsbegeerte}
+\NewTranslation{english}{lw}{Faculty of Arts and Philosophy}
+\NewTranslationFallback{ge}{Faculteit Geneeskunde en Gezondheidswetenschappen}
+\NewTranslation{english}{ge}{Faculty of Medicine and Heath Sciences}
+\NewTranslationFallback{ea}{Faculteit Ingenieurswetenschappen en Architectuur}
+\NewTranslation{english}{ea}{Faculty of Engineering and Architecture}
+\NewTranslationFallback{eb}{Faculteit Economie en Bedrijfskunde}
+\NewTranslation{english}{eb}{Faculty of Economics and Business Administration}
+\NewTranslationFallback{di}{Faculteit Dierengeneeskunde}
+\NewTranslation{english}{di}{Faculty of Veterinary Medicine}
+\NewTranslationFallback{pp}{Faculteit Psychologie en Pedagogische Wetenschappen}
+\NewTranslation{english}{pp}{Faculty of Psychology and Educational Sciences}
+\NewTranslationFallback{bw}{Faculteit Bio-Ingenieurswetenschappen}
+\NewTranslation{english}{bw}{Faculty of Bioscience Engineering}
+\NewTranslationFallback{fw}{Faculteit Farmaceutische Wetenschappen}
+\NewTranslation{english}{fw}{Faculty of Pharmaceutical Sciences}
+\NewTranslationFallback{ps}{Faculteit Politieke en Sociale Wetenschappen}
+\NewTranslation{english}{ps}{Faculty of Political and Social Sciences}
+
+
+% By default, use Dutch.
+\NewTranslationFallback{assets}{nl}
+% Otherwise, use English.
+\NewTranslation{english}{assets}{en}
+
+\newcommand*{\ugentdefault}{ugentstyle2016-ugent-\GetTranslation{assets}}
+\newcommand*{\ugentkortrijk}{ugentstyle2016-kortrijk}
+\newcommand*{\ugentglobal}{ugentstyle2016-global}
+\newcommand*{\ugentfacultylogo}[1]{ugentstyle2016-#1-\GetTranslation{assets}}
+% Needs some expansion magic, see https://tex.stackexchange.com/a/326191/92083
+\newcommand*{\ugentfacultyname}[1]{%
+    \edef\transkey{#1}%
+    \expandafter\GetTranslation\expandafter{\transkey}%
+}
+
+% Define the grid sizes we will need.
+\newlength{\bigblock}
+\setlength\bigblock{\dimexpr\pageheight/7\relax}
+\newlength{\smallblock}
+\setlength\smallblock{\dimexpr\bigblock/4\relax}
+
+\endinput
