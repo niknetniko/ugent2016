@@ -1,55 +1,72 @@
+%%----------------------------------------------------------------------------------------------------------------------
+%% Copyright (C) 2019 by Niko Strijbol
 %%
-%% Author: strij
-%% 14/02/2019
+%% This file may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version
+%% 1.3c of this license or (at your option) any later version. The latest version of this license is in:
 %%
+%%      http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of LaTeX version 2006/05/20 or later.
+%%----------------------------------------------------------------------------------------------------------------------
+%% example.tex
+%% Shows how to use the UGent 2016 styles.
 
-% Preamble
-\documentclass[11pt,dutch,campus=default,faculty=ea,layout=all]{ugentreport2016}
+% The ugentreport2016 and ugentbook2016 are based on respectively scrreprt and scrbook respectively.
+% They have three options:
+% - campus: default, global, kortrijk - determines which UGent logo is used
+% - faculty: two letter code for the facculty. See the docs for the possible values. Changes logos and colours
+% - layout: none, margins, colours, titlestyle, titlefont, all. Possible values are listed below, but are described
+%           more completely in the manual. Each next level also applies everything from the previous one.
+%   - none: don't apply any styling apart from the title page
+%   - margins: adjust the margins of the pages
+%   - colours: apply ugent colours to titles
+%   - titlestyle: apply styling to titles (bold, font size, etc.)
+%   - titlefont: apply the UGent Panno font to the titles (you must have this font installed, see the manual)
+%   - all: apply all styling, including the body text
+%
+% All other options are passed to the underlying class.
+\documentclass[11pt,dutch,campus=default,faculty=we,layout=all]{ugentreport2016}
 
-%\usepackage{layout}
-%\usepackage{showframe}
+% Provide example text
+\usepackage{lipsum}
 
+% Some meta data. See the manual for an overview for everything.
+\author{Jan Jaap}
+\title{Supermooie cursus die een hele lange titel heeft}
+\subtitle{Hello}
+\academyyear{2018--2019}
+\programme{Informatica}
+\wordcount{10000}
+\studentnumber{12356}
+\email{example@ugent.be}
+\phone{+3256225600}
+\address{%
+Gentstraat 56 \\
+1111 Genternaaring
+}
+\department{Departement Informatica}
+\researchgroup{Programmeren enzo}
+%\facultish{Dienst Maaltijdvoorziening}
 
-% Document
 \begin{document}
 
-    \author{Niko Strijbol}
-    \title{Supermooie cursus die een hele lange titel heeft toch}
-    \subtitle{Hello}
-    \academyyear{2018--2019}
-    \programme{Informatica}
-    \wordcount{10000}
-    \studentnumber{12356}
-    \email{niko.strijbol@ugent.be}
-    \phone{+3256225600}
-    \address{%
-        Ter Puttetstraat 8 \\
-        8940 Wervik
-    }
-    \department{Departement Informatica}
-    \researchgroup{Programmeren enzo}
-    %\facultish{Dienst Maaltijdvoorziening}
-
+    % Title page
     \maketitle
-
+    % Contents
     \tableofcontents
 
     \part{Hallo}
     \chapter{hallo}
-    OK
+    \lipsum
     \section{Test}
-    OK
-    ok
-    iok
+    \lipsum[3]
     \subsection{Test}
-    ok
+    \lipsum
     \subsubsection{Test}
+    \lipsum
+    \subsubsection{Test2}
+    \lipsum[2]
+    \part{Hallo deel II}
+    \lipsum[5]
 
-    Hallo! Dit is een test.
-    \newpage
-    hallo
-
-    \newpage
-
-    %\layout
 \end{document}
