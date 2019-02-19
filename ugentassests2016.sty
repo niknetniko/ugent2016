@@ -96,6 +96,17 @@
     \expandafter\GetTranslation\expandafter{\transkey}%
 }
 
+% Provide language specific versions
+\newcommand*{\ugentdefaulten}{ugentstyle2016-ugent-en}
+\newcommand*{\ugentkortrijken}{ugentstyle2016-kortrijk}
+\newcommand*{\ugentglobalen}{ugentstyle2016-global}
+\newcommand*{\ugentfacultylogoen}[1]{ugentstyle2016-#1-en}
+
+\newcommand*{\ugentdefaultnl}{ugentstyle2016-ugent-nl}
+\newcommand*{\ugentkortrijknl}{ugentstyle2016-kortrijk}
+\newcommand*{\ugentglobalnl}{ugentstyle2016-global}
+\newcommand*{\ugentfacultylogonl}[1]{ugentstyle2016-#1-nl}
+
 % Define the grid sizes we will need.
 \newlength{\bigblock}
 \setlength\bigblock{\dimexpr\pageheight/7\relax}

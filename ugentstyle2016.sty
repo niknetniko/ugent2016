@@ -28,14 +28,11 @@
 }
 
 % Which template we want
-\DeclareStringOption[course]{style}
+\DeclareStringOption[course]{ugentstyle}
 % The faculty (or none)
 \DeclareStringOption[we]{faculty}
 % Which campus
 \DeclareStringOption[default]{campus}
-% How much of the text to style
-% none -> colours -> titles -> everything
-\DeclareStringOption[none]{layout}
 
 \DeclareDefaultOption{%
 	\@unknownoptionerror
@@ -54,13 +51,13 @@
 }{%
 \PackageError{\@currname}{Unknown campus provided: \ugent@campus}{Consult the manual for allowed values.}%
 }
-\IfStringInList{\ugent@style}{course,report,notes}{%
+\IfStringInList{\ugent@ugentstyle}{course,report,notes}{%
 }{%
-\PackageError{\@currname}{Unknown title page style provided: \ugent@style}{Consult the manual for allowed values.}%
+\PackageError{\@currname}{Unknown title page style provided: \ugent@ugentstyle}{Consult the manual for allowed values.}%
 }
 
 % Some combinations of options are not possible.
-\IfStrEq{\ugent@style}{course}{%
+\IfStrEq{\ugent@ugentstyle}{course}{%
 	\IfStrEq{\ugent@faculty}{none}{%
 		\PackageError{\@currname}{The faculty is mandatory when using course title page}{Consult the manual for more information.}
 	}{}
@@ -112,7 +109,7 @@
 \newcommand*{\address}[1]{\gdef\@address{#1}}
 \newcommand*{\facultish}[1]{\gdef\@facultish{#1}}
 
-\IfStrEq{\ugent@style}{notes}{%
+\IfStrEq{\ugent@ugentstyle}{notes}{%
 % By default and if possible, we use the faculty name.
 	\IfStrEq{\@facultish}{}{%
 		\IfStrEq{\ugent@faculty}{none}{%
@@ -141,7 +138,7 @@
 \renewcommand*{\maketitle}{%
 \pagenumbering{gobble} % Numbers are restored later
 
-\IfStrEq{\ugent@style}{report}{ % BEGIN IF style == report
+\IfStrEq{\ugent@ugentstyle}{report}{ % BEGIN IF style == report
 \newgeometry{margin=2\smallblock} % adjust margins, restored later
 \begin{titlepage}
 
@@ -178,7 +175,7 @@
 
 	\IfStrEq{\@titletext}{}{}{%
 	\vspace{1\baselineskip}
-	\noindent\@titletext
+	\noindent\@titletext \par
 	}
 	\vspace{1\baselineskip}
 	\noindent\panno{\@academyyear}
@@ -188,7 +185,7 @@
 \end{titlepage}
 \restoregeometry % restore margins
 }{ % ELSE style => notes|course
-\IfStrEq{\ugent@style}{notes}{ % IF style => notes
+\IfStrEq{\ugent@ugentstyle}{notes}{ % IF style => notes
 \newgeometry{margin=2\smallblock} % adjust margins, restored later
 \begin{titlepage}
 
@@ -217,10 +214,9 @@
 	\vspace{0.50\baselineskip}
 	\noindent\panno[20pt][30pt]{\color{ugent-blue}\MakeTextUppercase\@subtitle} \par
 
-	\noindent\@titletext
 	\IfStrEq{\@titletext}{}{}{%
 	\vspace{2\baselineskip}
-	\noindent\@titletext
+	\noindent\@titletext \par
 	}
 
 	\vspace{2\baselineskip}

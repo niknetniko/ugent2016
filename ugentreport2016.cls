@@ -18,7 +18,7 @@
 }
 
 % Some options we pass to the underlying style package.
-\DeclareStringOption[report]{style}{\PassOptionsToPackage{\CurrentOption}{ugentstyle2016}}
+\DeclareStringOption[report]{ugentstyle}{\PassOptionsToPackage{\CurrentOption}{ugentstyle2016}}
 \DeclareStringOption{faculty}{\PassOptionsToPackage{\CurrentOption}{ugentstyle2016}}
 \DeclareStringOption{campus}{\PassOptionsToPackage{\CurrentOption}{ugentstyle2016}}
 
