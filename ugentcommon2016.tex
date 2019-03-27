@@ -13,6 +13,7 @@
 \RequirePackage{textcase}
 \RequirePackage{hyperref}
 \RequirePackage{ugentstyle2016}
+\RequirePackage{etoolbox}
 
 % Applied when the user wants the margins to be set, but nothing else.
 \IfStringInList{\ugentcls@layout}{margins,colours,titlestyle,titlefont,all}{
@@ -47,9 +48,13 @@
 \renewcommand\partlineswithprefixformat[3]{#2{\MakeUppercase{#3}}}
 \renewcommand{\ULthickness}{0.7mm}
 \renewcommand{\ULdepth}{1.6mm}
+\ifcsundef{chapter}{
+
+}{
 \addtokomafont{chapter}{\selectfont\bfseries}
 \renewcommand\chapterlineswithprefixformat[3]{#2{\MakeUppercase{\uline{#3}}}}
 \renewcommand{\chapterlinesformat}[3]{\@hangfrom{#2}{\uline{\MakeUppercase{#3}}}}
+}
 \addtokomafont{section}{\bfseries}
 \addtokomafont{subsection}{\bfseries}
 \addtokomafont{subsubsection}{\bfseries}
