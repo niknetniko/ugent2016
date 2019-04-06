@@ -9,12 +9,13 @@
 \RequirePackage{graphicx}
 \RequirePackage{kvoptions}
 \RequirePackage{xstring}
-\RequirePackage{ulem}
+\RequirePackage{soul}
 \RequirePackage{geometry}
 \RequirePackage{translations}
 \RequirePackage{ugentassests2016}
 \RequirePackage{hyperref}
 \RequirePackage{phonenumbers}
+\usepackage{setspace}
 
 \usetikzlibrary{positioning}
 
@@ -137,6 +138,7 @@
 
 \renewcommand*{\maketitle}{%
 \pagenumbering{gobble} % Numbers are restored later
+\setul{0.2ex}{0.2ex}
 
 \IfStrEq{\ugent@ugentstyle}{report}{ % BEGIN IF style == report
 \newgeometry{margin=2\smallblock} % adjust margins, restored later
@@ -156,10 +158,9 @@
 	\end{tikzpicture}
 
 	\vspace{\fill}
-	%\noindent\begin{minipage}{\textwidth}
-	\renewcommand{\ULthickness}{1mm}
-	\renewcommand{\ULdepth}{2mm}
-	\noindent\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
+	\begin{spacing}{2.3}
+	\noindent\linespread{5}\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\ul{\@title}}} \par
+	\end{spacing}
 	\vspace{0.50\baselineskip}
 	\noindent\panno[20pt][30pt]{\color{ugent-blue}\MakeTextUppercase\@subtitle} \par
 
@@ -207,10 +208,10 @@
 	}
 
 	\vspace{\fill}
-	%\noindent\begin{minipage}{\textwidth}
-	\renewcommand{\ULthickness}{1mm}
-	\renewcommand{\ULdepth}{2mm}
-	\noindent\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
+	%TODO
+	%\renewcommand{\ULthickness}{1mm}
+	%\renewcommand{\ULdepth}{2mm}
+	\noindent\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\ul{\@title}}} \par
 	\vspace{0.50\baselineskip}
 	\noindent\panno[20pt][30pt]{\color{ugent-blue}\MakeTextUppercase\@subtitle} \par
 
@@ -269,9 +270,10 @@
 		\begin{minipage}[c][\dimexpr0.37\pageheight-2\smallblock\relax][s]{\dimexpr0.61\pagewidth-2\smallblock\relax}
 			\raggedright
 			\color{white}
-			\renewcommand{\ULthickness}{1mm}
-			\renewcommand{\ULdepth}{2mm}
-			\pannosemibold[35pt][65pt]{\MakeTextUppercase{\uline{\@title}}} \par
+			% TODO
+			%\renewcommand{\ULthickness}{1mm}
+			%\renewcommand{\ULdepth}{2mm}
+			\pannosemibold[35pt][65pt]{\MakeTextUppercase{\ul{\@title}}} \par
 			\vspace{0.75\baselineskip}
 			\pannosemibold[30pt][60pt]{\@subtitle}
 			\vfill
@@ -285,6 +287,7 @@
 } % END nested IF style
 } % END IF style
 \pagenumbering{arabic} % Restore page numbering
+\resetul
 }
 
 
