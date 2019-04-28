@@ -1,27 +1,41 @@
-% Provides the official Ghent University style elements.
+%%----------------------------------------------------------------------------------------------------------------------
+%% Copyright (C) 2019 by Niko Strijbol
+%%
+%% This file may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version
+%% 1.3c of this license or (at your option) any later version. The latest version of this license is in:
+%%
+%%      http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of LaTeX version 2006/05/20 or later.
+%%----------------------------------------------------------------------------------------------------------------------
 %
-% The available colours are:
-% - Main colours: ugent-blue and ugent-yellow
-% - Faculty colours: ugent-{lettercode}, where lettrecode is the two-letter code
+% This package provides style building blocks for use in documents and other packages.
+% Provided are following components:
+% - Colours, both for the university and for the faculties
+% - Utility methods to use the university font (requires seperate installation)
+% - Logos for various entities, such as the university, the faculties and campusses.
 %
-% The available fonts are:
-% - /panofamily -> general fontspec font
-% - /pano[size]{text}
-% - /panosemibold[size]{text}
+% Note that this package requires the University's font, UGent Panno Text, to be installed and available as a system
+% font.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{ugentassests2016}[2019/02/13 package ugentassests2016]
 
+% Required for detecting the language of the document
 \RequirePackage{babel}
+% Required for provinding the colours
 \RequirePackage{xcolor}
+% Required for loading the custom fonts
 \RequirePackage{fontspec}
+% Used to provide new commands
 \RequirePackage{xparse}
+% Used to simplify getting the correct resources for the language.
 \RequirePackage{translations}
 
-% Define global Ghent University colours
+% Global Ghent University colours
 \definecolor{ugent-blue}{RGB}{30, 100, 200}		% traffic blue		/ verkeersblauw
 \definecolor{ugent-yellow}{RGB}{255, 210, 0}	% zinc yellow		/ zinkgeel
 
-% Define faculty colours
+% Faculty colours
 \definecolor{ugent-lw}{RGB}{241, 164, 43}		% signal yellow		/ signaalgeel
 \definecolor{ugent-re}{RGB}{220, 78, 40}		% vermilion			/ vermiljoen
 \definecolor{ugent-we}{RGB}{45, 140, 168}		% no match
@@ -35,20 +49,25 @@
 \definecolor{ugent-ps}{RGB}{113, 168, 96}		% yellow green		/ geelgroen
 
 
-% Define the font
+% Provide the font family
 \newfontfamily\pannofamily{UGent Panno Text}[
     BoldFont	= UGent Panno Text SemiBold
 ]
 
-% Define useful fonts commands that set the text to Pano, with an optional size
-\NewDocumentCommand{\panno}{ o O{#1} m } {%
+% Allow easy use of the Panno font by providing a command to apply the font.
+% Use: \panno[20pt][30pt]{text}
+% The sizes are optional; if present they are passed to the \fontsize command.
+\NewDocumentCommand\panno{ o O{#1} m } {%
     \IfNoValueTF {#1} {%
         {\pannofamily #3}
     }{%
         {\fontsize{#1}{#2}\pannofamily #3}
     }%
 }
-\NewDocumentCommand{\pannosemibold}{ o O{#1} m } {%
+% Allow easy use of the Panno SemiBold font by providing a command to apply the font.
+% Use: \pannosemibold[20pt][30pt]{text}
+% The sizes are optional; if present they are passed to the \fontsize command.
+\NewDocumentCommand\pannosemibold{ o O{#1} m } {%
     \IfNoValueTF {#1} {%
         {\textbf{\pannofamily #3}}
     }{%
@@ -96,18 +115,19 @@
     \expandafter\GetTranslation\expandafter{\transkey}%
 }
 
-% Provide language specific versions
+% English versions
 \newcommand*{\ugentdefaulten}{ugentstyle2016-ugent-en}
 \newcommand*{\ugentkortrijken}{ugentstyle2016-kortrijk}
 \newcommand*{\ugentglobalen}{ugentstyle2016-global}
 \newcommand*{\ugentfacultylogoen}[1]{ugentstyle2016-#1-en}
 
+% Dutch versions
 \newcommand*{\ugentdefaultnl}{ugentstyle2016-ugent-nl}
 \newcommand*{\ugentkortrijknl}{ugentstyle2016-kortrijk}
 \newcommand*{\ugentglobalnl}{ugentstyle2016-global}
 \newcommand*{\ugentfacultylogonl}[1]{ugentstyle2016-#1-nl}
 
-% Define the grid sizes we will need.
+% Define the block sizes for the typographic grid.
 \newlength{\bigblock}
 \setlength\bigblock{\dimexpr\pageheight/7\relax}
 \newlength{\smallblock}

@@ -1,8 +1,18 @@
+%%----------------------------------------------------------------------------------------------------------------------
+%% Copyright (C) 2019 by Niko Strijbol
 %%
-%% Common code for report/book class
-%% Author: strij
-%% 16/02/2019
+%% This file may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version
+%% 1.3c of this license or (at your option) any later version. The latest version of this license is in:
 %%
+%%      http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of LaTeX version 2006/05/20 or later.
+%%----------------------------------------------------------------------------------------------------------------------
+%%
+%% ugentcommon2016.tex
+%%
+%% Common code for the document classes. At the moment, this code is used as \input{ugentcommon2016} in those classes.
+%% However, in the future, we might move to dtx.
 
 % These packages need to be loaded after the class and options to prevent issues.
 \RequirePackage{xstring}
@@ -49,7 +59,6 @@
 \renewcommand{\ULthickness}{0.7mm}
 \renewcommand{\ULdepth}{1.6mm}
 \ifcsundef{chapter}{
-
 }{
 \addtokomafont{chapter}{\selectfont\bfseries}
 \renewcommand\chapterlineswithprefixformat[3]{#2{\MakeUppercase{\uline{#3}}}}
@@ -92,9 +101,6 @@ tocpagenumberformat=\tocentryformat
 % but can be overridden.
 \IfEq{\@showfooter}{1}{
 \RequirePackage{lastpage} % Only needed if we use this
-
-% Define translations
-
 
 \setkomafont{pagefoot}{\normalfont} % No italics please
 \setkomafont{pagenumber}{} % Nothing please

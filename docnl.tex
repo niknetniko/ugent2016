@@ -1,14 +1,7 @@
-%%
-%% Author: strij
-%% 19/02/2019
-%%
-
 % Preamble
 \documentclass[11pt,dutch,parskip=half-]{scrartcl}
 
 \usepackage{lmodern}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage{minted}
 \usepackage{ugentassests2016}
 \usepackage{graphicx}
@@ -86,10 +79,18 @@
         \end{minipage} \\
     \end{tabular}
 
-    \section{Klassen \texttt{ugentreport2016} en \texttt{ugentbook2016}}\label{sec:klassen}
+    \section{Klassen \texttt{ugentreport2016}, \texttt{ugentbook2016} en \texttt{ugentarticle2016}}\label{sec:klassen}
 
-    Er zijn twee documentklassen voorzien: \texttt{ugentreport2016} en \texttt{ugentbook2016}, die respectievelijk \texttt{scrreprt} en \texttt{scrbook} gebruiken als onderliggende klasse.
-    Beide klassen ondersteunen dezelfde opties, de enige verschillen zijn de onderliggende klassen en de standaardwaarden van de opties.
+    Deze pakketten zijn bedoeld als aanvulling op de \KOMAScript-klassen.
+    Bijgevolg zijn er drie documentklassen, die aansluiten bij die voorzien door \KOMAScript:
+
+    \begin{itemize}
+        \item \texttt{ugentreport2016} gebruikt \texttt{scrreprt} als onderliggende klasse.
+        \item \texttt{ugentbook2016} gebruikt \texttt{scrbook} als onderliggende klasse.
+        \item \texttt{ugentarticle2016} gebruikt \texttt{scrartcl} als onderliggende klasse.
+    \end{itemize}
+
+    Alle klassen ondersteunen dezelfde opties, de enige verschillen zijn de onderliggende klassen en de standaardwaarden van de opties.
 
     Snel op weg is mogelijk door het \texttt{example.tex}-bestand te gebruiken, dat de meeste opties kort uitlegt.
 
@@ -373,7 +374,7 @@
 
     \subsection{Grid}\label{subsec:grid}
 
-    De huisstijl definiëert een typografisch grid over de pagina\footnote{Zie \url{https://styleguide.ugent.be/basisprincipes/grid-en-lay-out.html}}, dat bekomen wordt door de lengte door 7 te delen.
+    De huisstijl definieert een typografisch grid over de pagina\footnote{Zie \url{https://styleguide.ugent.be/basisprincipes/grid-en-lay-out.html}}, dat bekomen wordt door de lengte door 7 te delen.
     Dat zijn de grote blokken.
     De lengte van een groot blok wordt dan gedeeld door 4 om een klein blok te krijgen.
     Het kleine blok is de basisgrootte van het document.
@@ -390,17 +391,28 @@
 
     \section{Voorblad met stijl \texttt{course}}\label{sec:voorblad-met-stijl-course}
     \begin{center}
-        \frame{\includegraphics[width=0.9\textwidth]{ugent2016title-course.pdf}}
+        \frame{\includegraphics[width=0.9\textwidth]{frontpages/ugent2016title-course.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{report}}\label{sec:voorblad-met-stijl-report}
     \begin{center}
-        \frame{\includegraphics[width=0.9\textwidth]{ugent2016title-report.pdf}}
+        \frame{\includegraphics[width=0.9\textwidth]{frontpages/ugent2016title-report.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{notes}}\label{sec:voorblad-met-stijl-notes}
     \begin{center}
-        \frame{\includegraphics[width=0.9\textwidth]{ugent2016title-notes.pdf}}
+        \frame{\includegraphics[width=0.9\textwidth]{frontpages/ugent2016title-notes.pdf}}
     \end{center}
+
+    \section{Wijzigingen}
+
+    Dit onderdeel bevat de voornaamste wijzigingen.
+    De exacte wijzigingen kunnen gevonden worden in de Github-repository van de pakketten.
+
+    \subsubsection*{15 februari 2019}
+    \begin{itemize}
+        \item Bugfixes bij onderlijnen lange titels
+        \item Voeg klasse \texttt{ugentartcl2016} toe
+    \end{itemize}
 
 \end{document}

@@ -1,34 +1,58 @@
-% Provides UGent title pages
+%%----------------------------------------------------------------------------------------------------------------------
+%% Copyright (C) 2019 by Niko Strijbol
+%%
+%% This file may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version
+%% 1.3c of this license or (at your option) any later version. The latest version of this license is in:
+%%
+%%      http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of LaTeX version 2006/05/20 or later.
+%%----------------------------------------------------------------------------------------------------------------------
+% Provides title pages in the style of Ghent University.
+%
+% This package provides the three officially defined styles [1]: notes/report, thesis (any kind) and book.
+%
+% [1]: https://styleguide.ugent.be/sjablonen/drukwerk.html
 \ProvidesPackage{ugentstyle2016}[2019/02/13 package ugentstyle2016]
 
-%
-% The required packages
-%
+% Used to position and generally lay out the title pages.
 \RequirePackage{tikz}
+% Used to provide proper upper case support for titles
 \RequirePackage{textcase}
+% Used for including images
 \RequirePackage{graphicx}
+% Used to parse options for this package.
 \RequirePackage{kvoptions}
+% Compare strings
 \RequirePackage{xstring}
+% Define commands
+\RequirePackage{xparse}
+% Used for underlining the titles
 \RequirePackage{soul}
+% Used to adjust margins of the title page
 \RequirePackage{geometry}
+% Used to provide translated texts.
 \RequirePackage{translations}
+% Used for the assets (colours, images)
 \RequirePackage{ugentassests2016}
+% Proper support for urls
 \RequirePackage{hyperref}
+% Format phone numbers
+% TODO
 \RequirePackage{phonenumbers}
+% Sets the spacing between lines.
 \usepackage{setspace}
 
+% Position things within tikz.
 \usetikzlibrary{positioning}
 
-%
-% The options this package supports
-%
-
+% Set-up for our own options.
 \SetupKeyvalOptions{
  family=ugent,
  prefix=ugent@
 }
 
-% Which template we want
+% Defines the style of the title page.
 \DeclareStringOption[course]{ugentstyle}
 % The faculty (or none)
 \DeclareStringOption[we]{faculty}
@@ -69,17 +93,11 @@
 \newcommand*{\@campusname}{\csname ugent\ugent@campus \endcsname}
 \newcommand*{\@facultycode}{\ugent@faculty}
 
-
-%
-% Define commands for title page information.
-%
-
 % If subtitle does not exist
 \@ifundefined{subtitle}{
 	\newcommand*{\@subtitle}{}
 	\newcommand*{\subtitle}{\gdef\@subtitle{#1}}
 }{}
-
 
 % Define them as empty
 \newcommand*{\@academyyear}{}
@@ -159,7 +177,7 @@
 
 	\vspace{\fill}
 	\begin{spacing}{2.3}
-	\noindent\linespread{5}\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\ul{\@title}}} \par
+		\noindent\linespread{5}\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\ul{\@title}}} \par
 	\end{spacing}
 	\vspace{0.50\baselineskip}
 	\noindent\panno[20pt][30pt]{\color{ugent-blue}\MakeTextUppercase\@subtitle} \par
@@ -208,10 +226,9 @@
 	}
 
 	\vspace{\fill}
-	%TODO
-	%\renewcommand{\ULthickness}{1mm}
-	%\renewcommand{\ULdepth}{2mm}
-	\noindent\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\ul{\@title}}} \par
+	\begin{spacing}{2.3}
+		\noindent\pannosemibold[30pt][60pt]{\color{ugent-blue}\MakeTextUppercase{\ul{\@title}}} \par
+	\end{spacing}
 	\vspace{0.50\baselineskip}
 	\noindent\panno[20pt][30pt]{\color{ugent-blue}\MakeTextUppercase\@subtitle} \par
 
@@ -270,10 +287,9 @@
 		\begin{minipage}[c][\dimexpr0.37\pageheight-2\smallblock\relax][s]{\dimexpr0.61\pagewidth-2\smallblock\relax}
 			\raggedright
 			\color{white}
-			% TODO
-			%\renewcommand{\ULthickness}{1mm}
-			%\renewcommand{\ULdepth}{2mm}
-			\pannosemibold[35pt][65pt]{\MakeTextUppercase{\ul{\@title}}} \par
+			\begin{spacing}{2.5}
+				\pannosemibold[35pt][65pt]{\MakeTextUppercase{\ul{\@title}}} \par
+			\end{spacing}
 			\vspace{0.75\baselineskip}
 			\pannosemibold[30pt][60pt]{\@subtitle}
 			\vfill
