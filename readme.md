@@ -1,12 +1,18 @@
 # UGent2016 styles
 
-LaTeX-klassen en -pakketten om documenten te schrijven in LaTeX die voldoen aan de huisstijl (van 2016).
+Provides document classes and packages to create documents in the official 2016 Ghent University style.
+The document classes are easy to use, but most functionality is also available as package for use with custom document classes.
 
-## Installatie
+These packages/classes require fontspec (only tested with LuaLatex).
 
-Voorlopig dient de installatie manueel te gebeuren: u zoekt best op Google naar iets als "install latex package manually", en u zal resultaten vinden.
+## Warning
 
+The packages are still in beta! Please report issues.
 
-## Let op
+## Use
 
-Deze pakketten zijn in bèta.
+See the included documentation (in Dutch for now).
+
+## Compiling documentation
+
+The files in the `/frontpages` map should be compiled to pdf. Then, simply compile the docnl.tex as you would any other document.
