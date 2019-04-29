@@ -1,0 +1,16 @@
+#% Do not delete the line below; configure depends on this
+#  \DeclareLaTeXClass{UGent Book 2016}
+#  \DeclareCategory{Books}
+# ugentbook2016 textclass definition file.
+# Niko Strijbol <strijbol.niko@gmail.com>, 2019/04/29.
+
+Format 66
+Input scrbook.layout
+Input ugentcommon2016.inc
+
+ClassOptions
+	Other		"ugentstyle=course"
+	Other		"faculty=we"
+	Other		"campus=default"
+	Other		"layout=titlefont"
+end

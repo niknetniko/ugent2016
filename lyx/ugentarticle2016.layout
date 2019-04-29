@@ -1,0 +1,16 @@
+#% Do not delete the line below; configure depends on this
+#  \DeclareLaTeXClass{UGent Article 2016}
+#  \DeclareCategory{Articles}
+# ugentarticle2016 textclass definition file.
+# Niko Strijbol <strijbol.niko@gmail.com>, 2019/04/29.
+
+Format 66
+Input scrartcl.layout
+Input ugentcommon2016.inc
+
+ClassOptions
+	Other		"ugentstyle=report"
+	Other		"faculty=we"
+	Other		"campus=default"
+	Other		"layout=titlefont"
+end
