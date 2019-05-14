@@ -24,8 +24,6 @@
 \RequirePackage{etoolbox}
 
 \AtEndPreamble{
-    % Required for detecting the language of the document
-    \RequirePackage{babel}
     % Required for provinding the colours
     \RequirePackage{xcolor}
     % Required for loading the custom fonts
@@ -130,7 +128,6 @@
     \newcommand*{\ugentkortrijknl}{ugentstyle2016-kortrijk}
     \newcommand*{\ugentglobalnl}{ugentstyle2016-global}
     \newcommand*{\ugentfacultylogonl}[1]{ugentstyle2016-#1-nl}
-
 }
 
 % Define the block sizes for the typographic grid.
@@ -138,7 +135,5 @@
 \setlength\bigblock{\dimexpr\pageheight/7\relax}
 \newlength{\smallblock}
 \setlength\smallblock{\dimexpr\bigblock/4\relax}
-
-
 
 \endinput

@@ -11,7 +11,6 @@
 \ProvidesPackage{ugentartcl2016}[2019/02/15 UGent2016 Article Class]
 
 \RequirePackage{kvoptions}
-\RequirePackage{translations}
 
 \SetupKeyvalOptions{
     prefix=ugentcls@
