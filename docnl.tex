@@ -1,50 +1,68 @@
 % Preamble
-\documentclass[11pt,british,parskip=half-]{scrartcl}
+\documentclass[11pt,parskip=half-]{scrartcl}
 
 \usepackage{lmodern}
-\usepackage[british]{babel}
+\usepackage[dutch]{babel}
 \usepackage{minted}
-\usepackage{ugentassests2016}
+\usepackage{ugentassets2016}
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{textcomp}
+\usepackage{hologo}
 \usepackage{hyperref}
 \usepackage{sidenotes}
 \usepackage{enumitem}
+\usepackage{fontspec}
 \usepackage[Q=yes]{examplep}
+\usepackage{multicol}
 
-\title{UGent-huisstijl}
-\subtitle{Handleiding voor de \LaTeX-pakketten}
+\title{Pakketten voor documenten in de UGent-huisstijl}
 \author{Niko Strijbol}
 
 \setcounter{tocdepth}{2}
+
+% customize dictum format:
+\setkomafont{dictumtext}{\itshape\small}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\dictumwidth{\linewidth}
+\renewcommand*\dictumauthorformat[1]{--- #1}
+\renewcommand*\dictumrule{}
+
+\newcommand*{\LuaLaTeX}{\hologo{LuaLaTeX}}
+
+\BeforeStartingTOC[toc]{\begin{multicols}{2}}
+\AfterStartingTOC[toc]{\end{multicols}}
+
+\usepackage[bottom=3cm,top=2cm]{geometry}
 
 % Document
 \begin{document}
     \maketitle
 
     \begin{abstract}
-        Deze verzameling pakketten en klassen voor \LaTeX\ geeft de mogelijkheid om verslagen, rapporten, werkstuken en boeken
-        te maken met \LaTeX\ die voldoen aan de officiële huisstijl van de UGent.
+        \noindent Deze verzameling pakketten en klassen voor \LaTeX\ geeft de mogelijkheid om verslagen, rapporten, werkstukken en boeken te maken met \LaTeX\ die voldoen aan de officiële huisstijl van de UGent.
     \end{abstract}
 
     \tableofcontents
 
     \section{Introductie}\label{sec:introductie}
 
-    Deze handleiding volgt een \emph{top-down}-aanpak;
-    we beginnen met de klassen die het vaakst gebruikt zullen worden, en gaan dan verder met de onderliggende pakketten.
+    \dictum[Larry Wall, auteur van Perl.]{``Easy things should be easy, and hard things should be possible.''}
 
-    Deze handleiding is in het Nederlands.
-    Een Engelse variant is in opbouw.
+    Deze pakketten willen nuttig zijn voor ieder die documenten wilt opstellen in de officiële huisstijl van de UGent. Zoals het citaat aangeeft hebben de pakketten de bedoeling een kant-en-klare oplossing te bieden die werkt in de meeste gevallen. Niettegenstaande zijn de meeste opties in te stellen, zodat de gebruiker alles kan instellen naar wens. Is iets niet instelbaar, rapporteer dit dan als een fout in het pakket zodat we het kunnen oplossen.
 
-    \section{Installatie}\label{sec:installatie}
-    De pakketten en klassen worden op de gewone wijze geïnstalleerd.
-    De pakketten en klassen werken enkel met systemen die het pakket \texttt{fontspec} ondersteunen, zoals \texttt{lualatex}.
+    Deze handleiding volgt een \emph{top-down}-aanpak; we beginnen met de klassen die het vaakst gebruikt zullen worden, en gaan dan verder met de onderliggende pakketten.
+
+    Deze handleiding is in het Nederlands. Een Engelse variant is in opbouw.
+
+    \subsection{Installatie}\label{subsec:installatie}
+    De pakketten en klassen worden op de gewone wijze geïnstalleerd. Omdat de methode nogal afhangt van de gebruikte distributie van \LaTeX, raden we aan om het internet te gebruiken\footnote{Een goed startpunt is \url{https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages\#Manual_installation}}.
+
+    De meeste pakketten werken enkel met systemen die het pakket \texttt{fontspec} ondersteunen, zoals \LuaLaTeX.
 
     Om ten volle te genieten van de huisstijl is het noodzakelijk het lettertype \emph{Panno Tekst UGent} te installeren of geïnstalleerd te hebben als systeemlettertype\footnote{Te downloaden op het intranet op \url{https://www.ugent.be/intranet/nl/op-het-werk/huisstijl/panno-lettertype.htm} }.
 
-    \section{Taal}\label{sec:taal}
+    \subsection{Taal}\label{subsec:taal}
     De pakketten en klassen gebruiken de taal van het document voor het laden van de afbeeldingen.
     Vergelijk volgende resultaten:
 
@@ -53,7 +71,8 @@
     \begin{tabular}{ m{0.5\linewidth} m{0.5\linewidth} }
         \begin{minipage}[t]{0.5\linewidth}
             \begin{minted}{latex}
-\documentclass[11pt, dutch]{article}
+\documentclass[11pt]{article}
+\usepackage[dutch]{babel}
 \usepackage{graphicx, ugentassests2016}
 \begin{document}
     \includegraphics{\ugentdefault}
@@ -68,7 +87,8 @@
     \begin{tabular}{ m{0.5\linewidth} m{0.5\linewidth} }
         \begin{minipage}[t]{0.5\linewidth}
             \begin{minted}{latex}
-\documentclass[11pt, english]{article}
+\documentclass[11pt]{article}
+\usepackage[british]{babel}
 \usepackage{graphicx, ugentassests2016}
 \begin{document}
     \includegraphics{\ugentdefault}
@@ -80,42 +100,75 @@
         \end{minipage} \\
     \end{tabular}
 
-    \section{Klassen \texttt{ugentreport2016}, \texttt{ugentbook2016} en \texttt{ugentarticle2016}}\label{sec:klassen}
+    \section{Documentklasse \texttt{ugent2016}}\label{sec:klassen}
 
-    Deze pakketten zijn bedoeld als aanvulling op de \KOMAScript-klassen.
-    Bijgevolg zijn er drie documentklassen, die aansluiten bij die voorzien door \KOMAScript:
+    De hoofdmanier om een document te bekomen in de officiële huisstijl is het gebruik van de klasse \texttt{ugent2016}. Deze klasse verzamelt alle andere functionaliteit.
 
-    \begin{itemize}
-        \item \texttt{ugentreport2016} gebruikt \texttt{scrreprt} als onderliggende klasse.
-        \item \texttt{ugentbook2016} gebruikt \texttt{scrbook} als onderliggende klasse.
-        \item \texttt{ugentarticle2016} gebruikt \texttt{scrartcl} als onderliggende klasse.
-    \end{itemize}
-
-    Alle klassen ondersteunen dezelfde opties, de enige verschillen zijn de onderliggende klassen en de standaardwaarden van de opties.
+    De klasse gebruikt de \KOMAScript-klassen als basis. Dit betekent de alle functionaliteit uit de \KOMAScript-klassen ook beschikbaar is.
 
     Snel op weg is mogelijk door het \texttt{example.tex}-bestand te gebruiken, dat de meeste opties kort uitlegt.
 
-    \subsection{Gebruik}\label{subsec:gebruik}
-    
-    De klassen worden gebruikt zoals elke andere documentklasse:
-    \begin{minted}{latex}
-\documentclass[11pt,campus=default,faculty=we,layout=all]{ugentreport2016}
-    \end{minted}
-
-    Er zijn enkele opties specifiek voor onze klassen, beschreven in sectie~\ref{subsec:opties}.
-    Alle andere opties worden doorgegeven aan de onderliggende klasse.
-    Wie zijn document grondig wilt aanpassen kijkt daarom best ook naar de \KOMAScript-handleiding.
-
     \subsection{Opties}\label{subsec:opties}
 
-    De klassen hebben vijf opties, in \emph{key-value}-formaat.
+    De opties van de klasse staan in \emph{key-value}-formaat. Een globaal overzicht van alle opties is te vinden in tabel~\ref{table:options}. Hieronder volgt dan een meer uitgebreide beschrijving van de mogelijkheden.
+
+    \begin{table}[h]
+        \begin{center}
+            \caption{Overzicht opties \texttt{ugent2016}\label{table:options}}
+            \begin{tabular}{l l l}
+                \hline
+                Naam & Standaard & Opties \\
+                \hline
+                \texttt{type} & \texttt{report} & \texttt{report}, \texttt{course}, \texttt{notes} \\
+                \texttt{faculty} & \texttt{we} & Zie tabel~\ref{table:faculty} \\
+                \texttt{campus} & \texttt{campus} & Zie tabel~\ref{table:campus} \\
+                \texttt{footer} & \texttt{auto} & \texttt{true}, \texttt{false}, \texttt{auto} \\
+                \texttt{layout} & \texttt{all} &  Zie sectie~\ref{subsubsec:layout} \\
+                \texttt{baseclass} & \texttt{auto} & \texttt{scrreprt}, \texttt{scrartcl}, \texttt{scrbook}, \texttt{auto} \\
+                \texttt{underline} & \texttt{false} & \texttt{true}, \texttt{false} (boolean flag) \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \subsubsection{\texttt{type=\textlangle course|report|notes\textrangle}}\label{subsubsec:style}
+
+    Stelt voor welk type document het betreft. Dit heeft vooral invloed of welk voorblad er gegenereerd wordt, alsook welke onderliggende klasse gebruikt zal worden (zie sectie~\ref{subsubsec:baseclass}). Ook wordt de voettekst standaard enkel getoond bij \texttt{notes}, zie sectie~\ref{subsubsec:footer}.
+
+    Wanneer moet nu welke optie gebruikt worden? Het antwoord hierop is vooral persoonlijke keuze, maar enkele richtlijnen kunnen nuttig zijn. Gebruik \texttt{course} voor een voorblad zoals in een boek, \texttt{report} is geschikt voor rapporten, thesissen, werkstukken, enz. \texttt{notes} is ten slotte aangewezen voor verslagen, notulen, administratieve documenten, enz. Een voorbeeld van de voorbladen is te vinden in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} en~\ref{sec:voorblad-met-stijl-notes}.
+
+    \subsubsection{\texttt{faculty=\textlangle faculteitscode\textrangle}}\label{subsubsec:faculty}
+    Deze optie neemt een tweeletterige code van de faculteit.  Een lijst van deze afkortingen is te vinden in tabel~\ref{table:faculty}.  De optie beïnvloed het facultaire logo alsook de facultaire kleuren die eventueel gebruikt worden.
+
+    \begin{table}[h]
+        \begin{center}
+            \caption{Afkortingen van de faculteiten\label{table:faculty}}
+            \begin{tabular}{l l}
+                \hline
+                Afkorting & Volledige naam \\
+                \hline
+                \texttt{we} & Faculteit Wetenschappen \\
+                \texttt{re} & Faculteit Recht en Criminologie \\
+                \texttt{lw} & Faculteit Letteren en Wijsbegeerte \\
+                \texttt{ge} & Faculteit Geneeskunde en Gezondheidswetenschappen \\
+                \texttt{ea} & Faculteit Ingenieurswetenschappen en Architectuur \\
+                \texttt{eb} & Faculteit Economie en Bedrijfskunde \\
+                \texttt{di} & Faculteit Dierengeneeskunde \\
+                \texttt{pp} & Faculteit Psychologie en Pedagogische Wetenschappen \\
+                \texttt{bw} & Faculteit Bio-Ingenieurswetenschappen \\
+                \texttt{fw} & Faculteit Farmaceutische Wetenschappen \\
+                \texttt{ps} & Faculteit Politieke en Sociale Wetenschappen \\
+                \texttt{none} & Speciale waarden, geen faculteit \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
 
     \subsubsection{\texttt{campus=\textlangle default|kortrijk|global\textrangle}}\label{subsubsec:campus}
 
-    Stelt in welk logo gebruikt moet worden.
-    De drie opties zijn beschreven in tabel~\ref{table:campus}.
+    Stelt de campus in. Dit heeft invloed op het gebruikte logo. De drie opties zijn beschreven in tabel~\ref{table:campus}.
 
-    \begin{table}
+    \begin{table}[h]
         \begin{center}
             \caption{Overzicht waarden \texttt{campus}\label{table:campus}}
             \begin{tabular}{l l}
@@ -141,63 +194,32 @@
 
     Merk op dat de campussen Kortrijk en Global geen vertaalde logo's hebben.
 
-    \subsubsection{\texttt{faculty=\textlangle faculteitscode\textrangle}}\label{subsubsec:faculty}
-    Deze optie neemt een tweeletterige code van de faculteit.
-    Een lijst van deze afkortingen is te vinden in tabel~\ref{table:faculty}.
-    De optie beïnvloed het facultaire logo alsook de facultaire kleuren die eventueel gebruikt worden.
+    \subsubsection{\texttt{footer=\textlangle auto|true|false\textrangle}}\label{subsubsec:footer}
+    De optie \texttt{footer} geeft aan of de voettekst moet toegevoegd worden of niet. Bij \texttt{auto} wordt de voettekst enkel getoond indien \texttt{type=notes}. Bij de andere types wordt de voettekst standaard niet getoond.
 
-    \begin{table}
-        \begin{center}
-            \caption{Afkortingen van de faculteiten\label{table:faculty}}
-            \begin{tabular}{l l}
-                \hline
-                Afkorting & Volledige naam \\
-                \hline
-                \texttt{we} & Faculteit Wetenschappen \\
-                \texttt{re} & Faculteit Recht en Criminologie \\
-                \texttt{lw} & Faculteit Letteren en Wijsbegeerte \\
-                \texttt{ge} & Faculteit Geneeskunde en Gezondheidswetenschappen \\
-                \texttt{ea} & Faculteit Ingenieurswetenschappen en Architectuur \\
-                \texttt{eb} & Faculteit Economie en Bedrijfskunde \\
-                \texttt{di} & Faculteit Dierengeneeskunde \\
-                \texttt{pp} & Faculteit Psychologie en Pedagogische Wetenschappen \\
-                \texttt{bw} & Faculteit Bio-Ingenieurswetenschappen \\
-                \texttt{fw} & Faculteit Farmaceutische Wetenschappen \\
-                \texttt{ps} & Faculteit Politieke en Sociale Wetenschappen \\
-                \texttt{none} & Speciale waarden, geen faculteit \\
-                \hline
-            \end{tabular}
-        \end{center}
-    \end{table}
+    \subsubsection{\texttt{layout=\textlangle stijlniveau\textrangle}}\label{subsubsec:layout}
 
-    \subsubsection{\texttt{footer=\textlangle true|false\textrangle}}
-    De optie \texttt{footer} geeft aan of de voettekst moet toegevoegd worden of niet.
-    Standaard staat deze optie uit, tenzij de optie \texttt{ugentstyle} de waard \texttt{notes} krijgt.
-    In dat geval wordt de voettekst wel getoond.
-
-    \subsubsection{\texttt{ugentstyle=\textlangle course|report|notes\textrangle}}\label{subsubsec:style}
-
-    Deze optie is vooral van invloed op het type voorblad dat gegenereerd wordt.
-    Gebruik \texttt{course} voor een voorblad zoals in een boek, \texttt{report} is geschikt voor rapporten, thesissen, werkstukken, enz.
-    \texttt{notes} is ten slotte aangewezen voor verslagen, notulen, administratieve documenten, enz.
-    Deze laatste optie gebruikt naast een ander voorblad ook een andere voettekst.
-    Een voorbeeld van deze stijlen is te vinden in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report}~en~\ref{sec:voorblad-met-stijl-notes}.
-
-    \subsubsection{\texttt{layout=\textlangle stijlniveau\textrangle}}
-
-    Deze optie duidt aan tot welk niveau het document opgemaakt moet worden naar de normen van de huisstijl.
-    Elk volgend niveau past ook de opmaak van het vorige niveau toe.
-    Zo zal niveau 3 ook de opmaak van niveau 2 en niveau 1 toepassen.
-    De hiërarchie ziet er als volgt uit: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont} → \texttt{all}.
+    Deze optie duidt aan tot welk niveau het document opgemaakt moet worden naar de normen van de huisstijl. Elk volgend niveau past ook de opmaak van het vorige niveau toe. Zo zal niveau 3 ook de opmaak van niveau 2 en niveau 1 toepassen. De hiërarchie ziet er als volgt uit: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont} → \texttt{all}.
 
     \begin{enumerate}
-        \item \textbf{\texttt{none}} -- Pas geen opmaak toe buiten de titelpagina. Dit is de standaardwaarde.
+        \item \textbf{\texttt{none}} -- Pas geen opmaak toe buiten de titelpagina.
         \item \textbf{\texttt{margins}} -- Pas de marges van het document aan.
         \item \textbf{\texttt{colours}} -- Pas kleuren toe. Concreet betekent dit dat de titels van het document in het blauw zullen zijn.
-        \item \textbf{\texttt{titlestyle}} -- Maak de titels op. Hierbij gaat het om het omzetten naar hoofdletters en onderlijnen van de titels.
+        \item \textbf{\texttt{titlestyle}} -- Maak de titels op. Hierbij gaat het om het omzetten naar hoofdletters en eventueel onderlijnen van de titels.
         \item \textbf{\texttt{titlefont}} -- Pas het lettertype toe op de titels.
-        \item \textbf{\texttt{all}} -- Pas alles toe. Concreet zal dit ervoor zorgen dat alle lettertypes voldoen aan de huisstijl. Omdat de UGent geen licentie heeft om het hoofdlettertype (Panno Tekst) te gebruiken voor schuine letters of cursief, wordt het secundaire lettertype gebruikt voor de hoofdtekst, namelijk \textit{Arial}.
+        \item \textbf{\texttt{all}} -- Pas alles toe. Concreet zal dit ervoor zorgen dat alle lettertypes voldoen aan de huisstijl. Omdat de UGent geen licentie heeft om het hoofdlettertype (Panno Tekst) te gebruiken voor schuine letters of cursief, wordt het secundaire lettertype gebruikt voor de hoofdtekst, namelijk \textit{Arial}. Dit is de standaardwaarde.
     \end{enumerate}
+
+    \subsubsection{\texttt{baseclass=\textlangle auto|scrreprt|scrartcl|scrbook\textrangle}}\label{subsubsec:baseclass}
+    Stelt in welke basisklasse geladen moet worden. Bij \texttt{auto} hangt de basisklasse af van welk \texttt{type} het document heeft. \texttt{type=report} laadt \texttt{scrreprt}, \texttt{type=course} laadt \texttt{scrbook} en \texttt{type=notes} laadt \texttt{scrartcl}.
+
+    \subsubsection{\texttt{underline=\textlangle true|false\textrangle}}\label{subsubsec:underline}
+
+    Duidt aan of de hoofdstuktitels onderlijnd moeten worden of niet. De huisstijl schrijft voor dat dit moet gebeuren, maar standaard staat deze optie uit. De reden hiervoor is technisch: er zijn enkele beperkingen op de huidige implementatie van het onderlijnen. Als deze in de toekomst opgelost worden, zal deze optie standaard aangezet worden.
+
+    \subsection{Voorblad}\label{subsec:voorblad}
+
+    De klasse maakt gebruik van het pakket \texttt{ugentstyle2016} om het voorblad te voorzien. Zie de beschrijving van de opties aldaar. In het bijzonder is tabel~\ref{table:titlemeta} interessant.
 
     \section{Pakket \texttt{ugentstyle2016}}\label{sec:pakkettexttt}
     Dit is het pakket dat verantwoordelijk is voor het voorblad.
@@ -205,16 +227,13 @@
     \subsection{Opties}\label{subsec:opties2}
     Het pakket heeft volgende opties, de reeds hierboven beschreven zijn:
     \begin{itemize}
-        \item \textbf{\texttt{style}} -- Zie deel~\ref{subsubsec:style}. De standaardwaarde is \texttt{course}.
+        \item \textbf{\texttt{type}} -- Zie deel~\ref{subsubsec:style}. De standaardwaarde is \texttt{course}.
         \item \textbf{\texttt{faculty}} -- Zie deel~\ref{subsubsec:faculty}. Standaardfaculteit is \texttt{we}.
         \item \textbf{\texttt{campus}} -- Zie deel~\ref{subsubsec:campus}. Standaardwaarde is \texttt{default}.
     \end{itemize}
 
     \subsection{Metagegevens}\label{subsec:metagegevens}
-    Om het voorblad van data te voorzien zijn er een heleboel commando's analoog aan \mintinline{latex}{\author{}} en verwanten.
-    Afhankelijk van het type voorblad worden gegevens op een andere plaats getoond of zelfs niet getoond.
-    Een visueel overzicht wordt gegeven in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report}~en~\ref{sec:voorblad-met-stijl-notes}.
-    Tabel~\ref{table:titlemeta} bevat een beschrijving van alle beschikbare commando's.
+    Om het voorblad van data te voorzien zijn er een heleboel commando's analoog aan \mintinline{latex}{\author{}} en verwanten. Afhankelijk van het type voorblad worden gegevens op een andere plaats getoond of zelfs niet getoond. Een visueel overzicht wordt gegeven in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report}~en~\ref{sec:voorblad-met-stijl-notes}. Tabel~\ref{table:titlemeta} bevat een beschrijving van alle beschikbare commando's.
 
     \begin{table}
         \begin{center}
@@ -223,10 +242,10 @@
                 \hline
                 Commando & Betekenis en gebruik \\
                 \hline
-                \verb|\author{}| & Zoals in standaard\LaTeX \\
-                \verb|\title{}|  & Zoals standaard\LaTeX \\
-                \verb|\subtitle{}| & Zoals standaard-\KOMAScript \\
-                \verb|\academyyear{}| & Het academiejaar, bv. 2017 -- 2018. \\
+                \verb|\author{}| & Zoals in standaard-\LaTeX. \\
+                \verb|\title{}|  & Zoals standaard-\LaTeX. \\
+                \verb|\subtitle{}| & Zoals standaard-\KOMAScript. \\
+                \verb|\academyyear{}| & Het academiejaar, bv. 2017 – 2018. \\
                 \verb|\programme{}| & De richting, bv. Informatica. \\
                 \verb|\wordcount{}| & Aantal woorden in het werk.\footnote{Dit wordt misschien ooit automatisch berekened.} \\
                 \verb|\studentnumber{}| & Studentennummer. \\
@@ -250,8 +269,7 @@
     \end{minted}
 
     \section{Pakket \texttt{ugentassets2016}}\label{sec:pakkettexttt2}
-    Dit pakket voorziet de logo's, kleuren en andere \emph{assets}.
-    Als voorbeeld wordt in dit deel vaak de Faculteit Wetenschappen gebruikt.
+    Dit pakket voorziet de logo's, kleuren en andere \emph{assets}. Als voorbeeld wordt in dit deel vaak de Faculteit Wetenschappen gebruikt. Dit pakket wordt door de andere klassen en pakketten achter de schermen gebruikt, maar kan ook onafhankelijk nuttig zijn als een document logo's of kleuren van de UGent moet bevatten.
 
     \subsection{Logo's}\label{subsec:logos}
 
@@ -262,7 +280,7 @@
 \includegraphics{\ugentdefault}
     \end{minted}
 
-    Zoals vermeld in deel~\ref{sec:taal} worden de logo's automatisch aangepast aan de taal.
+    Zoals vermeld in deel~\ref{subsec:taal} worden de logo's automatisch aangepast aan de taal.
     Er zijn wel experimentele\footnote{Dit betekent dat ze kunnen veranderen of verdwijnen.} versies van de commando's die altijd hetzelfde logo teruggeven.
     Om ze te gebruiken voegt men de tweeletterige taalcode toe aan het commando:
 
@@ -319,39 +337,21 @@
 
     \subsection{Lettertypes}\label{subsec:lettertypes}
 
-    Het pakket laadt het lettertype \emph{Panno Tekst UGent} in met \texttt{fontspec}.
-    Dit is beschikbaar met \mintinline{latex}{\pannofamily}.
-    Zoals reeds vermeld vereist dit uiteraard dat Panno geïnstalleerd is als systeemlettertype\footnote{Technisch moet het lettertype \emph{known} zijn voor \texttt{fontspec}}.
-    Verder zijn er twee commando's die het leven gemakkelijker maken om het lettertype te gebruiken.
-
-    \begin{description}[style=nextline]
-        \item[\Q{\\panno[grootte1][grootte2]{tekst}}] Zet de \texttt{tekst} in Panno, met groottes \texttt{grootte1} en \texttt{grootte2}. Deze grotes worden gebruikt bij het \mintinline{latex}{\fontsize{groott1}{grootte2}}-commando.
-        \item[\Q{\\pannosemibold[grootte1][grootte2]{tekst}}] Zet de \texttt{tekst} in Panno Semi Bold, met groottes \texttt{grootte1} en \texttt{grootte2}. Deze grotes worden gebruikt bij het \mintinline{latex}{\fontsize{groott1}{grootte2}}-commando.
-    \end{description}
-
-    Het gebruik is eenvoudig:
+    Het pakket laadt het lettertype \emph{Panno Tekst UGent} in met \texttt{fontspec}, als \texttt{fontspec} beschikbaar is. Indien niet zal een waarschuwing getoond worden in de logs. Dit is beschikbaar met \mintinline{latex}{\panno}. Zoals reeds vermeld vereist dit uiteraard dat Panno geïnstalleerd is als systeemlettertype\footnote{Technisch moet het lettertype \emph{known} zijn in \texttt{fontspec}.}. Het gebruik is eenvoudig:
 
     \begin{tabular}{ m{0.6\linewidth} m{0.4\linewidth} }
         \begin{minipage}[t]{0.6\linewidth}
             \begin{minted}{latex}
-% Puur fontspec-commando
-{\pannofamily Dit is Panno.}
-% Hulpcommando's
-\panno[16pt][30pt]{Panno Tekst}
-\pannosemibold[16pt][30pt]{Panno Tekst}
+                {\panno Dit is Panno.}
             \end{minted}
         \end{minipage}
         & \begin{minipage}[t]{\linewidth}
-            \vspace{0.45\baselineskip}
-            {\pannofamily Dit is Panno.} \par
-            \vspace{\baselineskip}
-              \panno[16pt][30pt]{Panno Tekst} \par
-              \pannosemibold[16pt][30pt]{Panno Tekst}
+            {\panno Dit is Panno.}
         \end{minipage} \\
     \end{tabular}
 
     \vspace{\baselineskip}
-    Tot slot opnieuw opmerken dat cursieve varianten van dit lettertype niet bestaan.
+    Tot slot opnieuw opmerken dat cursieve varianten van dit lettertype niet bestaan\footnote{Juister is dat de UGent geen licentie heeft voor de cursieve varianten. Het basislettertype, \textit{Panno Text}, beschikt hier wel over. Zie \url{https://www.boldmonday.com/typeface/pannotext/}}.
 
     \subsection{Namen der faculteiten}\label{subsec:namen-der-faculteiten}
 
@@ -392,23 +392,30 @@
 
     \section{Voorblad met stijl \texttt{course}}\label{sec:voorblad-met-stijl-course}
     \begin{center}
-        \frame{\includegraphics[width=0.9\textwidth]{frontpages/ugent2016title-course.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{frontpages/ugent2016title-course.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{report}}\label{sec:voorblad-met-stijl-report}
     \begin{center}
-        \frame{\includegraphics[width=0.9\textwidth]{frontpages/ugent2016title-report.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{frontpages/ugent2016title-report.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{notes}}\label{sec:voorblad-met-stijl-notes}
     \begin{center}
-        \frame{\includegraphics[width=0.9\textwidth]{frontpages/ugent2016title-notes.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{frontpages/ugent2016title-notes.pdf}}
     \end{center}
 
-    \section{Wijzigingen}
+    \section{Wijzigingen}\label{sec:wijzigingen}
 
     Dit onderdeel bevat de voornaamste wijzigingen.
     De exacte wijzigingen kunnen gevonden worden in de Github-repository van de pakketten.
+
+    \subsubsection*{18 mei 2019}
+    \begin{itemize}
+        \item Babel wordt niet meer standaard geladen voor compatibiliteitsredenen.
+        \item Het pakket \texttt{ugentasset2016} werkt nu ook zonder \texttt{fontspec}.
+        \item Alle klassen zijn samengevoegd tot één klasse, \texttt{ugent2016}.
+    \end{itemize}
 
     \subsubsection*{15 februari 2019}
     \begin{itemize}
