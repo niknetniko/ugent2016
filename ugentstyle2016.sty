@@ -40,9 +40,6 @@
 	\RequirePackage{graphicx}
 	% Used to adjust margins of the title page
 	\RequirePackage{geometry}
-	% Proper support for urls
-	% TODO: remove maybe?
-	\RequirePackage{hyperref}
 	% Sets the spacing between lines.
 	\RequirePackage{setspace}
 	% Used for underlining the titles
@@ -157,6 +154,14 @@
 		}
 	}{}
 }{}
+
+\AtBeginDocument{
+	\IfStrEq{\ugent@type}{notes}{
+		\@ifpackageloaded{hyperref}{}{%
+			\PackageError{\@currname}{Package 'hyperref' is not loaded}{Please add \\usepackage{hyperref}}
+		}
+	}
+}
 
 \AtEndPreamble{
 

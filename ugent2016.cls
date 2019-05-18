@@ -101,9 +101,9 @@
 \AtEndPreamble{
     \RequirePackage{xstring}
     \RequirePackage{scrlayer-scrpage}
-    \RequirePackage{tikz}
-    \RequirePackage{graphicx}
     \RequirePackage{textcase}
+    % Load this as the last package to prevent issues.
+    \RequirePackage{hyperref}
 }
 
 % Change settings once we are in the document.
