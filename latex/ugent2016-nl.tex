@@ -15,6 +15,7 @@
 \usepackage{fontspec}
 \usepackage[Q=yes]{examplep}
 \usepackage{multicol}
+\usepackage{titling}
 
 \title{Pakketten voor documenten in de UGent-huisstijl}
 \author{Niko Strijbol}
@@ -52,8 +53,6 @@
     Deze pakketten willen nuttig zijn voor ieder die documenten wilt opstellen in de officiële huisstijl van de UGent. Zoals het citaat aangeeft hebben de pakketten de bedoeling een kant-en-klare oplossing te bieden die werkt in de meeste gevallen. Niettegenstaande zijn de meeste opties in te stellen, zodat de gebruiker alles kan instellen naar wens. Is iets niet instelbaar, rapporteer dit dan als een fout in het pakket zodat we het kunnen oplossen.
 
     Deze handleiding volgt een \emph{top-down}-aanpak; we beginnen met de klassen die het vaakst gebruikt zullen worden, en gaan dan verder met de onderliggende pakketten.
-
-    Deze handleiding is in het Nederlands. Een Engelse variant is in opbouw.
 
     \subsection{Installatie}\label{subsec:installatie}
     De pakketten en klassen worden op de gewone wijze geïnstalleerd. Omdat de methode nogal afhangt van de gebruikte distributie van \LaTeX, raden we aan om het internet te gebruiken\footnote{Een goed startpunt is \url{https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages\#Manual_installation}}.
@@ -107,6 +106,8 @@
     De klasse gebruikt de \KOMAScript-klassen als basis. Dit betekent de alle functionaliteit uit de \KOMAScript-klassen ook beschikbaar is.
 
     Snel op weg is mogelijk door het \texttt{example.tex}-bestand te gebruiken, dat de meeste opties kort uitlegt.
+
+    Naast de hoofdklasse bestaan ook de varianten \texttt{ugent2016-article}, \texttt{ugent2016-book} en \texttt{ugent2016-report}. Deze klassen maken gebruik van de overeenkomstige onderliggende klasse (ze gebruiken achter de schermen ook \texttt{ugent2016}).
 
     \subsection{Opties}\label{subsec:opties}
 
@@ -392,17 +393,17 @@
 
     \section{Voorblad met stijl \texttt{course}}\label{sec:voorblad-met-stijl-course}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{frontpages/ugent2016title-course.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-course-title.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{report}}\label{sec:voorblad-met-stijl-report}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{frontpages/ugent2016title-report.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-report-title.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{notes}}\label{sec:voorblad-met-stijl-notes}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{frontpages/ugent2016title-notes.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-notes-title.pdf}}
     \end{center}
 
     \section{Wijzigingen}\label{sec:wijzigingen}

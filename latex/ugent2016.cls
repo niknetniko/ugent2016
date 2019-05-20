@@ -15,7 +15,7 @@
 %%
 %% Provides a class for Ghent University styles. See the manual for more details.
 
-\NeedsTeXFormat{LaTeX2e}
+\NeedsTeXFormat{LaTeX2e}[2017/01/01]
 \ProvidesPackage{ugent2016}[2019/05/18 UGent2016 Class]
 
 % Load our stuff at the end of the preamble. This allows the user to override loaded packages.
