@@ -33,29 +33,21 @@ all: $(pdf_assets) latex/ugent2016-nl.pdf latex/ugent2016-en.pdf
 pdf_assets := $(patsubst assets/%,latex/logos/%,$(patsubst %.eps,%.pdf,$(wildcard assets/*.eps)))
 
 latex/ugent2016-nl.pdf: latex/ugent2016-nl.tex \
-						latex/ugent2016-report-title.pdf \
-						latex/ugent2016-course-title.pdf \
-						latex/ugent2016-notes-title.pdf \
-						$(pdf_assets)
+						latex/ugent2016-title-report.pdf \
+						latex/ugent2016-title-course.pdf \
+						latex/ugent2016-title-notes.pdf \
+						all_pdf_assets
 	latexmk -cd -lualatex -interaction=nonstopmode -shell-escape -use-make $<
 
 latex/ugent2016-en.pdf: latex/ugent2016-en.tex \
-						latex/ugent2016-report-title.pdf \
-						latex/ugent2016-course-title.pdf \
-						latex/ugent2016-notes-title.pdf \
-						$(pdf_assets)
+						latex/ugent2016-title-report.pdf \
+						latex/ugent2016-title-course.pdf \
+						latex/ugent2016-title-notes.pdf \
+						all_pdf_assets
 	latexmk -cd -lualatex -interaction=nonstopmode -shell-escape -use-make $<
 
 # Run from within the latex directory
-latex/ugent2016-report-title.pdf: latex/ugent2016-report-title.tex
-	latexmk -cd -lualatex -interaction=nonstopmode -use-make $<
-
-# Run from within the latex directory
-latex/ugent2016-course-title.pdf: latex/ugent2016-course-title.tex
-	latexmk -cd -lualatex -interaction=nonstopmode -use-make $<
-
-# Run from within the latex directory
-latex/ugent2016-notes-title.pdf: latex/ugent2016-notes-title.tex
+latex/ugent2016-title-%.pdf: latex/ugent2016-title-%.tex
 	latexmk -cd -lualatex -interaction=nonstopmode -use-make $<
 
 # Create the example file
@@ -63,9 +55,24 @@ example.pdf: example.tex
 	latexmk -cd lualatex -interaction=nontopmode -use-make $<
 
 # Create all assets
-all_pdf_assets: $(pdf_assets)
+all_pdf_assets: $(pdf_assets) latex/logos/ugent2016-logo-global-nl.pdf latex/logos/ugent2016-logo-kortrijk-en.pdf
+
+# These two are created using symlinks rather than links.
+latex/logos/ugent2016-logo-global-nl.pdf: latex/logos/ugent2016-logo-global-en.pdf
+	powershell New-Item -Force -ItemType SymbolicLink -Name $@ -Value $<
+
+latex/logos/ugent2016-logo-kortrijk-en.pdf: latex/logos/ugent2016-logo-kortrijk-nl.pdf
+	powershell New-Item -Force -ItemType SymbolicLink -Name $@ -Value $<
+
+# Create the directory
+latex/logos:
+	powershell mkdir -f latex/logos
 
 # Convert a single asset
-latex/logos/%.pdf: assets/%.eps
-	echo $<
-	epstopdf $< --output=$@ -n
+latex/logos/%.pdf: assets/%.eps latex/logos
+	epstopdf --outfile=$@ $<
+
+# Clean up some stuff
+clean:
+	powershell rm -r -force latex/logos/
+	latexmk -cd -use-make -C

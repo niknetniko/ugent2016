@@ -31,7 +31,7 @@
 	% We need proper font support.
 	\RequirePackage{fontspec}
 	% Used for the assets (colours, images)
-	\RequirePackage{ugentassets2016}
+	\RequirePackage{ugent2016-assets}
 	% Used to position and generally lay out the title pages.
 	\RequirePackage{tikz}
 	% Used to provide proper upper case support for titles
@@ -59,7 +59,7 @@
 % The faculty (or none)
 \DeclareStringOption[we]{faculty}
 % Which campus
-\DeclareStringOption[default]{campus}
+\DeclareStringOption[ugent]{campus}
 
 \DeclareDefaultOption{%
 	\@unknownoptionerror
@@ -78,9 +78,9 @@
 	}
 }
 % Check if the campus is valid.
-\IfStringInList{\ugent@campus}{default,global,kortrijk}{}{%
+\IfStringInList{\ugent@campus}{ugent,global,kortrijk}{}{%
 	\PackageError{\@currname}{Unknown campus provided: \ugent@campus}{%
-		The campus must be one of [default,global,kortrijk].
+		The campus must be one of [ugent,global,kortrijk].
 	}
 }
 % Check if the style is valid.
@@ -102,9 +102,9 @@
 % Define a shortcut for the faculty color
 \newcommand*{\@facultycolor}{ugent-\ugent@faculty}
 % Define a shortcut for the faculty logo
-\newcommand*{\@facultyimage}{\ugentfacultylogo{\ugent@faculty}}
+\newcommand*{\@facultyimage}{\ugentlogo{\ugent@faculty}}
 % Define a shortcut for the campus name
-\newcommand*{\@campusname}{\csname ugent\ugent@campus \endcsname}
+\newcommand*{\@campusimage}{\ugentlogo{\ugent@campus}}
 % Define a shortcut for the faculty code.
 \newcommand*{\@facultycode}{\ugent@faculty}
 
@@ -150,7 +150,7 @@
 		\IfStrEq{\ugent@faculty}{none}{
 			\PackageError{\@currname}{If no faculty is set, provide a name using \\@facultish{name}}{Consult the manual for more information.}%
 		}{
-			\facultish{\ugentfacultyname{\ugent@faculty}}
+			\facultish{\facultyname{\ugent@faculty}}
 		}
 	}{}
 }{}
@@ -196,7 +196,7 @@
 						}
 					};
 					\node[anchor=south west] (ugent) at ([shift={(\smallblock,0)}]current page.south west) {
-						\includegraphics[height=4\smallblock]{\@campusname}
+						\includegraphics[height=4\smallblock]{\@campusimage}
 					};
 				\end{tikzpicture}
 
@@ -210,7 +210,7 @@
 				% Add word count if necessary
 				\IfStrEq{\@wordcount}{}{}{%
 					\vspace{1\baselineskip}
-					\noindent{\panno \GetTranslation{wordcounttext} \@wordcount}
+					\noindent{\panno\GetTranslation{wordcounttext} \@wordcount}
 				}
 
 				\vspace{6\baselineskip}
@@ -236,7 +236,7 @@
 				\IfStrEq{\ugent@faculty}{none}{%
 					\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
 						\node[anchor=north west] (faculty) at ([shift={(\smallblock,0)}]current page.north west) {
-							\includegraphics[height=4\smallblock]{\@campusname}
+							\includegraphics[height=4\smallblock]{\@campusimage}
 						};
 					\end{tikzpicture}
 				}{% A faculty was defined
@@ -245,7 +245,7 @@
 							\includegraphics[height=3\smallblock]{\@facultyimage}
 						};
 						\node[anchor=south west] (ugent) at ([shift={(\smallblock,0)}]current page.south west) {
-							\includegraphics[height=4\smallblock]{\@campusname}
+							\includegraphics[height=4\smallblock]{\@campusimage}
 						};
 					\end{tikzpicture}
 				}
@@ -302,10 +302,10 @@
 					\fill[ugent-blue] (small-top-right) rectangle (small-bottom-left);
 
 					\node[anchor=north west] (faculty) at (current page.north west) {
-					\includegraphics[height=3\smallblock]{\@facultyimage}
+						\includegraphics[height=3\smallblock]{\@facultyimage}
 					};
 					\node[anchor=south west] (ugent) at (current page.south west) {
-					\includegraphics[height=4\smallblock]{\@campusname}
+						\includegraphics[height=4\smallblock]{\@campusimage}
 					};
 					\node[anchor=north west, align=left] (title) at ([shift={(\smallblock,-\smallblock)}]small-top-left) {
 					\begin{minipage}[c][\dimexpr0.37\pageheight-2\smallblock\relax][s]{\dimexpr0.61\pagewidth-2\smallblock\relax}

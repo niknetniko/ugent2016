@@ -4,12 +4,12 @@
 \usepackage{lmodern}
 \usepackage[british]{babel}
 \usepackage{minted}
-\usepackage{ugentassets2016}
+\usepackage{ugent2016-assets}
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{textcomp}
 \usepackage{hologo}
-\usepackage{hyperref}
+\usepackage[colorlinks]{hyperref}
 \usepackage{sidenotes}
 \usepackage{enumitem}
 \usepackage{fontspec}
@@ -31,8 +31,8 @@
 
 \newcommand*{\LuaLaTeX}{\hologo{LuaLaTeX}}
 
-%\BeforeStartingTOC[toc]{\begin{multicols}{2}}
-%\AfterStartingTOC[toc]{\end{multicols}}
+\BeforeStartingTOC[toc]{\begin{multicols}{2}}
+\AfterStartingTOC[toc]{\end{multicols}}
 
 \usepackage[bottom=3cm,top=2cm]{geometry}
 
@@ -79,14 +79,14 @@
             \begin{minted}{latex}
 \documentclass[11pt]{article}
 \usepackage[dutch]{babel}
-\usepackage{graphicx, ugentassests2016}
+\usepackage{graphicx, ugent2016-assets}
 \begin{document}
-    \includegraphics{\ugentdefault}
+    \includegraphics{\ugentlogo{ugent}}
 \end{document}
             \end{minted}
         \end{minipage}
         & \begin{minipage}{.5\linewidth}
-            \includegraphics[width=\linewidth]{\ugentdefaultnl}
+              \includegraphics[width=\linewidth]{\ugentlogodutch{ugent}}
         \end{minipage} \\
     \end{tabular}
 
@@ -95,14 +95,14 @@
             \begin{minted}{latex}
 \documentclass[11pt]{article}
 \usepackage[british]{babel}
-\usepackage{graphicx, ugentassests2016}
+\usepackage{graphicx, ugent2016-assets}
 \begin{document}
-    \includegraphics{\ugentdefault}
+    \includegraphics{\ugentlogo{ugent}}
 \end{document}
             \end{minted}
         \end{minipage}
         & \begin{minipage}{.5\linewidth}
-              \includegraphics[width=\linewidth]{\ugentdefaulten}
+              \includegraphics[width=\linewidth]{\ugentlogoenglish{ugent}}
         \end{minipage} \\
     \end{tabular}
 
@@ -186,7 +186,7 @@
         \end{center}
     \end{table}
 
-    \subsubsection{\texttt{campus=\textlangle default|kortrijk|global\textrangle}}\label{subsubsec:campus}
+    \subsubsection{\texttt{campus=\textlangle ugent|kortrijk|global\textrangle}}\label{subsubsec:campus}
 
     Specifies the campus. This affects the used logo. The three options are described in Table~\ref{table:campus}.
 
@@ -197,17 +197,17 @@
                 \hline
                 Value & Example \\
                 \hline
-                \texttt{default}  &
+                \texttt{ugent}  &
                 \begin{minipage}{.3\textwidth}
-                    \includegraphics[width=\linewidth]{\ugentdefault}
+                    \includegraphics[width=\linewidth]{\ugentlogo{ugent}}
                 \end{minipage} \\
                 \texttt{kortrijk} &
                 \begin{minipage}{.3\textwidth}
-                    \includegraphics[width=\linewidth]{\ugentkortrijk}
+                    \includegraphics[width=\linewidth]{\ugentlogo{kortrijk}}
                 \end{minipage} \\
                 \texttt{global} &
                 \begin{minipage}{.3\textwidth}
-                    \includegraphics[width=\linewidth]{\ugentglobal}
+                    \includegraphics[width=\linewidth]{\ugentlogo{global}}
                 \end{minipage} \\
                 \hline
             \end{tabular}
@@ -253,7 +253,7 @@
     \begin{itemize}
         \item \textbf{\texttt{type}} -- See Section~\ref{subsubsec:style}. The default value is \texttt{course}.
         \item \textbf{\texttt{faculty}} -- See Section~\ref{subsubsec:faculty}. The default value faculty is \texttt{we}.
-        \item \textbf{\texttt{campus}} -- See Section~\ref{subsubsec:campus}. The default value is \texttt{default}.
+        \item \textbf{\texttt{campus}} -- See Section~\ref{subsubsec:campus}. The default value is \texttt{ugent}.
     \end{itemize}
 
     \subsection{Metadata}\label{subsec:metagegevens}
@@ -302,29 +302,23 @@
     The package contains commands or macros that evaluate to the path of a logo. An example:
 
     \begin{minted}{latex}
-\includegraphics{\ugentdefault}
+\includegraphics{\ugentlogo{ugent}}
     \end{minted}
 
-    As mentioned in Section~\ref{subsec:taal}, the images are automatically chosen based on the document's language. There are experimental commands\footnote{Experimental means they can change or disappear between releases} that always give the same images. To use them, add the two letter language code to the commands, for example:
+    As mentioned in Section~\ref{subsec:taal}, the images are automatically chosen based on the document's language. There are experimental commands\footnote{Experimental means they can change or disappear between releases} that always give the same images. To use them, add language to the commands, for example:
 
     \begin{minted}{latex}
-\ugentdefault       % depends on language
-\ugentdefaultnl     % always Dutch
-\ugentdefaulten     % always English
+\ugentlogo{ugent}           % depends on language
+\ugentlogodutch{ugent}      % always Dutch
+\ugentlogoenglish{ugent}    % always English
     \end{minted}
 
-    Following commands are available:
+    The command has following format: \mintinline{latex}{\ugentlogo{〈logo〉}}. Use one of the following values as \texttt{logo}:
 
-    \begin{description}[style=nextline]
-        \item[\Q{\\ugentdefault}] Provides the default logo. This logo (and other logos) contains the minimal amount of whitespace.
-            \begin{marginfigure}[-1cm]\includegraphics[width=\marginparwidth]{\ugentdefault}\end{marginfigure}
-        \item[\Q{\\ugentkortrijk}] Logo of Campus Kortrijk. No translation is available.
-            \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentkortrijk}\end{marginfigure}
-        \item[\Q{\\ugentglobal}] Logo of the Global Campus. No translation is available.
-            \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentglobal}\end{marginfigure}
-        \item[\Q{\\ugentfacultylogo{code}}] Logo of the faculty. De parameter \texttt{code} is the two letter code from Table~\ref{table:faculty}. Note that the special value \texttt{none} cannot be used in this macro.
-            \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentfacultylogo{we}}\end{marginfigure}
-    \end{description}
+    \begin{itemize}
+        \item A value from Table~\ref{table:campus} for logos of a campus.
+        \item A two-letter faculty code from Table~\ref{table:faculty} (except \texttt{none}).
+    \end{itemize}
 
     \subsection{Colours}\label{subsec:kleuren}
 
@@ -371,13 +365,13 @@
 
     \subsection{Faculty names}\label{subsec:namen-der-faculteiten}
 
-    A macro that gives the translated name of a faculty is available: \mintinline{latex}{\ugentfacultyname{code}}. Here \texttt{code} is again the two letter code from Table~\ref{table:faculty}. There is also no support for \texttt{faculty=none}. A language independent macro is not yet available for the name; it will always be translated.
+    A macro that gives the translated name of a faculty is available: \mintinline{latex}{\facultyname{code}}. Here \texttt{code} is again the two letter code from Table~\ref{table:faculty}. There is also no support for \texttt{faculty=none}. A language independent macro is not yet available for the name; it will always be translated.
 
     \begin{tabular}{ m{0.6\linewidth} m{0.4\linewidth} }
         \begin{minipage}[t]{0.6\linewidth}
             \begin{minted}{latex}
-\ugentfacultyname{we} \par
-\ugentfacultyname{re}
+\facultyname{we}
+\facultyname{re}
             \end{minted}
         \end{minipage}
         & \begin{minipage}[t]{\linewidth}

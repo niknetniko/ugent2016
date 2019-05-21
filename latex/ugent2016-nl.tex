@@ -4,12 +4,12 @@
 \usepackage{lmodern}
 \usepackage[dutch]{babel}
 \usepackage{minted}
-\usepackage{ugentassets2016}
+\usepackage{ugent2016-assets}
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{textcomp}
 \usepackage{hologo}
-\usepackage{hyperref}
+\usepackage[colorlinks]{hyperref}
 \usepackage{sidenotes}
 \usepackage{enumitem}
 \usepackage{fontspec}
@@ -78,14 +78,14 @@
             \begin{minted}{latex}
 \documentclass[11pt]{article}
 \usepackage[dutch]{babel}
-\usepackage{graphicx, ugentassests2016}
+\usepackage{graphicx, ugent2016-assets}
 \begin{document}
-    \includegraphics{\ugentdefault}
+    \includegraphics{\ugentlogo{ugent}}
 \end{document}
             \end{minted}
         \end{minipage}
         & \begin{minipage}{.5\linewidth}
-            \includegraphics[width=\linewidth]{\ugentdefaultnl}
+            \includegraphics[width=\linewidth]{\ugentlogodutch{ugent}}
         \end{minipage} \\
     \end{tabular}
 
@@ -94,14 +94,14 @@
             \begin{minted}{latex}
 \documentclass[11pt]{article}
 \usepackage[british]{babel}
-\usepackage{graphicx, ugentassests2016}
+\usepackage{graphicx, ugent2016-assets}
 \begin{document}
-    \includegraphics{\ugentdefault}
+    \includegraphics{\ugentlogo{ugent}}
 \end{document}
             \end{minted}
         \end{minipage}
         & \begin{minipage}{.5\linewidth}
-              \includegraphics[width=\linewidth]{\ugentdefaulten}
+              \includegraphics[width=\linewidth]{\ugentlogoenglish{ugent}}
         \end{minipage} \\
     \end{tabular}
 
@@ -127,11 +127,11 @@
 \end{document}
 \end{minted}
 
-    De drie klasse van hierboven gebruiken achter de schermen dezelfde basisklasse: \texttt{ugent20160}. Deze klasse is ook bruikbaar indien gewenst.
+    De drie klasse van hierboven gebruiken achter de schermen dezelfde basisklasse: \texttt{ugent2016}. Deze klasse is ook bruikbaar indien gewenst.
 
     \subsection{Opties}\label{subsec:opties}
 
-    De opties van de klasse staan in \emph{key-value}-formaat. Een globaal overzicht van alle opties is te vinden in tabel~\ref{table:options}. Hieronder volgt dan een meer uitgebreide beschrijving van de mogelijkheden.
+    De opties van de klasse staan in \emph{key-value}-formaat. Een globaal overzicht van alle opties is te vinden in \autoref{table:options}. Hieronder volgt dan een meer uitgebreide beschrijving van de mogelijkheden.
 
     \begin{table}[h]
         \begin{center}
@@ -187,7 +187,7 @@
         \end{center}
     \end{table}
 
-    \subsubsection{\texttt{campus=\textlangle default|kortrijk|global\textrangle}}\label{subsubsec:campus}
+    \subsubsection{\texttt{campus=\textlangle ugent|kortrijk|global\textrangle}}\label{subsubsec:campus}
 
     Stelt de campus in. Dit heeft invloed op het gebruikte logo. De drie opties zijn beschreven in tabel~\ref{table:campus}.
 
@@ -198,17 +198,17 @@
                 \hline
                 Waarde & Voorbeeld \\
                 \hline
-                \texttt{default}  &
+                \texttt{ugent}  &
                 \begin{minipage}{.3\textwidth}
-                    \includegraphics[width=\linewidth]{\ugentdefault}
+                    \includegraphics[width=\linewidth]{\ugentlogo{ugent}}
                 \end{minipage} \\
                 \texttt{kortrijk} &
                 \begin{minipage}{.3\textwidth}
-                    \includegraphics[width=\linewidth]{\ugentkortrijk}
+                    \includegraphics[width=\linewidth]{\ugentlogo{kortrijk}}
                 \end{minipage} \\
                 \texttt{global} &
                 \begin{minipage}{.3\textwidth}
-                    \includegraphics[width=\linewidth]{\ugentglobal}
+                    \includegraphics[width=\linewidth]{\ugentlogo{global}}
                 \end{minipage} \\
                 \hline
             \end{tabular}
@@ -244,9 +244,9 @@
 
     \subsection{Voorblad}\label{subsec:voorblad}
 
-    De klasse maakt gebruik van het pakket \texttt{ugent2016-style} om het voorblad te voorzien. Zie de beschrijving van de opties aldaar. In het bijzonder is tabel~\ref{table:titlemeta} interessant.
+    De klasse maakt gebruik van het pakket \texttt{ugent2016-title} om het voorblad te voorzien. Zie de beschrijving van de opties aldaar. In het bijzonder is tabel~\ref{table:titlemeta} interessant.
 
-    \section{Pakket \texttt{ugen2016-style}}\label{sec:pakkettexttt}
+    \section{Pakket \texttt{ugen2016-title}}\label{sec:pakkettexttt}
     Dit is het pakket dat verantwoordelijk is voor het voorblad.
 
     \subsection{Opties}\label{subsec:opties2}
@@ -254,7 +254,7 @@
     \begin{itemize}
         \item \textbf{\texttt{type}} -- Zie deel~\ref{subsubsec:style}. De standaardwaarde is \texttt{course}.
         \item \textbf{\texttt{faculty}} -- Zie deel~\ref{subsubsec:faculty}. Standaardfaculteit is \texttt{we}.
-        \item \textbf{\texttt{campus}} -- Zie deel~\ref{subsubsec:campus}. Standaardwaarde is \texttt{default}.
+        \item \textbf{\texttt{campus}} -- Zie deel~\ref{subsubsec:campus}. Standaardwaarde is \texttt{ugent}.
     \end{itemize}
 
     \subsection{Metagegevens}\label{subsec:metagegevens}
@@ -293,45 +293,33 @@
 \subtitle{Zonder toegevoegde data}
     \end{minted}
 
-    \section{Pakket \texttt{ugentassets2016}}\label{sec:pakkettexttt2}
+    \section{Pakket \texttt{ugent2016-assets}}\label{sec:pakkettexttt2}
     Dit pakket voorziet de logo's, kleuren en andere \emph{assets}. Als voorbeeld wordt in dit deel vaak de Faculteit Wetenschappen gebruikt. Dit pakket wordt door de andere klassen en pakketten achter de schermen gebruikt, maar kan ook onafhankelijk nuttig zijn als een document logo's of kleuren van de UGent moet bevatten.
 
     \subsection{Logo's}\label{subsec:logos}
 
-    Het pakket heeft commando's die het pad naar de verschillende logo's geven.
-    Deze kunnen dan gebruikt worden om bijvoorbeeld de logo's te tonen:
+    Het pakket heeft commando's die het pad naar de verschillende logo's geven. Deze kunnen dan gebruikt worden om bijvoorbeeld de logo's te tonen:
 
     \begin{minted}{latex}
-\includegraphics{\ugentdefault}
+\includegraphics{\ugentlogo{ugent}}
     \end{minted}
 
     Zoals vermeld in deel~\ref{subsec:taal} worden de logo's automatisch aangepast aan de taal.
     Er zijn wel experimentele\footnote{Dit betekent dat ze kunnen veranderen of verdwijnen.} versies van de commando's die altijd hetzelfde logo teruggeven.
-    Om ze te gebruiken voegt men de tweeletterige taalcode toe aan het commando:
+    Om ze te gebruiken voegt men de taal toe aan het commando:
 
     \begin{minted}{latex}
-\ugentdefault       % afhankelijk van taal
-\ugentdefaultnl     % altijd Nederlands
-\ugentdefaulten     % altijd Engels
+\ugentlogo{ugent}           % afhankelijk van taal
+\ugentlogodutch{ugent}      % altijd Nederlands
+\ugentlogoenglish{ugent}    % altijd Engels
     \end{minted}
 
-    Volgende commando's zijn beschikbaar:
+    Het commando heeft volgende formaat: \mintinline{latex}{\ugentlogo{〈logo〉}}. Als \texttt{logo} kunnen volgende waarden gebruikt worden:
 
-    \begin{description}[style=nextline]
-        \item[\Q{\\ugentdefault}] Geeft het gewone logo van de Universiteit.
-                Rond dit, en andere logo's, is witruimte voorzien.
-            \begin{marginfigure}[-1cm]\includegraphics[width=\marginparwidth]{\ugentdefault}\end{marginfigure}
-        \item[\Q{\\ugentkortrijk}] Logo van de Campus Kortrijk.
-                Dit logo heeft geen vertaling.
-            \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentkortrijk}\end{marginfigure}
-        \item[\Q{\\ugentglobal}] Logo van de Global Campus.
-                Dit logo heeft geen vertaling.
-            \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentglobal}\end{marginfigure}
-        \item[\Q{\\ugentfacultylogo{code}}] Geeft het logo van de faculteit.
-                De parameter \texttt{code} is de tweeletterige code uit tabel~\ref{table:faculty}.
-                Merk op dat de speciale waarde \texttt{none} niet werkt in deze marco.
-            \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentfacultylogo{we}}\end{marginfigure}
-    \end{description}
+    \begin{itemize}
+        \item Een waarde uit tabel~\ref{table:campus} voor campuslogo's.
+        \item Een tweeletterige code van de faculteit uit tabel~\ref{table:faculty} (uitgezonderd \texttt{none}) voor het logo van de desbetreffende faculteit.
+    \end{itemize}
 
     \subsection{Kleuren}\label{subsec:kleuren}
 
@@ -380,7 +368,7 @@
 
     \subsection{Namen der faculteiten}\label{subsec:namen-der-faculteiten}
 
-    Er is een commando dat de vertaalde naam van de faculteit geeft: \mintinline{latex}{\ugentfacultyname{code}}.
+    Er is een commando dat de vertaalde naam van de faculteit geeft: \mintinline{latex}{\facultyname{code}}.
     Hierbij is \texttt{code} opnieuw de tweeletterige code uit tabel~\ref{table:faculty}.
     Deze macro werkt ook niet als \texttt{faculty=none}.
     Hiervoor is (nog) geen vast commando voorzien; de naam zal altijd afhangen van de taal van het document.
@@ -388,13 +376,13 @@
     \begin{tabular}{ m{0.6\linewidth} m{0.4\linewidth} }
         \begin{minipage}[t]{0.6\linewidth}
             \begin{minted}{latex}
-\ugentfacultyname{we} \par
-\ugentfacultyname{re}
+\facultyname{we} \par
+\facultyname{re}
             \end{minted}
         \end{minipage}
         & \begin{minipage}[t]{\linewidth}
-              \ugentfacultyname{we} \par
-              \ugentfacultyname{re}
+              \facultyname{we} \par
+              \facultyname{re}
         \end{minipage} \\
     \end{tabular}
 
@@ -404,7 +392,7 @@
     Dat zijn de grote blokken.
     De lengte van een groot blok wordt dan gedeeld door 4 om een klein blok te krijgen.
     Het kleine blok is de basisgrootte van het document.
-    Pakketten zoals \texttt{ugent2016-style} gebruiken deze basisgrootte om de positie van onderdelen te bepalen.
+    Pakketten zoals \texttt{ugent2016-title} gebruiken deze basisgrootte om de positie van onderdelen te bepalen.
     Er zijn twee macro's beschikbaar, \mintinline{latex}{\bigblock} en \mintinline{latex}{\smallblock}, die de lengte van respectievelijk het grote en het kleine blok geven.
     Dit zijn lengtes en kunnen dus overal gebruikt worden waar lengtes toegelaten worden.
 
@@ -417,23 +405,29 @@
 
     \section{Voorblad met stijl \texttt{course}}\label{sec:voorblad-met-stijl-course}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{ugent2016-course-title.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-title-course.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{report}}\label{sec:voorblad-met-stijl-report}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{ugent2016-report-title.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-title-report.pdf}}
     \end{center}
 
     \section{Voorblad met stijl \texttt{notes}}\label{sec:voorblad-met-stijl-notes}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{ugent2016-notes-title.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-title-notes.pdf}}
     \end{center}
 
     \section{Wijzigingen}\label{sec:wijzigingen}
 
-    Dit onderdeel bevat de voornaamste wijzigingen.
-    De exacte wijzigingen kunnen gevonden worden in de Github-repository van de pakketten.
+    Dit onderdeel bevat de voornaamste wijzigingen. De exacte wijzigingen kunnen gevonden worden in de Github-repository.
+
+    \subsubsection*{22 mei 2019}
+    \begin{itemize}
+        \item Uniforme naamgeving van de pakketten en klassen.
+        \item Commando's hernoemd met uniformere naam.
+        \item Toevoegen \emph{wrapper}-klassen \texttt{ugent2016-report}, \texttt{ugent2016-article} en \texttt{ugent2016-book}.
+    \end{itemize}
 
     \subsubsection*{18 mei 2019}
     \begin{itemize}

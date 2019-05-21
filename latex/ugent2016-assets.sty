@@ -93,12 +93,12 @@
     % Otherwise, use English.
     \NewTranslation{english}{assets}{en}
 
-    \newcommand*{\ugentlogo}[2][\GetTranslation{assets}]{%
-        \IfStrEqCase{#1}{%
-            {kortrijk}{ugentstyle2016-kortrijk}%
-            {global}{ugentstyle2016-global}%
-        }[ugentstyle2016-#1-#2]
-    }
+    % We could define the following two commands as one with an optional parameter. However, this causes
+    % issues because an optional argument makes it non-expandable, meaning the command can no longer be
+    % used as a path in \includegraphics.
+    \newcommand*{\ugentlogo}[1]{ugent2016-logo-#1-\GetTranslation{assets}}
+    \newcommand*{\ugentlogoenglish}[1]{ugent2016-logo-#1-en}
+    \newcommand*{\ugentlogodutch}[1]{ugent2016-logo-#1-nl}
 
     % Needs some expansion magic, see https://tex.stackexchange.com/a/326191/92083
     \newcommand*{\facultyname}[1]{%
@@ -109,8 +109,6 @@
 
 % Define the block sizes for the typographic grid.
 \newlength{\bigblock}
-\setlength\bigblock{\dimexpr\pageheight/7\relax}
+\setlength{\bigblock}{\dimexpr\paperheight/7\relax}
 \newlength{\smallblock}
-\setlength\smallblock{\dimexpr\bigblock/4\relax}
-
-\endinput
+\setlength{\smallblock}{\dimexpr\bigblock/4\relax}
