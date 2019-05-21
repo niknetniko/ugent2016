@@ -5,7 +5,7 @@
 
 # The first rule in a Makefile is the one executed by default ("make"). It
 # should always be the "all" rule, so that "make" and "make all" are identical.
-all: latex/ugent2016-nl.pdf latex/ugent2016-en.pdf
+all: $(pdf_assets) latex/ugent2016-nl.pdf latex/ugent2016-en.pdf
 
 # CUSTOM BUILD RULES
 
@@ -30,16 +30,20 @@ all: latex/ugent2016-nl.pdf latex/ugent2016-en.pdf
 # -interaction=nonstopmode keeps the pdflatex backend from stopping at a
 # missing file reference and interactively asking you for an alternative.
 
+pdf_assets := $(patsubst assets/%,latex/logos/%,$(patsubst %.eps,%.pdf,$(wildcard assets/*.eps)))
+
 latex/ugent2016-nl.pdf: latex/ugent2016-nl.tex \
 						latex/ugent2016-report-title.pdf \
 						latex/ugent2016-course-title.pdf \
-						latex/ugent2016-notes-title.pdf
+						latex/ugent2016-notes-title.pdf \
+						$(pdf_assets)
 	latexmk -cd -lualatex -interaction=nonstopmode -shell-escape -use-make $<
 
 latex/ugent2016-en.pdf: latex/ugent2016-en.tex \
 						latex/ugent2016-report-title.pdf \
 						latex/ugent2016-course-title.pdf \
-						latex/ugent2016-notes-title.pdf
+						latex/ugent2016-notes-title.pdf \
+						$(pdf_assets)
 	latexmk -cd -lualatex -interaction=nonstopmode -shell-escape -use-make $<
 
 # Run from within the latex directory
@@ -57,3 +61,11 @@ latex/ugent2016-notes-title.pdf: latex/ugent2016-notes-title.tex
 # Create the example file
 example.pdf: example.tex
 	latexmk -cd lualatex -interaction=nontopmode -use-make $<
+
+# Create all assets
+all_pdf_assets: $(pdf_assets)
+
+# Convert a single asset
+latex/logos/%.pdf: assets/%.eps
+	echo $<
+	epstopdf $< --output=$@ -n
