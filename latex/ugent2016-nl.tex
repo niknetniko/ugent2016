@@ -55,15 +55,21 @@
     Deze handleiding volgt een \emph{top-down}-aanpak; we beginnen met de klassen die het vaakst gebruikt zullen worden, en gaan dan verder met de onderliggende pakketten.
 
     \subsection{Installatie}\label{subsec:installatie}
-    De pakketten en klassen worden op de gewone wijze geïnstalleerd. Omdat de methode nogal afhangt van de gebruikte distributie van \LaTeX, raden we aan om het internet te gebruiken\footnote{Een goed startpunt is \url{https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages\#Manual_installation}}.
+    De pakketten en klassen worden op de gewone wijze geïnstalleerd. Omdat de methode nogal afhangt van de gebruikte distributie van \LaTeX, raden we aan om het internet te gebruiken\footnote{Een goed startpunt is \url{https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages\#Manual_installation}}. Wat meer details:
+
+    \begin{itemize}
+        \item Steek alle \texttt{*.cls}- en \texttt{*.sty}-bestanden in de map \texttt{tex/latex/ugent20160}.
+        \item Kopieer de map \texttt{/logo} naar \texttt{tex/latex/ugent2016}. Het resultaat moet \texttt{tex/latex/ugent2016/logos/*} zijn.
+        \item Kopieer \texttt{ugent2016-nl.pdf} en \texttt{ugent2016-en.pdf} naar \texttt{doc/latex/ugent2016}.
+        \item Kopieer \texttt{ugent2016-nl.tex} en \texttt{ugent2016-en.tex} naar \texttt{source/latex/ugent2016}.
+    \end{itemize}
 
     De meeste pakketten werken enkel met systemen die het pakket \texttt{fontspec} ondersteunen, zoals \LuaLaTeX.
 
     Om ten volle te genieten van de huisstijl is het noodzakelijk het lettertype \emph{Panno Tekst UGent} te installeren of geïnstalleerd te hebben als systeemlettertype\footnote{Te downloaden op het intranet op \url{https://www.ugent.be/intranet/nl/op-het-werk/huisstijl/panno-lettertype.htm} }.
 
     \subsection{Taal}\label{subsec:taal}
-    De pakketten en klassen gebruiken de taal van het document voor het laden van de afbeeldingen.
-    Vergelijk volgende resultaten:
+    De pakketten en klassen gebruiken de taal van het document voor het laden van de afbeeldingen. Vergelijk volgende resultaten:
 
     \vspace{\baselineskip}
 
@@ -101,13 +107,27 @@
 
     \section{Documentklasse \texttt{ugent2016}}\label{sec:klassen}
 
-    De hoofdmanier om een document te bekomen in de officiële huisstijl is het gebruik van de klasse \texttt{ugent2016}. Deze klasse verzamelt alle andere functionaliteit.
+    De hoofdmanier om een document te bekomen in de officiële huisstijl is het gebruik van de klassen \texttt{ugent2016-article}, \texttt{ugent2016-book} en \texttt{ugent2016-report}. Deze klassen verzamelen alle andere functionaliteit.
 
     De klasse gebruikt de \KOMAScript-klassen als basis. Dit betekent de alle functionaliteit uit de \KOMAScript-klassen ook beschikbaar is.
 
-    Snel op weg is mogelijk door het \texttt{example.tex}-bestand te gebruiken, dat de meeste opties kort uitlegt.
+    Snel op weg is mogelijk door het \texttt{example.tex}-bestand te gebruiken of bekijk het voorbeeld hieronder:
 
-    Naast de hoofdklasse bestaan ook de varianten \texttt{ugent2016-article}, \texttt{ugent2016-book} en \texttt{ugent2016-report}. Deze klassen maken gebruik van de overeenkomstige onderliggende klasse (ze gebruiken achter de schermen ook \texttt{ugent2016}).
+\begin{minted}{latex}
+\documentclass[11pt]{ugent2016-report}
+\usepackage[dutch]{babel}
+
+\author{Jan Janssens}
+\title{Discrete algoritmen VII}
+\subtitle{Zeer discrete doch krachtig}
+
+\begin{document}
+    \maketitle
+    Hallo.
+\end{document}
+\end{minted}
+
+    De drie klasse van hierboven gebruiken achter de schermen dezelfde basisklasse: \texttt{ugent20160}. Deze klasse is ook bruikbaar indien gewenst.
 
     \subsection{Opties}\label{subsec:opties}
 
@@ -115,17 +135,17 @@
 
     \begin{table}[h]
         \begin{center}
-            \caption{Overzicht opties \texttt{ugent2016}\label{table:options}}
+            \caption{Overzicht opties \texttt{ugent2016}. De meeste opties gelden ook voor de andere klassen.\label{table:options}}
             \begin{tabular}{l l l}
                 \hline
                 Naam & Standaard & Opties \\
                 \hline
-                \texttt{type} & \texttt{report} & \texttt{report}, \texttt{course}, \texttt{notes} \\
+                \texttt{type} & \texttt{report} & \texttt{report}, \texttt{course}, \texttt{notes} (enkel \texttt{ugent2016})\\
                 \texttt{faculty} & \texttt{we} & Zie tabel~\ref{table:faculty} \\
                 \texttt{campus} & \texttt{campus} & Zie tabel~\ref{table:campus} \\
                 \texttt{footer} & \texttt{auto} & \texttt{true}, \texttt{false}, \texttt{auto} \\
                 \texttt{layout} & \texttt{all} &  Zie sectie~\ref{subsubsec:layout} \\
-                \texttt{baseclass} & \texttt{auto} & \texttt{scrreprt}, \texttt{scrartcl}, \texttt{scrbook}, \texttt{auto} \\
+                \texttt{baseclass} & \texttt{auto} & \texttt{scrreprt}, \texttt{scrartcl}, \texttt{scrbook}, \texttt{auto} (enkel \texttt{ugent2016})\\
                 \texttt{underline} & \texttt{false} & \texttt{true}, \texttt{false} (boolean flag) \\
                 \hline
             \end{tabular}
@@ -136,10 +156,12 @@
 
     Stelt voor welk type document het betreft. Dit heeft vooral invloed of welk voorblad er gegenereerd wordt, alsook welke onderliggende klasse gebruikt zal worden (zie sectie~\ref{subsubsec:baseclass}). Ook wordt de voettekst standaard enkel getoond bij \texttt{notes}, zie sectie~\ref{subsubsec:footer}.
 
+    Dit is enkel nuttig bij de klasse \texttt{ugent2016}, de varianten (\texttt{ugent2016-article}, \texttt{ugent2016-book} en \texttt{ugent2016-report}) stellen dit automatisch in.
+
     Wanneer moet nu welke optie gebruikt worden? Het antwoord hierop is vooral persoonlijke keuze, maar enkele richtlijnen kunnen nuttig zijn. Gebruik \texttt{course} voor een voorblad zoals in een boek, \texttt{report} is geschikt voor rapporten, thesissen, werkstukken, enz. \texttt{notes} is ten slotte aangewezen voor verslagen, notulen, administratieve documenten, enz. Een voorbeeld van de voorbladen is te vinden in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} en~\ref{sec:voorblad-met-stijl-notes}.
 
     \subsubsection{\texttt{faculty=\textlangle faculteitscode\textrangle}}\label{subsubsec:faculty}
-    Deze optie neemt een tweeletterige code van de faculteit.  Een lijst van deze afkortingen is te vinden in tabel~\ref{table:faculty}.  De optie beïnvloed het facultaire logo alsook de facultaire kleuren die eventueel gebruikt worden.
+    Deze optie neemt een tweeletterige code van de faculteit. Een lijst van deze afkortingen is te vinden in tabel~\ref{table:faculty}. De optie beïnvloed het facultaire logo alsook de facultaire kleuren die eventueel gebruikt worden.
 
     \begin{table}[h]
         \begin{center}
@@ -214,15 +236,17 @@
     \subsubsection{\texttt{baseclass=\textlangle auto|scrreprt|scrartcl|scrbook\textrangle}}\label{subsubsec:baseclass}
     Stelt in welke basisklasse geladen moet worden. Bij \texttt{auto} hangt de basisklasse af van welk \texttt{type} het document heeft. \texttt{type=report} laadt \texttt{scrreprt}, \texttt{type=course} laadt \texttt{scrbook} en \texttt{type=notes} laadt \texttt{scrartcl}.
 
+    Dit is enkel nuttig bij de klasse \texttt{ugent2016}, de varianten (\texttt{ugent2016-article}, \texttt{ugent2016-book} en \texttt{ugent2016-report}) stellen dit automatisch in.
+
     \subsubsection{\texttt{underline=\textlangle true|false\textrangle}}\label{subsubsec:underline}
 
     Duidt aan of de hoofdstuktitels onderlijnd moeten worden of niet. De huisstijl schrijft voor dat dit moet gebeuren, maar standaard staat deze optie uit. De reden hiervoor is technisch: er zijn enkele beperkingen op de huidige implementatie van het onderlijnen. Als deze in de toekomst opgelost worden, zal deze optie standaard aangezet worden.
 
     \subsection{Voorblad}\label{subsec:voorblad}
 
-    De klasse maakt gebruik van het pakket \texttt{ugentstyle2016} om het voorblad te voorzien. Zie de beschrijving van de opties aldaar. In het bijzonder is tabel~\ref{table:titlemeta} interessant.
+    De klasse maakt gebruik van het pakket \texttt{ugent2016-style} om het voorblad te voorzien. Zie de beschrijving van de opties aldaar. In het bijzonder is tabel~\ref{table:titlemeta} interessant.
 
-    \section{Pakket \texttt{ugentstyle2016}}\label{sec:pakkettexttt}
+    \section{Pakket \texttt{ugen2016-style}}\label{sec:pakkettexttt}
     Dit is het pakket dat verantwoordelijk is voor het voorblad.
 
     \subsection{Opties}\label{subsec:opties2}
@@ -234,7 +258,7 @@
     \end{itemize}
 
     \subsection{Metagegevens}\label{subsec:metagegevens}
-    Om het voorblad van data te voorzien zijn er een heleboel commando's analoog aan \mintinline{latex}{\author{}} en verwanten. Afhankelijk van het type voorblad worden gegevens op een andere plaats getoond of zelfs niet getoond. Een visueel overzicht wordt gegeven in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report}~en~\ref{sec:voorblad-met-stijl-notes}. Tabel~\ref{table:titlemeta} bevat een beschrijving van alle beschikbare commando's.
+    Om het voorblad van data te voorzien zijn er een heleboel commando's analoog aan \mintinline{latex}{\author{}} en verwanten. Afhankelijk van het type voorblad worden gegevens op een andere plaats getoond of zelfs niet getoond. Een visueel overzicht wordt gegeven in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} en~\ref{sec:voorblad-met-stijl-notes}. Tabel~\ref{table:titlemeta} bevat een beschrijving van alle beschikbare commando's.
 
     \begin{table}
         \begin{center}
@@ -248,7 +272,7 @@
                 \verb|\subtitle{}| & Zoals standaard-\KOMAScript. \\
                 \verb|\academyyear{}| & Het academiejaar, bv. 2017 – 2018. \\
                 \verb|\programme{}| & De richting, bv. Informatica. \\
-                \verb|\wordcount{}| & Aantal woorden in het werk.\footnote{Dit wordt misschien ooit automatisch berekened.} \\
+                \verb|\wordcount{}| & Aantal woorden in het werk. \\
                 \verb|\studentnumber{}| & Studentennummer. \\
                 \verb|\email{}| & E-mailadres van de auteur. \\
                 \verb|\phone{}| & Telefoonnummer van de auteur. \\
@@ -380,7 +404,7 @@
     Dat zijn de grote blokken.
     De lengte van een groot blok wordt dan gedeeld door 4 om een klein blok te krijgen.
     Het kleine blok is de basisgrootte van het document.
-    Pakketten zoals \texttt{ugentstyle2016} gebruiken deze basisgrootte om de positie van onderdelen te bepalen.
+    Pakketten zoals \texttt{ugent2016-style} gebruiken deze basisgrootte om de positie van onderdelen te bepalen.
     Er zijn twee macro's beschikbaar, \mintinline{latex}{\bigblock} en \mintinline{latex}{\smallblock}, die de lengte van respectievelijk het grote en het kleine blok geven.
     Dit zijn lengtes en kunnen dus overal gebruikt worden waar lengtes toegelaten worden.
 

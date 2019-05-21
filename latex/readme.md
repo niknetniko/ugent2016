@@ -26,9 +26,9 @@ Current maintainer(s):
 2. Development versions might be available in the source repository. A makefile to produce tds compatible zips is also available.
 3. Manual installation details:
     - Install all `*.cls` and `*.sty` files under `tex/latex/ugent2016`.
-    - Copy the `/logo` directory to `tex/latex/ugent2016`. The result should be `tex/latex/ugent2016/logos/*`. You should include at least the pdf versions, but the eps version could also be useful.
+    - Copy the `/logo` directory to `tex/latex/ugent2016`. The result should be `tex/latex/ugent2016/logos/*`.
     - Copy `ugent2016-nl.pdf` and `ugent2016-en.pdf` to `doc/latex/ugent2016`.
-    - Copy `ugent2016-nl.tex` and `ugent2016-en.tex` to `source/latex/ugent2016`. If installing from CTAN, you can also add the `ugent2016.dtx` and `ugent2016.ins` files to this folder.
+    - Copy `ugent2016-nl.tex` and `ugent2016-en.tex` to `source/latex/ugent2016`.
 
 ## Documentation
 

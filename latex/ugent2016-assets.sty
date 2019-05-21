@@ -22,10 +22,12 @@
 % font. Consult the documentation of your LaTeX-distribution for more information; using non-TeX fonts will often
 % require LuaLaTeX or XeteX.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ugentassets2016}[2019/05/18 package ugentassests2016]
+\ProvidesPackage{ugent2016-assets}[2019/05/18 package ugent2016-assets]
 
 % Load our packages at the end of the preamble. This allows the user to override loaded packages.
 \RequirePackage{etoolbox}
+% Compare strings
+\RequirePackage{xstring}
 
 \AtEndPreamble{
     % Required for provinding the colours
@@ -91,27 +93,18 @@
     % Otherwise, use English.
     \NewTranslation{english}{assets}{en}
 
-    \newcommand*{\ugentdefault}{ugentstyle2016-ugent-\GetTranslation{assets}}
-    \newcommand*{\ugentkortrijk}{ugentstyle2016-kortrijk}
-    \newcommand*{\ugentglobal}{ugentstyle2016-global}
-    \newcommand*{\ugentfacultylogo}[1]{ugentstyle2016-#1-\GetTranslation{assets}}
+    \newcommand*{\ugentlogo}[2][\GetTranslation{assets}]{%
+        \IfStrEqCase{#1}{%
+            {kortrijk}{ugentstyle2016-kortrijk}%
+            {global}{ugentstyle2016-global}%
+        }[ugentstyle2016-#1-#2]
+    }
+
     % Needs some expansion magic, see https://tex.stackexchange.com/a/326191/92083
-    \newcommand*{\ugentfacultyname}[1]{%
+    \newcommand*{\facultyname}[1]{%
         \edef\transkey{#1}%
         \expandafter\GetTranslation\expandafter{\transkey}%
     }
-
-    % English versions
-    \newcommand*{\ugentdefaulten}{ugentstyle2016-ugent-en}
-    \newcommand*{\ugentkortrijken}{ugentstyle2016-kortrijk}
-    \newcommand*{\ugentglobalen}{ugentstyle2016-global}
-    \newcommand*{\ugentfacultylogoen}[1]{ugentstyle2016-#1-en}
-
-    % Dutch versions
-    \newcommand*{\ugentdefaultnl}{ugentstyle2016-ugent-nl}
-    \newcommand*{\ugentkortrijknl}{ugentstyle2016-kortrijk}
-    \newcommand*{\ugentglobalnl}{ugentstyle2016-global}
-    \newcommand*{\ugentfacultylogonl}[1]{ugentstyle2016-#1-nl}
 }
 
 % Define the block sizes for the typographic grid.

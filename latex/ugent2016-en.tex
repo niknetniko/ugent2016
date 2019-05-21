@@ -31,8 +31,8 @@
 
 \newcommand*{\LuaLaTeX}{\hologo{LuaLaTeX}}
 
-\BeforeStartingTOC[toc]{\begin{multicols}{2}}
-\AfterStartingTOC[toc]{\end{multicols}}
+%\BeforeStartingTOC[toc]{\begin{multicols}{2}}
+%\AfterStartingTOC[toc]{\end{multicols}}
 
 \usepackage[bottom=3cm,top=2cm]{geometry}
 
@@ -41,7 +41,7 @@
     \maketitle
 
     \begin{abstract}
-        \noindent This bundle contains some packages and classes to give \LaTeX\ the possibility to create reports, articles and books that comply with the official house style of Ghent University.
+        \noindent This bundle contains some packages and classes to give \LaTeX\ the possibility to create reports, articles and books that comply with the official corporate style of Ghent University.
     \end{abstract}
 
     \tableofcontents
@@ -57,20 +57,20 @@
     This manual follows a top-down approach; we start with the most used classes and continue with the underlying low level packages.
 
     \subsection{Installation}\label{subsec:installatie}
-    The packages and classes should be installed in the standard way. Since the exact details differ depending on the \LaTeX-distribution, we suggest using the internet.\footnote{A good starting point however is \url{https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages\#Manual_installation}}.
-
-    The source repository\footnote{\url{https://github.com/niknetniko/ugent2016}} of the package contains a makefile to produce a TDS-compliant zip file for easy manual installation. Some more details:
+    The packages and classes should be installed in the standard way. Since the exact details differ depending on the \LaTeX-distribution, we suggest using the internet.\footnote{A good starting point however is \url{https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages\#Manual_installation}}. Some more details:
     \begin{itemize}
-        \item Install the \texttt{ugent2016*.cls} files in \texttt{/latex}
+        \item Install all \texttt{*.cls} and \texttt{*.sty} files under \texttt{tex/latex/ugent2016}.
+        \item Copy the \texttt{/logo} directory to \texttt{tex/latex/ugent2016}. The result should be \texttt{tex/latex/ugent2016/logos/*}.
+        \item Copy \texttt{ugent2016-nl.pdf} and \texttt{ugent2016-en.pdf} to \texttt{doc/latex/ugent2016}.
+        \item Copy \texttt{ugent2016-nl.tex} and \texttt{ugent2016-en.tex} to \texttt{source/latex/ugent2016}.
     \end{itemize}
 
-    De meeste pakketten werken enkel met systemen die het pakket \texttt{fontspec} ondersteunen, zoals \LuaLaTeX.
+    Most packages and classes only work with systems supporting the \texttt{fontspec} package, such as \LuaLaTeX.
 
-    Om ten volle te genieten van de huisstijl is het noodzakelijk het lettertype \emph{Panno Tekst UGent} te installeren of geïnstalleerd te hebben als systeemlettertype\footnote{Te downloaden op het intranet op \url{https://www.ugent.be/intranet/nl/op-het-werk/huisstijl/panno-lettertype.htm} }.
+    To fully enjoy the corporate style, it is necessary to install the \emph{Panno Tekst UGent} font as system font.\footnote{Download it from the intranet at \url{https://www.ugent.be/intranet/nl/op-het-werk/huisstijl/panno-lettertype.htm} }
 
-    \subsection{Taal}\label{subsec:taal}
-    De pakketten en klassen gebruiken de taal van het document voor het laden van de afbeeldingen.
-    Vergelijk volgende resultaten:
+    \subsection{Language}\label{subsec:taal}
+    The packages and classes use the document language to load images and translate some text. Compare following results:
 
     \vspace{\baselineskip}
 
@@ -106,33 +106,45 @@
         \end{minipage} \\
     \end{tabular}
 
-    \section{Documentklasse \texttt{ugent2016}}\label{sec:klassen}
+    \section{Document class \texttt{ugent2016}}\label{sec:klassen}
 
-    De hoofdmanier om een document te bekomen in de officiële huisstijl is het gebruik van de klasse \texttt{ugent2016}. Deze klasse verzamelt alle andere functionaliteit.
+    The main method to create a document in the official corporate style involves using the classes \texttt{ugent2016-article}, \texttt{ugent2016-book} and \texttt{ugent2016-report}.
 
-    De klasse gebruikt de \KOMAScript-klassen als basis. Dit betekent de alle functionaliteit uit de \KOMAScript-klassen ook beschikbaar is.
+    The class uses the \KOMAScript classes as base classes. This means all functionality of the \KOMAScript classes is also available. An example is the file \texttt{example.tex}, or just look at the (much smaller) sample below:
 
-    Snel op weg is mogelijk door het \texttt{example.tex}-bestand te gebruiken, dat de meeste opties kort uitlegt.
+    \begin{minted}{latex}
+\documentclass[11pt]{ugent2016-report}
+\usepackage[dutch]{babel}
 
-    Naast de hoofdklasse bestaan ook de varianten \texttt{ugent2016-article}, \texttt{ugent2016-book} en \texttt{ugent2016-report}. Deze klassen maken gebruik van de overeenkomstige onderliggende klasse (ze gebruiken achter de schermen ook \texttt{ugent2016}).
+\author{Jan Janssens}
+\title{Discrete algoritmen VII}
+\subtitle{Zeer discrete doch krachtig}
 
-    \subsection{Opties}\label{subsec:opties}
+\begin{document}
+    \maketitle
+    Hallo.
+\end{document}
+    \end{minted}
 
-    De opties van de klasse staan in \emph{key-value}-formaat. Een globaal overzicht van alle opties is te vinden in tabel~\ref{table:options}. Hieronder volgt dan een meer uitgebreide beschrijving van de mogelijkheden.
+    Behind the scenes, the three classes above use the same base class, \texttt{ugent2016}, which you can also use should wish.
+
+    \subsection{Options}\label{subsec:opties}
+
+    De options of the class use the \emph{key-value} format. A global overview is found in Table~\ref{table:options}. The rest of this sections describes them in more detail.
 
     \begin{table}[h]
         \begin{center}
-            \caption{Overzicht opties \texttt{ugent2016}\label{table:options}}
+            \caption{Options for \texttt{ugent2016}. Most options are also applicable to the variants.\label{table:options}}
             \begin{tabular}{l l l}
                 \hline
-                Naam & Standaard & Opties \\
+                Name & Default & Options \\
                 \hline
-                \texttt{type} & \texttt{report} & \texttt{report}, \texttt{course}, \texttt{notes} \\
-                \texttt{faculty} & \texttt{we} & Zie tabel~\ref{table:faculty} \\
-                \texttt{campus} & \texttt{campus} & Zie tabel~\ref{table:campus} \\
+                \texttt{type} & \texttt{report} & \texttt{report}, \texttt{course}, \texttt{notes} (\texttt{ugent2016} only) \\
+                \texttt{faculty} & \texttt{we} & See Table~\ref{table:faculty} \\
+                \texttt{campus} & \texttt{campus} & See Table~\ref{table:campus} \\
                 \texttt{footer} & \texttt{auto} & \texttt{true}, \texttt{false}, \texttt{auto} \\
-                \texttt{layout} & \texttt{all} &  Zie sectie~\ref{subsubsec:layout} \\
-                \texttt{baseclass} & \texttt{auto} & \texttt{scrreprt}, \texttt{scrartcl}, \texttt{scrbook}, \texttt{auto} \\
+                \texttt{layout} & \texttt{all} &  See Section~\ref{subsubsec:layout} \\
+                \texttt{baseclass} & \texttt{auto} & \texttt{scrreprt}, \texttt{scrartcl}, \texttt{scrbook}, \texttt{auto} (\texttt{ugent2016} only)\\
                 \texttt{underline} & \texttt{false} & \texttt{true}, \texttt{false} (boolean flag) \\
                 \hline
             \end{tabular}
@@ -141,32 +153,34 @@
 
     \subsubsection{\texttt{type=\textlangle course|report|notes\textrangle}}\label{subsubsec:style}
 
-    Stelt voor welk type document het betreft. Dit heeft vooral invloed of welk voorblad er gegenereerd wordt, alsook welke onderliggende klasse gebruikt zal worden (zie sectie~\ref{subsubsec:baseclass}). Ook wordt de voettekst standaard enkel getoond bij \texttt{notes}, zie sectie~\ref{subsubsec:footer}.
+    Specifies which type of document is used. This mainly affects which title page is generated, but also which underlying class is used (see Section~\ref{subsubsec:baseclass}). De footer is also only shown by default when using type \texttt{notes}, see Section~\ref{subsubsec:footer}.
 
-    Wanneer moet nu welke optie gebruikt worden? Het antwoord hierop is vooral persoonlijke keuze, maar enkele richtlijnen kunnen nuttig zijn. Gebruik \texttt{course} voor een voorblad zoals in een boek, \texttt{report} is geschikt voor rapporten, thesissen, werkstukken, enz. \texttt{notes} is ten slotte aangewezen voor verslagen, notulen, administratieve documenten, enz. Een voorbeeld van de voorbladen is te vinden in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} en~\ref{sec:voorblad-met-stijl-notes}.
+    This option is only useful with the class \texttt{ugent2016}; the variants (\texttt{ugent2016-article}, \texttt{ugent2016-book} and \texttt{ugent2016-report}) automatically set this option.
 
-    \subsubsection{\texttt{faculty=\textlangle faculteitscode\textrangle}}\label{subsubsec:faculty}
-    Deze optie neemt een tweeletterige code van de faculteit.  Een lijst van deze afkortingen is te vinden in tabel~\ref{table:faculty}.  De optie beïnvloed het facultaire logo alsook de facultaire kleuren die eventueel gebruikt worden.
+    When should which type be used then? The answer is mainly personal pereference, but some guidelines are useful. Use \texttt{course} for a title page like in a book or a PhD. \texttt{report} is appropriate for reports, master dissertations, group reports, etc. \texttt{notes} is preferred for minutes, notes, administrative documents, etc. An example of the title pages is found in appendices~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} and~\ref{sec:voorblad-met-stijl-notes}.
+
+    \subsubsection{\texttt{faculty=\textlangle faculty code\textrangle}}\label{subsubsec:faculty}
+    This option takes a two letter code of the faculty. A list of codes is found in Table~\ref{table:faculty}. This option impacts the faculty logo as well as the faculty colours, if they are used.
 
     \begin{table}[h]
         \begin{center}
-            \caption{Afkortingen van de faculteiten\label{table:faculty}}
+            \caption{Codes for the faculties\label{table:faculty}}
             \begin{tabular}{l l}
                 \hline
-                Afkorting & Volledige naam \\
+                Code & Full name \\
                 \hline
-                \texttt{we} & Faculteit Wetenschappen \\
-                \texttt{re} & Faculteit Recht en Criminologie \\
-                \texttt{lw} & Faculteit Letteren en Wijsbegeerte \\
-                \texttt{ge} & Faculteit Geneeskunde en Gezondheidswetenschappen \\
-                \texttt{ea} & Faculteit Ingenieurswetenschappen en Architectuur \\
-                \texttt{eb} & Faculteit Economie en Bedrijfskunde \\
-                \texttt{di} & Faculteit Dierengeneeskunde \\
-                \texttt{pp} & Faculteit Psychologie en Pedagogische Wetenschappen \\
-                \texttt{bw} & Faculteit Bio-Ingenieurswetenschappen \\
-                \texttt{fw} & Faculteit Farmaceutische Wetenschappen \\
-                \texttt{ps} & Faculteit Politieke en Sociale Wetenschappen \\
-                \texttt{none} & Speciale waarden, geen faculteit \\
+                \texttt{we} & Faculty of Sciences \\
+                \texttt{re} & Faculty of Law and Criminology \\
+                \texttt{lw} & Faculty of Arts and Philosophy \\
+                \texttt{ge} & Faculty of Medicine and Health Sciences \\
+                \texttt{ea} & Faculty of Engineering and Architecture \\
+                \texttt{eb} & Faculty of Economics and Business Administration \\
+                \texttt{di} & Faculty of Veterinary Medicine \\
+                \texttt{pp} & Faculty of Psychology and Educational Sciences \\
+                \texttt{bw} & Faculty of Bioscience Engineering \\
+                \texttt{fw} & Faculty of Pharmaceutical Sciences \\
+                \texttt{ps} & Faculty of Political and Social Sciences \\
+                \texttt{none} & Special value, no faculty \\
                 \hline
             \end{tabular}
         \end{center}
@@ -174,14 +188,14 @@
 
     \subsubsection{\texttt{campus=\textlangle default|kortrijk|global\textrangle}}\label{subsubsec:campus}
 
-    Stelt de campus in. Dit heeft invloed op het gebruikte logo. De drie opties zijn beschreven in tabel~\ref{table:campus}.
+    Specifies the campus. This affects the used logo. The three options are described in Table~\ref{table:campus}.
 
     \begin{table}[h]
         \begin{center}
-            \caption{Overzicht waarden \texttt{campus}\label{table:campus}}
+            \caption{Values for \texttt{campus}\label{table:campus}}
             \begin{tabular}{l l}
                 \hline
-                Waarde & Voorbeeld \\
+                Value & Example \\
                 \hline
                 \texttt{default}  &
                 \begin{minipage}{.3\textwidth}
@@ -200,173 +214,164 @@
         \end{center}
     \end{table}
 
-    Merk op dat de campussen Kortrijk en Global geen vertaalde logo's hebben.
+    Note that the campusses Kortrijk and Global don't have translated logos.
 
     \subsubsection{\texttt{footer=\textlangle auto|true|false\textrangle}}\label{subsubsec:footer}
-    De optie \texttt{footer} geeft aan of de voettekst moet toegevoegd worden of niet. Bij \texttt{auto} wordt de voettekst enkel getoond indien \texttt{type=notes}. Bij de andere types wordt de voettekst standaard niet getoond.
+    The option \texttt{footer} specifies if the footer should be added or not. When using \texttt{auto}, the footer is only added if \texttt{type=notes}. With the other types the footer is not shown by default.
 
-    \subsubsection{\texttt{layout=\textlangle stijlniveau\textrangle}}\label{subsubsec:layout}
+    \subsubsection{\texttt{layout=\textlangle style level\textrangle}}\label{subsubsec:layout}
 
-    Deze optie duidt aan tot welk niveau het document opgemaakt moet worden naar de normen van de huisstijl. Elk volgend niveau past ook de opmaak van het vorige niveau toe. Zo zal niveau 3 ook de opmaak van niveau 2 en niveau 1 toepassen. De hiërarchie ziet er als volgt uit: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont} → \texttt{all}.
+    This option specifies to which degree the document should be styled. Each level also applies the style of the previous level. For example, level 3 will also apply the style of level 2. The hierarchy looks like: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont} → \texttt{all}.
 
     \begin{enumerate}
-        \item \textbf{\texttt{none}} -- Pas geen opmaak toe buiten de titelpagina.
-        \item \textbf{\texttt{margins}} -- Pas de marges van het document aan.
-        \item \textbf{\texttt{colours}} -- Pas kleuren toe. Concreet betekent dit dat de titels van het document in het blauw zullen zijn.
-        \item \textbf{\texttt{titlestyle}} -- Maak de titels op. Hierbij gaat het om het omzetten naar hoofdletters en eventueel onderlijnen van de titels.
-        \item \textbf{\texttt{titlefont}} -- Pas het lettertype toe op de titels.
-        \item \textbf{\texttt{all}} -- Pas alles toe. Concreet zal dit ervoor zorgen dat alle lettertypes voldoen aan de huisstijl. Omdat de UGent geen licentie heeft om het hoofdlettertype (Panno Tekst) te gebruiken voor schuine letters of cursief, wordt het secundaire lettertype gebruikt voor de hoofdtekst, namelijk \textit{Arial}. Dit is de standaardwaarde.
+        \item \textbf{\texttt{none}} -- Don't apply any style except the title page.
+        \item \textbf{\texttt{margins}} -- Adjust the margins of the document.
+        \item \textbf{\texttt{colours}} -- Apply the colours. This results in blue titles in the document.
+        \item \textbf{\texttt{titlestyle}} -- Style the titles. The titles will be in all caps and possibly underlined.
+        \item \textbf{\texttt{titlefont}} -- Apply the fonts on the titles.
+        \item \textbf{\texttt{all}} -- Apply everything. This means all fonts will be adjusted. Since there are no italics in the University's font, Arial will be used. This is the default value.
     \end{enumerate}
 
     \subsubsection{\texttt{baseclass=\textlangle auto|scrreprt|scrartcl|scrbook\textrangle}}\label{subsubsec:baseclass}
-    Stelt in welke basisklasse geladen moet worden. Bij \texttt{auto} hangt de basisklasse af van welk \texttt{type} het document heeft. \texttt{type=report} laadt \texttt{scrreprt}, \texttt{type=course} laadt \texttt{scrbook} en \texttt{type=notes} laadt \texttt{scrartcl}.
+    Specifies which base class will be used. When using \texttt{auto}, the base class will automatically be chosen based on which \texttt{type} the document has. \texttt{type=report} uses \texttt{scrreprt}, \texttt{type=course} loads \texttt{scrbook} and \texttt{type=notes} loads \texttt{scrartcl}.
+
+    This option is only useful with the class \texttt{ugent2016}; the variants (\texttt{ugent2016-article}, \texttt{ugent2016-book} and \texttt{ugent2016-report}) automatically set this option.
 
     \subsubsection{\texttt{underline=\textlangle true|false\textrangle}}\label{subsubsec:underline}
 
-    Duidt aan of de hoofdstuktitels onderlijnd moeten worden of niet. De huisstijl schrijft voor dat dit moet gebeuren, maar standaard staat deze optie uit. De reden hiervoor is technisch: er zijn enkele beperkingen op de huidige implementatie van het onderlijnen. Als deze in de toekomst opgelost worden, zal deze optie standaard aangezet worden.
+    Enables or disables underlining the titles. The corporate style presribes this, yet the option defaults to false. This is due to technical limitations: the underlining has some limitations. If this is solved in the future, the underlining will be enabled by default.
 
-    \subsection{Voorblad}\label{subsec:voorblad}
+    \subsection{Title page}\label{subsec:voorblad}
 
-    De klasse maakt gebruik van het pakket \texttt{ugentstyle2016} om het voorblad te voorzien. Zie de beschrijving van de opties aldaar. In het bijzonder is tabel~\ref{table:titlemeta} interessant.
+    The classes use the package \texttt{ugent2016-title} to produce the title page. See the options of that package for more explanation. Specifically, Table~\ref{table:titlemeta} is interesting.
 
-    \section{Pakket \texttt{ugentstyle2016}}\label{sec:pakkettexttt}
-    Dit is het pakket dat verantwoordelijk is voor het voorblad.
+    \section{Package \texttt{ugent2016-title}}\label{sec:pakkettexttt}
+    This package is responsible for the title page.
 
-    \subsection{Opties}\label{subsec:opties2}
-    Het pakket heeft volgende opties, de reeds hierboven beschreven zijn:
+    \subsection{Options}\label{subsec:opties2}
+    The package has following options
     \begin{itemize}
-        \item \textbf{\texttt{type}} -- Zie deel~\ref{subsubsec:style}. De standaardwaarde is \texttt{course}.
-        \item \textbf{\texttt{faculty}} -- Zie deel~\ref{subsubsec:faculty}. Standaardfaculteit is \texttt{we}.
-        \item \textbf{\texttt{campus}} -- Zie deel~\ref{subsubsec:campus}. Standaardwaarde is \texttt{default}.
+        \item \textbf{\texttt{type}} -- See Section~\ref{subsubsec:style}. The default value is \texttt{course}.
+        \item \textbf{\texttt{faculty}} -- See Section~\ref{subsubsec:faculty}. The default value faculty is \texttt{we}.
+        \item \textbf{\texttt{campus}} -- See Section~\ref{subsubsec:campus}. The default value is \texttt{default}.
     \end{itemize}
 
-    \subsection{Metagegevens}\label{subsec:metagegevens}
-    Om het voorblad van data te voorzien zijn er een heleboel commando's analoog aan \mintinline{latex}{\author{}} en verwanten. Afhankelijk van het type voorblad worden gegevens op een andere plaats getoond of zelfs niet getoond. Een visueel overzicht wordt gegeven in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report}~en~\ref{sec:voorblad-met-stijl-notes}. Tabel~\ref{table:titlemeta} bevat een beschrijving van alle beschikbare commando's.
+    \subsection{Metadata}\label{subsec:metagegevens}
+
+    To provide the title page with data, a bunch of commands are defined, analogue to \mintinline{latex}{\author{}}. Depending on the type of title page, data is shown in different positions or not at all. A visual overview is given in appendices~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} and~\ref{sec:voorblad-met-stijl-notes}. Table~\ref{table:titlemeta} contains a description of all available commands.
 
     \begin{table}
         \begin{center}
-            \caption{Beschikbare commando's voor het titelblad\label{table:titlemeta}}
+            \caption{Available commands for the title page\label{table:titlemeta}}
             \begin{tabular}{p{0.2\linewidth} p{0.7\linewidth}}
                 \hline
-                Commando & Betekenis en gebruik \\
+                Commando & Meaning \\
                 \hline
-                \verb|\author{}| & Zoals in standaard-\LaTeX. \\
-                \verb|\title{}|  & Zoals standaard-\LaTeX. \\
-                \verb|\subtitle{}| & Zoals standaard-\KOMAScript. \\
-                \verb|\academyyear{}| & Het academiejaar, bv. 2017 – 2018. \\
-                \verb|\programme{}| & De richting, bv. Informatica. \\
-                \verb|\wordcount{}| & Aantal woorden in het werk.\footnote{Dit wordt misschien ooit automatisch berekened.} \\
-                \verb|\studentnumber{}| & Studentennummer. \\
-                \verb|\email{}| & E-mailadres van de auteur. \\
-                \verb|\phone{}| & Telefoonnummer van de auteur. \\
-                \verb|\address{}| & Adres van de auteur. Kan over meerdere regels. \\
-                \verb|\department{}| & Departement/vakgroep binnen de faculteit. \\
-                \verb|\researchgroup{}| & Onderzoeksgroep. \\
-                \verb|\facultisch{}| & De faculteit (of aanverwanten, zoals Directie ICT). Standaard wordt dit de naam van de faculteit. Als \texttt{faculty=none}, moet dit gegeven worden. \\
-                \verb|\titletext{}| & Vrije, niet opgemaakte tekst voor op het titelblad. \\
+                \verb|\author{}| & Like standard \LaTeX. \\
+                \verb|\title{}|  & Liek standard \LaTeX. \\
+                \verb|\subtitle{}| & Like standard \KOMAScript. \\
+                \verb|\academyyear{}| & The academic year, e.g.\ 2017 – 2018. \\
+                \verb|\programme{}| & The education programme, e.g.\ Computer Science. \\
+                \verb|\wordcount{}| & Number of words in the document. \\
+                \verb|\studentnumber{}| & Student number. \\
+                \verb|\email{}| & E-mail address of the author. \\
+                \verb|\phone{}| & Phone number of the author. \\
+                \verb|\address{}| & Address of the author. Can be multiple lines. \\
+                \verb|\department{}| & Department within the faculty. \\
+                \verb|\researchgroup{}| & Research group. \\
+                \verb|\facultisch{}| & De faculty (or related, like Directie ICT). Defaults to the name of the faculty. If \texttt{faculty=none} is used, this is required. \\
+                \verb|\titletext{}| & Free form text. No style is applied. \\
                 \hline
             \end{tabular}
         \end{center}
     \end{table}
 
-    Ze worden gebruikt zoals de normale \LaTeX-commando's:
+    They are used like the regular \LaTeX commands:
     \begin{minted}{latex}
-\author{Jan Jaap}
-\title{Een mooie paper}
-\subtitle{Zonder toegevoegde data}
+\author{John Johnson}
+\title{A nice paper}
+\subtitle{No added data}
     \end{minted}
 
-    \section{Pakket \texttt{ugentassets2016}}\label{sec:pakkettexttt2}
-    Dit pakket voorziet de logo's, kleuren en andere \emph{assets}. Als voorbeeld wordt in dit deel vaak de Faculteit Wetenschappen gebruikt. Dit pakket wordt door de andere klassen en pakketten achter de schermen gebruikt, maar kan ook onafhankelijk nuttig zijn als een document logo's of kleuren van de UGent moet bevatten.
+    \section{Package \texttt{ugent2016-assets}}\label{sec:pakkettexttt2}
 
-    \subsection{Logo's}\label{subsec:logos}
+    This package provides the logos, colours and other assets. We often use the Faculty of Sciences in this section to illustrate the options and commands. This packages is used by the other packages behind the scenes, but can also be useful for use in other packages (e.g.\ document classes not covered by this package).
 
-    Het pakket heeft commando's die het pad naar de verschillende logo's geven.
-    Deze kunnen dan gebruikt worden om bijvoorbeeld de logo's te tonen:
+    \subsection{Logos}\label{subsec:logos}
+
+    The package contains commands or macros that evaluate to the path of a logo. An example:
 
     \begin{minted}{latex}
 \includegraphics{\ugentdefault}
     \end{minted}
 
-    Zoals vermeld in deel~\ref{subsec:taal} worden de logo's automatisch aangepast aan de taal.
-    Er zijn wel experimentele\footnote{Dit betekent dat ze kunnen veranderen of verdwijnen.} versies van de commando's die altijd hetzelfde logo teruggeven.
-    Om ze te gebruiken voegt men de tweeletterige taalcode toe aan het commando:
+    As mentioned in Section~\ref{subsec:taal}, the images are automatically chosen based on the document's language. There are experimental commands\footnote{Experimental means they can change or disappear between releases} that always give the same images. To use them, add the two letter language code to the commands, for example:
 
     \begin{minted}{latex}
-\ugentdefault       % afhankelijk van taal
-\ugentdefaultnl     % altijd Nederlands
-\ugentdefaulten     % altijd Engels
+\ugentdefault       % depends on language
+\ugentdefaultnl     % always Dutch
+\ugentdefaulten     % always English
     \end{minted}
 
-    Volgende commando's zijn beschikbaar:
+    Following commands are available:
 
     \begin{description}[style=nextline]
-        \item[\Q{\\ugentdefault}] Geeft het gewone logo van de Universiteit.
-                Rond dit, en andere logo's, is witruimte voorzien.
+        \item[\Q{\\ugentdefault}] Provides the default logo. This logo (and other logos) contains the minimal amount of whitespace.
             \begin{marginfigure}[-1cm]\includegraphics[width=\marginparwidth]{\ugentdefault}\end{marginfigure}
-        \item[\Q{\\ugentkortrijk}] Logo van de Campus Kortrijk.
-                Dit logo heeft geen vertaling.
+        \item[\Q{\\ugentkortrijk}] Logo of Campus Kortrijk. No translation is available.
             \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentkortrijk}\end{marginfigure}
-        \item[\Q{\\ugentglobal}] Logo van de Global Campus.
-                Dit logo heeft geen vertaling.
+        \item[\Q{\\ugentglobal}] Logo of the Global Campus. No translation is available.
             \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentglobal}\end{marginfigure}
-        \item[\Q{\\ugentfacultylogo{code}}] Geeft het logo van de faculteit.
-                De parameter \texttt{code} is de tweeletterige code uit tabel~\ref{table:faculty}.
-                Merk op dat de speciale waarde \texttt{none} niet werkt in deze marco.
+        \item[\Q{\\ugentfacultylogo{code}}] Logo of the faculty. De parameter \texttt{code} is the two letter code from Table~\ref{table:faculty}. Note that the special value \texttt{none} cannot be used in this macro.
             \begin{marginfigure}[-0.5cm]\includegraphics[width=\marginparwidth]{\ugentfacultylogo{we}}\end{marginfigure}
     \end{description}
 
-    \subsection{Kleuren}\label{subsec:kleuren}
+    \subsection{Colours}\label{subsec:kleuren}
 
-    Ook alle officiële kleuren van de UGent zijn beschikbaar. Deze kleuren zijn gedefinieerd als een \LaTeX-kleur, en
-    kunnen dus overal gebruikt worden:
+    All official colours of Ghent University and her faculties are available. They are defined as a \LaTeX colour, and can be used everywhere:
 
     \begin{tabular}{ m{0.5\linewidth} m{0.5\linewidth} }
         \begin{minipage}[t]{0.5\linewidth}
             \begin{minted}{latex}
-{\color{ugent-blue} Dit is blauw.}
+{\color{ugent-blue} This is blue.}
             \end{minted}
         \end{minipage}
         & \begin{minipage}{.5\linewidth}
-              {\color{ugent-blue} Dit is blauw.}
+              {\color{ugent-blue} This is blue.}
         \end{minipage} \\
     \end{tabular}
 
-    Een lijst van beschikbare kleuren:
+    A list of available colours:
 
     \begin{description}[style=nextline]
-        \item[\Q{ugent-blue}] Officiële blauwe hoofdkleur. \begin{marginfigure}{\textcolor{ugent-blue}{\rule{0.5cm}{0.5cm}}}\end{marginfigure}
-        \item[\Q{ugent-yellow}] Officiële gele accentkleur. \begin{marginfigure}{\textcolor{ugent-yellow}{\rule{0.5cm}{0.5cm}}}\end{marginfigure}
-        \item[\Q{ugent-{code}}] Officiële faculteitskleur.
-                De parameter \texttt{code} is de tweeletterige code uit tabel~\ref{table:faculty}.
-                Merk op dat de speciale waarde \texttt{none} niet werkt in deze marco.
+        \item[\Q{ugent-blue}] Official blue main colour. \begin{marginfigure}{\textcolor{ugent-blue}{\rule{0.5cm}{0.5cm}}}\end{marginfigure}
+        \item[\Q{ugent-yellow}] Official yellow accent colour. \begin{marginfigure}{\textcolor{ugent-yellow}{\rule{0.5cm}{0.5cm}}}\end{marginfigure}
+        \item[\Q{ugent-{code}}] Official faculty colour. The parameter \texttt{code} is de two letter code from Table~\ref{table:faculty}. Note that the special value \texttt{none} is not supported by this macro.
             \begin{marginfigure}{\textcolor{ugent-we}{\rule{0.5cm}{0.5cm}}}\end{marginfigure}
     \end{description}
 
-    \subsection{Lettertypes}\label{subsec:lettertypes}
+    \subsection{Fonts}\label{subsec:lettertypes}
 
-    Het pakket laadt het lettertype \emph{Panno Tekst UGent} in met \texttt{fontspec}, als \texttt{fontspec} beschikbaar is. Indien niet zal een waarschuwing getoond worden in de logs. Dit is beschikbaar met \mintinline{latex}{\panno}. Zoals reeds vermeld vereist dit uiteraard dat Panno geïnstalleerd is als systeemlettertype\footnote{Technisch moet het lettertype \emph{known} zijn in \texttt{fontspec}.}. Het gebruik is eenvoudig:
+    If the package \texttt{fontspec} is available, the package will load the \emph{Panno Tekst UGent} font. If fontspec is not available a warning will be printed in the logs and the font will not be available. The font is available as \mintinline{latex}{\panno}. As mentioned before, Panno needs to be installed as system font\footnote{Technically the font should be \emph{known} to \texttt{fontspec}.}. The use is simple:
 
     \begin{tabular}{ m{0.6\linewidth} m{0.4\linewidth} }
         \begin{minipage}[t]{0.6\linewidth}
             \begin{minted}{latex}
-                {\panno Dit is Panno.}
+                {\panno This is Panno.}
             \end{minted}
         \end{minipage}
         & \begin{minipage}[t]{\linewidth}
-            {\panno Dit is Panno.}
+            {\panno This is Panno.}
         \end{minipage} \\
     \end{tabular}
 
     \vspace{\baselineskip}
-    Tot slot opnieuw opmerken dat cursieve varianten van dit lettertype niet bestaan\footnote{Juister is dat de UGent geen licentie heeft voor de cursieve varianten. Het basislettertype, \textit{Panno Text}, beschikt hier wel over. Zie \url{https://www.boldmonday.com/typeface/pannotext/}}.
 
-    \subsection{Namen der faculteiten}\label{subsec:namen-der-faculteiten}
+    Again, we note that italics or cursive variants do not exist for this font\footnote{More correct is that the University doesn't have a licentie for the italic variant. The base font, \textit{Panno Text}, does have it. See \url{https://www.boldmonday.com/typeface/pannotext/}}.
 
-    Er is een commando dat de vertaalde naam van de faculteit geeft: \mintinline{latex}{\ugentfacultyname{code}}.
-    Hierbij is \texttt{code} opnieuw de tweeletterige code uit tabel~\ref{table:faculty}.
-    Deze macro werkt ook niet als \texttt{faculty=none}.
-    Hiervoor is (nog) geen vast commando voorzien; de naam zal altijd afhangen van de taal van het document.
+    \subsection{Faculty names}\label{subsec:namen-der-faculteiten}
+
+    A macro that gives the translated name of a faculty is available: \mintinline{latex}{\ugentfacultyname{code}}. Here \texttt{code} is again the two letter code from Table~\ref{table:faculty}. There is also no support for \texttt{faculty=none}. A language independent macro is not yet available for the name; it will always be translated.
 
     \begin{tabular}{ m{0.6\linewidth} m{0.4\linewidth} }
         \begin{minipage}[t]{0.6\linewidth}
@@ -376,59 +381,37 @@
             \end{minted}
         \end{minipage}
         & \begin{minipage}[t]{\linewidth}
-              \ugentfacultyname{we} \par
-              \ugentfacultyname{re}
+              \facultyname{we} \par
+              \facultyname{re}
         \end{minipage} \\
     \end{tabular}
 
     \subsection{Grid}\label{subsec:grid}
 
-    De huisstijl definieert een typografisch grid over de pagina\footnote{Zie \url{https://styleguide.ugent.be/basisprincipes/grid-en-lay-out.html}}, dat bekomen wordt door de lengte door 7 te delen.
-    Dat zijn de grote blokken.
-    De lengte van een groot blok wordt dan gedeeld door 4 om een klein blok te krijgen.
-    Het kleine blok is de basisgrootte van het document.
-    Pakketten zoals \texttt{ugentstyle2016} gebruiken deze basisgrootte om de positie van onderdelen te bepalen.
-    Er zijn twee macro's beschikbaar, \mintinline{latex}{\bigblock} en \mintinline{latex}{\smallblock}, die de lengte van respectievelijk het grote en het kleine blok geven.
-    Dit zijn lengtes en kunnen dus overal gebruikt worden waar lengtes toegelaten worden.
+    The corporate style defines a typographical grid on the page\footnote{See \url{https://styleguide.ugent.be/basisprincipes/grid-en-lay-out.html}}. It is obtained by dividing the length of the page by 7. These are the big blocks. The length of a big block is then divided by 4 to obtain a small block. The small block is the basic building block the the style: almost everything is aligned to it.
+
+    Packages such as \texttt{ugent2016-title} use these basic building blocks to determine the position of various components. Two macros are available, exposing the length of a big and small block: \mintinline{latex}{\bigblock} en \mintinline{latex}{\smallblock}.
 
     \begin{minted}{latex}
-% Lengte zal 3*(lengte blad/28) zijn
+% Length will be 3*(length paper/28)
 \includegraphics[width=3\smallblock]{\ugentkortrijk}
     \end{minted}
 
     \appendix
 
-    \section{Voorblad met stijl \texttt{course}}\label{sec:voorblad-met-stijl-course}
+    \section{Title page type \texttt{course}}\label{sec:voorblad-met-stijl-course}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{ugent2016-course-title.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-title-course.pdf}}
     \end{center}
 
-    \section{Voorblad met stijl \texttt{report}}\label{sec:voorblad-met-stijl-report}
+    \section{Title page type \texttt{report}}\label{sec:voorblad-met-stijl-report}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{ugent2016-report-title.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-title-report.pdf}}
     \end{center}
 
-    \section{Voorblad met stijl \texttt{notes}}\label{sec:voorblad-met-stijl-notes}
+    \section{Title page type \texttt{notes}}\label{sec:voorblad-met-stijl-notes}
     \begin{center}
-        \frame{\includegraphics[width=1\textwidth]{ugent2016-notes-title.pdf}}
+        \frame{\includegraphics[width=1\textwidth]{ugent2016-title-notes.pdf}}
     \end{center}
-
-    \section{Wijzigingen}\label{sec:wijzigingen}
-
-    Dit onderdeel bevat de voornaamste wijzigingen.
-    De exacte wijzigingen kunnen gevonden worden in de Github-repository van de pakketten.
-
-    \subsubsection*{18 mei 2019}
-    \begin{itemize}
-        \item Babel wordt niet meer standaard geladen voor compatibiliteitsredenen.
-        \item Het pakket \texttt{ugentasset2016} werkt nu ook zonder \texttt{fontspec}.
-        \item Alle klassen zijn samengevoegd tot één klasse, \texttt{ugent2016}.
-    \end{itemize}
-
-    \subsubsection*{15 februari 2019}
-    \begin{itemize}
-        \item Bugfixes bij onderlijnen lange titels
-        \item Voeg klasse \texttt{ugentartcl2016} toe
-    \end{itemize}
 
 \end{document}
