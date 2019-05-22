@@ -1,5 +1,5 @@
 #% Do not delete the line below; configure depends on this
-#  \DeclareLaTeXClass{UGent 2016 Article}
+#  \DeclareLaTeXClass{UGent2016 Article}
 #  \DeclareCategory{Articles}
 # ugent2016-article textclass definition file.
 # Niko Strijbol <strijbol.niko@gmail.com>, 2019/04/29.

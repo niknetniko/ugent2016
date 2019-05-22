@@ -33,7 +33,7 @@
 % Expose all options of the style package.
 \DeclareStringOption[report]{type}
 \DeclareStringOption[we]{faculty}
-\DeclareStringOption[default]{campus}
+\DeclareStringOption[ugent]{campus}
 
 % Define whether the footer should be shown or not.
 \DeclareStringOption[auto]{footer}
@@ -94,7 +94,7 @@
 }{}
 
 % Load our style package with the required options.
-\RequirePackage[type=\ugentcls@type,faculty=\ugentcls@faculty,campus=\ugentcls@campus]{ugentstyle2016}
+\RequirePackage[type=\ugentcls@type,faculty=\ugentcls@faculty,campus=\ugentcls@campus]{ugent2016-title}
 
 
 % Load packages at the end of the preamble, allowing overrides.
@@ -179,7 +179,7 @@
         \cfoot*{
             \begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
                 \node[anchor=north west] (footer) at ([shift={(1.5\smallblock,2.4\smallblock)}]current page.south west) {
-                    \includegraphics[height=2\smallblock]{\@campusname}
+                    \includegraphics[height=2\smallblock]{\@campusimage}
                 };
                 \node[anchor=north west, align=left] (title) at ([shift={(5\smallblock,2\smallblock)}]current page.south west) {
                     \begin{minipage}[c][1\smallblock][s]{7\smallblock}

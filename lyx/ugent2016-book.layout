@@ -1,5 +1,5 @@
 #% Do not delete the line below; configure depends on this
-#  \DeclareLaTeXClass{UGent 2016 Book}
+#  \DeclareLaTeXClass{UGent2016 Book}
 #  \DeclareCategory{Books}
 # ugent2016-book textclass definition file.
 # Niko Strijbol <strijbol.niko@gmail.com>, 2019/04/29.
