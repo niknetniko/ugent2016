@@ -42,6 +42,6 @@ The packages are still in beta! Please report issues. The three main classes are
 
 ## License
 
-All code is licensed under the LaTeX Project Public License, version 1.3c or later.
+All files except those mentioned below are licensed under the LaTeX Project Public License, version 1.3c or later. See the `LICENSE` file.
 
-The license of the included images is unclear at the moment (I'm working on this).
+All files in the folders `assets` and `latex/logos` are propably licensed under CC BY-SA 4.0; this is in process of being verified.
