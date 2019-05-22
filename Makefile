@@ -74,5 +74,4 @@ latex/logos/%.pdf: assets/%.eps latex/logos
 
 # Clean up some stuff
 clean:
-	powershell rm -r -force -ErrorAction Ignore latex/logos/
 	cd latex && latexmk -cd -use-make -C
