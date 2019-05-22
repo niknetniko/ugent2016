@@ -12,13 +12,7 @@ See the end of the readme for a quickstart section.
 
 ## Installation
 
-You should install the folder `/latex` it as any other package, meaning you should copy it to the correct folders in your TeX installation. Google is your friend!
-
-## Documentation
-
-All options, packages and classes are documented in the manual (Dutch only for now).
-
-To build the documentation, you can use the makefile. It will build the Dutch docs by default.
+See more details in the readme inside `/latex` or `/lyx`.
 
 ## Quickstart
 

@@ -1,7 +1,7 @@
 # The UGent2016 packages
 
 Version: 0.1  
-Date: 2019/05/19
+Date: 2019/05/22
 
 ## Description
 
@@ -26,7 +26,7 @@ Current maintainer(s):
 2. Development versions might be available in the source repository. A makefile to produce tds compatible zips is also available.
 3. Manual installation details:
     - Install all `*.cls` and `*.sty` files under `tex/latex/ugent2016`.
-    - Copy the `/logo` directory to `tex/latex/ugent2016`. The result should be `tex/latex/ugent2016/logos/*`.
+    - Copy the `/logos` directory to `tex/latex/ugent2016`. The result should be `tex/latex/ugent2016/logos/*`.
     - Copy `ugent2016-nl.pdf` and `ugent2016-en.pdf` to `doc/latex/ugent2016`.
     - Copy `ugent2016-nl.tex` and `ugent2016-en.tex` to `source/latex/ugent2016`.
 
