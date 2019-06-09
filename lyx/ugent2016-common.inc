@@ -67,3 +67,9 @@ Style TitleText
 	CopyStyle		Author
 	LatexName		titletext
 End
+
+Style Promotors
+	LabelString		"Promotors (promotoren)"
+	CopyStyle		Author
+	LatexName		promotors
+End

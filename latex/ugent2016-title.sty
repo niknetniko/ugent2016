@@ -128,6 +128,7 @@
 \newcommand*{\@mobile}{}
 \newcommand*{\@address}{}
 \newcommand*{\@facultish}{}
+\newcommand*{\@promotors}{}
 
 % Create the command that will make them available to the package.
 \newcommand*{\professor}[1]{\author{#1}}
@@ -143,6 +144,7 @@
 \newcommand*{\mobile}[1]{\gdef\@mobile{#1}}
 \newcommand*{\address}[1]{\gdef\@address{#1}}
 \newcommand*{\facultish}[1]{\gdef\@facultish{#1}}
+\newcommand*{\promotors}[1]{\gdef\@promotors{#1}}
 
 \IfStrEq{\ugent@type}{notes}{
 % By default and if possible, we use the faculty name.
@@ -170,6 +172,8 @@
 	\NewTranslation{english}{wordcounttext}{Word count:}
 	\NewTranslationFallback{numbertext}{Studentennummer:}
 	\NewTranslation{english}{numbertext}{Student number:}
+	\NewTranslationFallback{academyyear}{Academiejaar:}
+	\NewTranslation{english}{academyyear}{Academic year:}
 
 	% For the course title page, we differ slightly from the Word templates; our title page is aligned to the grid,
 	% theirs is not.
@@ -178,6 +182,9 @@
 	\setlength\textblockwidth{\dimexpr0.61\pagewidth-2\smallblock\relax}
 	\newlength{\textblockheight}
 	\setlength\textblockheight{\dimexpr(0.37\pageheight)-(2\smallblock)\relax}
+
+	\newlength{\@basesize}
+	\setlength{\@basesize}{\f@size pt}
 
 	\renewcommand*{\maketitle}{%
 		\pagenumbering{gobble} % Numbers are restored later
@@ -202,30 +209,43 @@
 
 				\vspace{\fill}
 				\begin{spacing}{2.3}
-					\noindent\linespread{5}{\fontsize{30pt}{60pt}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
+					\noindent{\fontsize{2.5\@basesize}{3\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
+					\noindent{\fontsize{1.5\@basesize}{1.8\@basesize}\panno\color{ugent-blue}\MakeTextUppercase{\@subtitle}}
 				\end{spacing}
-				\vspace{0.50\baselineskip}
-				\noindent{\fontsize{30pt}{60pt}\panno\color{ugent-blue}\MakeTextUppercase{\@subtitle}} \par
 
 				% Add word count if necessary
-				\IfStrEq{\@wordcount}{}{}{%
+				\ifdefempty{\@wordcount}{%
+					\vspace{6\baselineskip}
+				}{%
 					\vspace{1\baselineskip}
 					\noindent{\panno\GetTranslation{wordcounttext} \@wordcount}
+					\vspace{4\baselineskip}
 				}
 
-				\vspace{6\baselineskip}
-				\noindent{\fontsize{16pt}{20pt}\panno\@author} \par
-				\IfStrEq{\@studentnumber}{}{}{
+				\noindent{\fontsize{1.5\@basesize}{1.8\@basesize}\panno\@author} \par
+				\ifdefempty{\@studentnumber}{%
+					\vspace{1\baselineskip}
+				}{%
 					\noindent{\panno\GetTranslation{numbertext} \@studentnumber}
 				}
 
-				\IfStrEq{\@titletext}{}{}{%
-					\vspace{1\baselineskip}
-					\noindent\@titletext \par
-				}
 				\vspace{1\baselineskip}
-				\noindent{\panno\@academyyear}
 
+				\ifdefempty{\@promotors}{%
+					\vspace{2\baselineskip}
+				}{%
+					\noindent{\fontsize{1.2\@basesize}{1.44\@basesize}\panno\@promotors}
+					\vspace{1\baselineskip}
+				}
+
+				\ifdefempty{\@titletext}{}{%
+					\noindent{\panno\@titletext}
+				}
+
+				\vspace{1\baselineskip}
+				\ifdefempty{\@academyyear}{}{%
+					\noindent{\panno\GetTranslation{academyyear} \@academyyear}
+				}
 				\vspace{\fill}
 			\end{titlepage}
 			\restoregeometry % restore margins
@@ -257,7 +277,7 @@
 				\vspace{0.50\baselineskip}
 				\noindent{\fontsize{30pt}{60pt}\panno\color{ugent-blue}\MakeTextUppercase\@subtitle} \par
 
-				\IfStrEq{\@titletext}{}{}{%
+				\ifdefempty{\@titletext}{}{%
 					\vspace{2\baselineskip}
 					\noindent\@titletext \par
 				}
@@ -266,15 +286,15 @@
 
 				\noindent\panno\@facultish \par
 				\noindent\panno\@department \par
-				\IfStrEq{\@researchgroup}{}{}{%
+				\ifdefempty{\@researchgroup}{}{%
 					\noindent\panno\@researchgroup \par
 				}
 				\vspace{1\baselineskip}
 				\noindent{\panno E \href{mailto:\@email}{\@email}} \par
-				\IfStrEq{\@phone}{}{}{%
+				\ifdefempty{\@phone}{}{%
 					\noindent{\panno{T \@phone}} \par
 				}
-				\IfStrEq{\@mobile}{}{}{%
+				\ifdefempty{\@mobile}{}{%
 					\noindent{\panno{T \@mobile}} \par
 				}
 				\vspace{1\baselineskip}
