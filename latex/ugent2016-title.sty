@@ -218,15 +218,15 @@
 					\vspace{6\baselineskip}
 				}{%
 					\vspace{1\baselineskip}
-					\noindent{\panno\GetTranslation{wordcounttext} \@wordcount}
+					\noindent{\GetTranslation{wordcounttext} \@wordcount}
 					\vspace{4\baselineskip}
 				}
 
-				\noindent{\fontsize{1.5\@basesize}{1.8\@basesize}\panno\@author} \par
+				\noindent{\fontsize{1.5\@basesize}{1.8\@basesize}\@author} \par
 				\ifdefempty{\@studentnumber}{%
 					\vspace{1\baselineskip}
 				}{%
-					\noindent{\panno\GetTranslation{numbertext} \@studentnumber}
+					\noindent{\GetTranslation{numbertext} \@studentnumber}
 				}
 
 				\vspace{1\baselineskip}
@@ -234,17 +234,17 @@
 				\ifdefempty{\@promotors}{%
 					\vspace{2\baselineskip}
 				}{%
-					\noindent{\fontsize{1.2\@basesize}{1.44\@basesize}\panno\@promotors}
+					\noindent{\fontsize{1.2\@basesize}{1.44\@basesize}\@promotors}
 					\vspace{1\baselineskip}
 				}
 
 				\ifdefempty{\@titletext}{}{%
-					\noindent{\panno\@titletext}
+					\noindent{\@titletext}
 				}
 
 				\vspace{1\baselineskip}
 				\ifdefempty{\@academyyear}{}{%
-					\noindent{\panno\GetTranslation{academyyear} \@academyyear}
+					\noindent{\GetTranslation{academyyear} \@academyyear}
 				}
 				\vspace{\fill}
 			\end{titlepage}
@@ -272,35 +272,37 @@
 
 				\vspace{\fill}
 				\begin{spacing}{2.3}
-					\noindent{\fontsize{30pt}{60pt}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
+					\noindent{\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
+					\noindent{\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\MakeTextUppercase\@subtitle}
 				\end{spacing}
-				\vspace{0.50\baselineskip}
-				\noindent{\fontsize{30pt}{60pt}\panno\color{ugent-blue}\MakeTextUppercase\@subtitle} \par
 
-				\ifdefempty{\@titletext}{}{%
-					\vspace{2\baselineskip}
+				\vspace{1\baselineskip}
+
+				\ifdefempty{\@titletext}{%
+					\vspace{1\baselineskip}
+				}{%
 					\noindent\@titletext \par
 				}
 
-				\vspace{2\baselineskip}
+				\vspace{3\baselineskip}
 
-				\noindent\panno\@facultish \par
-				\noindent\panno\@department \par
+				\noindent\@facultish \par
+				\noindent\@department \par
 				\ifdefempty{\@researchgroup}{}{%
-					\noindent\panno\@researchgroup \par
+					\noindent\@researchgroup \par
 				}
 				\vspace{1\baselineskip}
-				\noindent{\panno E \href{mailto:\@email}{\@email}} \par
+				\noindent{E \href{mailto:\@email}{\@email}} \par
 				\ifdefempty{\@phone}{}{%
-					\noindent{\panno{T \@phone}} \par
+					\noindent{T \@phone} \par
 				}
 				\ifdefempty{\@mobile}{}{%
-					\noindent{\panno{T \@mobile}} \par
+					\noindent{M \@mobile} \par
 				}
 				\vspace{1\baselineskip}
-				\noindent\panno{\@address} \par
+				\noindent{\@address} \par
 				\vspace{1\baselineskip}
-				\noindent\panno{\href{https://www.ugent.be}{\color{ugent-blue}www.ugent.be}}
+				\noindent{\href{https://www.ugent.be}{\color{ugent-blue}www.ugent.be}}
 
 				\vspace{\fill}
 
@@ -331,16 +333,15 @@
 					\begin{minipage}[c][\dimexpr0.37\pageheight-2\smallblock\relax][s]{\dimexpr0.61\pagewidth-2\smallblock\relax}
 						\raggedright
 						\color{white}
-						\begin{spacing}{2.8}
-							{\fontsize{35pt}{65pt}\bfseries\panno\MakeTextUppercase{\uline{\@title}}} \par
+						\begin{spacing}{3}
+							{\fontsize{35bp}{42bp}\bfseries\panno\MakeTextUppercase{\uline{\@title}}} \par
+							{\fontsize{30bp}{36bp}\bfseries\panno\@subtitle}
 						\end{spacing}
-						\vspace{0.75\baselineskip}
-						{\fontsize{30pt}{60pt}\bfseries\panno\@subtitle}
 						\vfill
-						{\fontsize{18pt}{35pt}\bfseries\panno\@author} \par
+						{\fontsize{18bp}{22bp}\panno\@author} \par
 						\vspace{\smallblock}
-						{\fontsize{15pt}{30pt}\panno\@programme} \par
-						{\fontsize{15pt}{30pt}\panno\@academyyear}
+						{\fontsize{15bp}{18bp}\panno\@programme} \par
+						{\fontsize{15bp}{18bp}\panno\@academyyear}
 					\end{minipage}
 					};
 				\end{tikzpicture}
