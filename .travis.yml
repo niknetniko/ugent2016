@@ -1,0 +1,23 @@
+language: generic
+
+# Dependency of the minted package
+#before_install:
+# - sudo apt-get install python-pygments
+install:
+  - source ./texlive/texlive_install.sh
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
+# Change working directory so including files will work
+script:
+  - make ugent2016.zip
+
+  # But you could use any other compiler as well instead of latexmk. Example:
+#  - pdflatex main.tex
+#  - bibtex main
+#  - pdflatex main.tex
+#  - pdflatex main.tex # Compile twice to fix references
+
+  # You can also pass arguments to texliveonfly:
+#  - texliveonfly --arguments='-shell-escape' main.tex
