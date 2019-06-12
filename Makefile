@@ -30,7 +30,7 @@ all: all_pdf_assets latex/ugent2016-nl.pdf latex/ugent2016-en.pdf
 # -interaction=nonstopmode keeps the pdflatex backend from stopping at a
 # missing file reference and interactively asking you for an alternative.
 
-pdf_assets := $(patsubst assets/%,latex/logos/%,$(patsubst %.eps,%.pdf,$(wildcard assets/*.eps)))
+pdf_assets := $(patsubst assets/%,latex/%,$(patsubst %.eps,%.pdf,$(wildcard assets/*.eps)))
 
 latex/ugent2016-nl.pdf: latex/ugent2016-nl.tex \
 						latex/ugent2016-title-report.pdf \
@@ -55,36 +55,48 @@ example.pdf: example.tex
 	latexmk -cd lualatex -interaction=nontopmode -use-make $<
 
 # Create all assets
-all_pdf_assets: $(pdf_assets) latex/logos/ugent2016-logo-global-nl.pdf latex/logos/ugent2016-logo-kortrijk-en.pdf
+all_pdf_assets: $(pdf_assets) latex/ugent2016-logo-global-nl.pdf latex/ugent2016-logo-kortrijk-en.pdf
 
 # These two are created using symlinks rather than links.
-latex/logos/ugent2016-logo-global-nl.pdf: latex/logos/ugent2016-logo-global-en.pdf
+latex/ugent2016-logo-global-nl.pdf: latex/ugent2016-logo-global-en.pdf
 	powershell New-Item -Force -ItemType SymbolicLink -Name $@ -Value $<
 
-latex/logos/ugent2016-logo-kortrijk-en.pdf: latex/logos/ugent2016-logo-kortrijk-nl.pdf
+latex/ugent2016-logo-kortrijk-en.pdf: latex/ugent2016-logo-kortrijk-nl.pdf
 	powershell New-Item -Force -ItemType SymbolicLink -Name $@ -Value $<
-
-# Create the directory
-latex/logos:
-	powershell mkdir -f latex/logos
 
 # Convert a single asset
-latex/logos/%.pdf: assets/%.eps latex/logos
+latex/%.pdf: assets/%.eps
 	epstopdf --outfile=$@ $<
 
 # Clean up some stuff
-clean:
+clean-win:
 	cd latex && latexmk -cd -use-make -C
-	-powershell Remove-Item latex/logos -Recurse -Force -ErrorAction Ignore
+	-powershell Remove-Item latex/*.pdf -Recurse -Force -ErrorAction Ignore
 	-powershell Remove-Item latex/_minted-ugent2016-en -Recurse -Force -ErrorAction Ignore
 	-powershell Remove-Item latex/_minted-ugent2016-nl -Recurse -Force -ErrorAction Ignore
 	-powershell Remove-Item ugent2016.zip -Force -ErrorAction Ignore
 	-powershell Remove-Item ugent2016.tds.zip -Force -ErrorAction Ignore
-	-powershell Remove-Item ugent2016 -Recurse -Force -ErrorAction Ignore
+	-powershell Remove-Item ctanout -Recurse -Force -ErrorAction Ignore
 	-powershell Remove-Item tdsout -Recurse -Force -ErrorAction Ignore
 
-ugent2016.zip: all ugent2016.tds.zip
+clean:
+	cd latex && latexmk -cd -use-make -C
+	rm -f latex/*.pdf
+	rm -rf latex/_minted-ugent2016-en
+	rm -rf latex/_minted-ugent2016-nl
+	rm -rf ugent2016.zip
+	rm -rf ugent2016.tds.zip
+	rm -rf ctanout
+	rm -rf tdsout
+
+ugent2016.zip-win: all ugent2016.tds.zip-win
 	powershell ./generate-ctan.ps1
 
-ugent2016.tds.zip: all
+ugent2016.tds.zip-win: all
 	powershell ./generate-tds.ps1
+
+ugent2016.zip: all ugent2016.tds.zip
+	powershell ./generate-ctan.sh
+
+ugent2016.tds.zip: all
+	powershell ./generate-tds.sh

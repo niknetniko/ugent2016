@@ -1,5 +1,6 @@
 #
-# Generate a zip file suitable for uploading to CTAN.
+# Generate a TDS compliant zip.
+# Note: this is experimental on Windows.
 #
 
 param(
@@ -8,13 +9,6 @@ param(
 
 $out = "tdsout"
 $in = "latex"
-
-# We need the following files in the zip for ctan:
-# - The class files
-# - The style files
-# - The docs (including the pdf versions)
-# - The logos
-# - The readme
 
 $latex = "$out/tex/latex/ugent2016"
 $doc = "$out/doc/latex/ugent2016"
@@ -44,7 +38,7 @@ Get-ChildItem -Path "$in/*" -File -Include *.tex | ForEach-Object {
 }
 
 # Copy the logos to the output folder
-Copy-Item "$in/logos" -Destination "$latex/logos" -Recurse
+Copy-Item "$in/ugent2016-logo-*.pdf" -Destination "$latex" -Recurse
 
 # Copy the documentation pdfs to the folder
 Copy-Item "$in/ugent2016-nl.pdf" -Destination "$doc"

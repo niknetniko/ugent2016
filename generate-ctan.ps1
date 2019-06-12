@@ -10,7 +10,7 @@ param(
 )
 
 $in = "tdsout"
-$out = "ugent2016"
+$out = "ctanout"
 
 # We need the following files in the zip for ctan:
 # - The class files
@@ -20,23 +20,20 @@ $out = "ugent2016"
 # - The readme
 
 # First, create the output directory
-New-Item -ItemType Directory -Force -Path $out
+New-Item -ItemType Directory -Force -Path $out/ugent2016
 
 Get-ChildItem $in -Recurse -File -Depth 3 | ForEach-Object {
     $filename = "$($_.BaseName)$($_.Extension)"
     Write-Host $_.FullName
-    Copy-Item $_.FullName -Destination $out/$filename
+    Copy-Item $_.FullName -Destination $out/ugent2016/$filename
 }
-
-# Copy logos
-Copy-Item "$in/tex/latex/ugent2016/logos" -Destination "$out/logos" -Recurse
 
 # Add tds-compliant zip file if necessary
 if (!$ExcludeTds) {
     Copy-Item ugent2016.tds.zip -Destination $out
 }
 
-Compress-Archive -Path $out -DestinationPath ugent2016.zip -Force
+Compress-Archive -Path $out/* -DestinationPath ugent2016.zip -Force
 
 if ($RemoveOut) {
     Remove-Item $out -Recurse -Force
