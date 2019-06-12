@@ -1,4 +1,3 @@
-texlive-base
 latexmk
 etoolbox
 xstring
