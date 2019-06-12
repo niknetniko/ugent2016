@@ -38,7 +38,7 @@
 % Define whether the footer should be shown or not.
 \DeclareStringOption[auto]{footer}
 % How much of the document we want to style.
-\DeclareStringOption[all]{layout}
+\DeclareStringOption[titlefont]{layout}
 % Define the underlying class
 \DeclareStringOption[auto]{baseclass}
 % Define whether the titles should be underlined or not.
@@ -110,7 +110,7 @@
 \AtBeginDocument{
 
     % Applied when the user wants the margins to be set, but nothing else.
-    \IfStringInList{\ugentcls@layout}{margins,colours,titlestyle,titlefont,all}{
+    \IfStringInList{\ugentcls@layout}{margins,colours,titlestyle,titlefont}{
         \iftoggle{showfooter}{
             \newgeometry{margin=2\smallblock,bottom=2.3\smallblock}
         }{
@@ -118,19 +118,12 @@
         }
     }{}
 
-    % This block is applied when the user wants full UGent style.
-    % It sets the main font to Arial; we don't use Panno, since the UGent doesn't
-    % have a license for italic versions.
-    \IfStrEq{\ugentcls@layout}{all}{
-        \setmainfont{Arial}
-    }{}
-
     % Applied when the user wants the titles in the correct colours, but nothing else.
-    \IfStringInList{\ugentcls@layout}{colours,titlestyle,titlefont,all}{
+    \IfStringInList{\ugentcls@layout}{colours,titlestyle,titlefont}{
         \addtokomafont{disposition}{\color{ugent-blue}}
     }{}
 
-    \IfStringInList{\ugentcls@layout}{titlestyle,titlefont,all}{
+    \IfStringInList{\ugentcls@layout}{titlestyle,titlefont}{
         \renewcommand\partlineswithprefixformat[3]{#2{\MakeUppercase{#3}}}
         \ifcsdef{chapter}{%
             \ifbool{ugentcls@underline}{%
@@ -149,7 +142,7 @@
     % This block is applied when the user wants the titles in UGent style, but not the main text.
     % Format the titles according to the UGent style (fonts and text decorations)
     % Sizes are not set, allowing for more flexibility for the user.
-    \IfStringInList{\ugentcls@layout}{titlefont,all}{
+    \IfStringInList{\ugentcls@layout}{titlefont}{
         \addtokomafont{disposition}{\panno}
         \newcommand*\tocentryformat[1]{{\panno#1}}
         \RedeclareSectionCommands[tocentryformat=\tocentryformat, tocpagenumberformat=\tocentryformat]

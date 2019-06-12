@@ -1,11 +1,11 @@
 # You want latexmk to *always* run, because make does not have all the info.
 # Also, include non-file targets in .PHONY so they are run regardless of any
 # file of the given name existing.
-.PHONY: latex/ugent2016-nl.pdf latex/ugent2016-en.pdf all
+.PHONY: latex/ugent2016-nl.pdf latex/ugent2016-en.pdf clean
 
 # The first rule in a Makefile is the one executed by default ("make"). It
 # should always be the "all" rule, so that "make" and "make all" are identical.
-all: $(pdf_assets) latex/ugent2016-nl.pdf latex/ugent2016-en.pdf
+all: all_pdf_assets latex/ugent2016-nl.pdf latex/ugent2016-en.pdf
 
 # CUSTOM BUILD RULES
 
@@ -75,3 +75,16 @@ latex/logos/%.pdf: assets/%.eps latex/logos
 # Clean up some stuff
 clean:
 	cd latex && latexmk -cd -use-make -C
+	-powershell Remove-Item latex/logos -Recurse -Force -ErrorAction Ignore
+	-powershell Remove-Item latex/_minted-ugent2016-en -Recurse -Force -ErrorAction Ignore
+	-powershell Remove-Item latex/_minted-ugent2016-nl -Recurse -Force -ErrorAction Ignore
+	-powershell Remove-Item ugent2016.zip -Force -ErrorAction Ignore
+	-powershell Remove-Item ugent2016.tds.zip -Force -ErrorAction Ignore
+	-powershell Remove-Item ugent2016 -Recurse -Force -ErrorAction Ignore
+	-powershell Remove-Item tdsout -Recurse -Force -ErrorAction Ignore
+
+ugent2016.zip: all ugent2016.tds.zip
+	powershell ./generate-ctan.ps1
+
+ugent2016.tds.zip: all
+	powershell ./generate-tds.ps1

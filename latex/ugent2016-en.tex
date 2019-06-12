@@ -143,7 +143,7 @@
                 \texttt{faculty} & \texttt{we} & See Table~\ref{table:faculty} \\
                 \texttt{campus} & \texttt{campus} & See Table~\ref{table:campus} \\
                 \texttt{footer} & \texttt{auto} & \texttt{true}, \texttt{false}, \texttt{auto} \\
-                \texttt{layout} & \texttt{all} &  See Section~\ref{subsubsec:layout} \\
+                \texttt{layout} & \texttt{titlefont} &  See Section~\ref{subsubsec:layout} \\
                 \texttt{baseclass} & \texttt{auto} & \texttt{scrreprt}, \texttt{scrartcl}, \texttt{scrbook}, \texttt{auto} (\texttt{ugent2016} only)\\
                 \texttt{underline} & \texttt{false} & \texttt{true}, \texttt{false} (boolean flag) \\
                 \hline
@@ -221,7 +221,7 @@
 
     \subsubsection{\texttt{layout=\textlangle style level\textrangle}}\label{subsubsec:layout}
 
-    This option specifies to which degree the document should be styled. Each level also applies the style of the previous level. For example, level 3 will also apply the style of level 2. The hierarchy looks like: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont} → \texttt{all}.
+    This option specifies to which degree the document should be styled. Each level also applies the style of the previous level. For example, level 3 will also apply the style of level 2. The hierarchy looks like: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont}.
 
     \begin{enumerate}
         \item \textbf{\texttt{none}} -- Don't apply any style except the title page.
@@ -229,7 +229,6 @@
         \item \textbf{\texttt{colours}} -- Apply the colours. This results in blue titles in the document.
         \item \textbf{\texttt{titlestyle}} -- Style the titles. The titles will be in all caps and possibly underlined.
         \item \textbf{\texttt{titlefont}} -- Apply the fonts on the titles.
-        \item \textbf{\texttt{all}} -- Apply everything. This means all fonts will be adjusted. Since there are no italics in the University's font, Arial will be used. This is the default value.
     \end{enumerate}
 
     \subsubsection{\texttt{baseclass=\textlangle auto|scrreprt|scrartcl|scrbook\textrangle}}\label{subsubsec:baseclass}
@@ -407,5 +406,9 @@
     \begin{center}
         \frame{\includegraphics[width=1\textwidth]{ugent2016-title-notes.pdf}}
     \end{center}
+
+    \section{Changes}\label{sec:changes}
+
+    Changes are tracked on GitHub.
 
 \end{document}

@@ -144,7 +144,7 @@
                 \texttt{faculty} & \texttt{we} & Zie tabel~\ref{table:faculty} \\
                 \texttt{campus} & \texttt{campus} & Zie tabel~\ref{table:campus} \\
                 \texttt{footer} & \texttt{auto} & \texttt{true}, \texttt{false}, \texttt{auto} \\
-                \texttt{layout} & \texttt{all} &  Zie sectie~\ref{subsubsec:layout} \\
+                \texttt{layout} & \texttt{titlefont} &  Zie sectie~\ref{subsubsec:layout} \\
                 \texttt{baseclass} & \texttt{auto} & \texttt{scrreprt}, \texttt{scrartcl}, \texttt{scrbook}, \texttt{auto} (enkel \texttt{ugent2016})\\
                 \texttt{underline} & \texttt{false} & \texttt{true}, \texttt{false} (boolean flag) \\
                 \hline
@@ -222,7 +222,7 @@
 
     \subsubsection{\texttt{layout=\textlangle stijlniveau\textrangle}}\label{subsubsec:layout}
 
-    Deze optie duidt aan tot welk niveau het document opgemaakt moet worden naar de normen van de huisstijl. Elk volgend niveau past ook de opmaak van het vorige niveau toe. Zo zal niveau 3 ook de opmaak van niveau 2 en niveau 1 toepassen. De hiërarchie ziet er als volgt uit: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont} → \texttt{all}.
+    Deze optie duidt aan tot welk niveau het document opgemaakt moet worden naar de normen van de huisstijl. Elk volgend niveau past ook de opmaak van het vorige niveau toe. Zo zal niveau 3 ook de opmaak van niveau 2 en niveau 1 toepassen. De hiërarchie ziet er als volgt uit: \texttt{none} → \texttt{margins} → \texttt{colours} → \texttt{titlestyle} → \texttt{titlefont}.
 
     \begin{enumerate}
         \item \textbf{\texttt{none}} -- Pas geen opmaak toe buiten de titelpagina.
@@ -230,7 +230,6 @@
         \item \textbf{\texttt{colours}} -- Pas kleuren toe. Concreet betekent dit dat de titels van het document in het blauw zullen zijn.
         \item \textbf{\texttt{titlestyle}} -- Maak de titels op. Hierbij gaat het om het omzetten naar hoofdletters en eventueel onderlijnen van de titels.
         \item \textbf{\texttt{titlefont}} -- Pas het lettertype toe op de titels.
-        \item \textbf{\texttt{all}} -- Pas alles toe. Concreet zal dit ervoor zorgen dat alle lettertypes voldoen aan de huisstijl. Omdat de UGent geen licentie heeft om het hoofdlettertype (Panno Tekst) te gebruiken voor schuine letters of cursief, wordt het secundaire lettertype gebruikt voor de hoofdtekst, namelijk \textit{Arial}. Dit is de standaardwaarde.
     \end{enumerate}
 
     \subsubsection{\texttt{baseclass=\textlangle auto|scrreprt|scrartcl|scrbook\textrangle}}\label{subsubsec:baseclass}
@@ -420,26 +419,6 @@
 
     \section{Wijzigingen}\label{sec:wijzigingen}
 
-    Dit onderdeel bevat de voornaamste wijzigingen. De exacte wijzigingen kunnen gevonden worden in de Github-repository.
-
-    \subsubsection*{22 mei 2019}
-    \begin{itemize}
-        \item Uniforme naamgeving van de pakketten en klassen.
-        \item Commando's hernoemd met uniformere naam.
-        \item Toevoegen \emph{wrapper}-klassen \texttt{ugent2016-report}, \texttt{ugent2016-article} en \texttt{ugent2016-book}.
-    \end{itemize}
-
-    \subsubsection*{18 mei 2019}
-    \begin{itemize}
-        \item Babel wordt niet meer standaard geladen voor compatibiliteitsredenen.
-        \item Het pakket \texttt{ugentasset2016} werkt nu ook zonder \texttt{fontspec}.
-        \item Alle klassen zijn samengevoegd tot één klasse, \texttt{ugent2016}.
-    \end{itemize}
-
-    \subsubsection*{15 februari 2019}
-    \begin{itemize}
-        \item Bugfixes bij onderlijnen lange titels
-        \item Voeg klasse \texttt{ugentartcl2016} toe
-    \end{itemize}
+    Wijzigingen worden bijgehouden op GitHub.
 
 \end{document}

@@ -1,7 +1,7 @@
 # The UGent2016 packages
 
-Version: 0.1  
-Date: 2019/05/22
+Version: 0.2   
+Date: 2019/06/12
 
 ## Description
 
@@ -29,6 +29,7 @@ Current maintainer(s):
     - Copy the `/logos` directory to `tex/latex/ugent2016`. The result should be `tex/latex/ugent2016/logos/*`.
     - Copy `ugent2016-nl.pdf` and `ugent2016-en.pdf` to `doc/latex/ugent2016`.
     - Copy `ugent2016-nl.tex` and `ugent2016-en.tex` to `source/latex/ugent2016`.
+    - Copy `ugent2016-title-*.tex` to `source/latex/ugent2016`. These are some source files needed for the documentation and can also server as an example.
 
 ## Documentation
 
