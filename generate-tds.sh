@@ -26,7 +26,7 @@ mkdir -p ${doc}
 mkdir -p ${source}
 
 # Copy all latex files
-find ${in} -name '*.cls' -o -name '*.sty' -exec cp "{}" ${latex} ";"
+find ${in} \( -name '*.cls' -o -name '*.sty' \) -exec cp "{}" ${latex} ";"
 
 # Copy all doc files
 find ${in} -name '*.md' -exec cp "{}" ${doc} ";"
