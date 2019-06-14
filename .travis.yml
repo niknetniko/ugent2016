@@ -1,5 +1,10 @@
 language: generic
 
+addons:
+  apt:
+    packages:
+      - ghostscript
+
 # Dependency of the minted package
 #before_install:
 # - sudo apt-get install python-pygments
