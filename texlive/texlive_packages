@@ -12,6 +12,7 @@ setspace
 ulem
 lm
 babel
+babel-dutch
 minted
 graphics
 oberdiek
