@@ -58,18 +58,27 @@ example.pdf: example.tex
 all_pdf_assets: $(pdf_assets) latex/ugent2016-logo-global-nl.pdf latex/ugent2016-logo-kortrijk-en.pdf
 
 # These two are created using symlinks rather than links.
+ifeq ($(OS),Windows_NT)
 latex/ugent2016-logo-global-nl.pdf: latex/ugent2016-logo-global-en.pdf
 	powershell New-Item -Force -ItemType SymbolicLink -Name $@ -Value $<
 
 latex/ugent2016-logo-kortrijk-en.pdf: latex/ugent2016-logo-kortrijk-nl.pdf
 	powershell New-Item -Force -ItemType SymbolicLink -Name $@ -Value $<
+else
+latex/ugent2016-logo-global-nl.pdf: latex/ugent2016-logo-global-en.pdf
+	ln -fs $< $@
+
+latex/ugent2016-logo-kortrijk-en.pdf: latex/ugent2016-logo-kortrijk-nl.pdf
+	ln -fs $< $@
+endif
 
 # Convert a single asset
 latex/%.pdf: assets/%.eps
 	epstopdf --outfile=$@ $<
 
 # Clean up some stuff
-clean-win:
+ifeq ($(OS),Windows_NT)
+clean:
 	cd latex && latexmk -cd -use-make -C
 	-powershell Remove-Item latex/*.pdf -Recurse -Force -ErrorAction Ignore
 	-powershell Remove-Item latex/_minted-ugent2016-en -Recurse -Force -ErrorAction Ignore
@@ -78,7 +87,7 @@ clean-win:
 	-powershell Remove-Item ugent2016.tds.zip -Force -ErrorAction Ignore
 	-powershell Remove-Item ctanout -Recurse -Force -ErrorAction Ignore
 	-powershell Remove-Item tdsout -Recurse -Force -ErrorAction Ignore
-
+else
 clean:
 	cd latex && latexmk -cd -use-make -C
 	rm -f latex/*.pdf
@@ -88,15 +97,18 @@ clean:
 	rm -rf ugent2016.tds.zip
 	rm -rf ctanout
 	rm -rf tdsout
+endif
 
-ugent2016.zip-win: all ugent2016.tds.zip-win
+ifeq ($(OS),Windows_NT)
+ugent2016.zip: all ugent2016.tds.zip
 	powershell ./generate-ctan.ps1
 
-ugent2016.tds.zip-win: all
+ugent2016.tds.zip: all
 	powershell ./generate-tds.ps1
-
+else
 ugent2016.zip: all ugent2016.tds.zip
 	powershell ./generate-ctan.sh
 
 ugent2016.tds.zip: all
 	powershell ./generate-tds.sh
+endif
