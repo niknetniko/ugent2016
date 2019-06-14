@@ -11,6 +11,7 @@ cache:
     - $HOME/.texlive
 # Change working directory so including files will work
 script:
+  - ls
   - make ugent2016.zip
 
   # But you could use any other compiler as well instead of latexmk. Example:
