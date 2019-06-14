@@ -10,6 +10,7 @@ cache:
     - /tmp/texlive
     - $HOME/.texlive
 # Change working directory so including files will work
+before_script: cd $TRAVIS_BUILD_DIR
 script:
   - ls
   - make ugent2016.zip
