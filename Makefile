@@ -66,10 +66,10 @@ latex/ugent2016-logo-kortrijk-en.pdf: latex/ugent2016-logo-kortrijk-nl.pdf
 	powershell New-Item -Force -ItemType SymbolicLink -Name $@ -Value $<
 else
 latex/ugent2016-logo-global-nl.pdf: latex/ugent2016-logo-global-en.pdf
-	ln -fs $< $@
+	ln -f $< $@
 
 latex/ugent2016-logo-kortrijk-en.pdf: latex/ugent2016-logo-kortrijk-nl.pdf
-	ln -fs $< $@
+	ln -f $< $@
 endif
 
 # Convert a single asset
@@ -107,8 +107,8 @@ ugent2016.tds.zip: all
 	powershell ./generate-tds.ps1
 else
 ugent2016.zip: all ugent2016.tds.zip
-	powershell ./generate-ctan.sh
+	./generate-ctan.sh
 
 ugent2016.tds.zip: all
-	powershell ./generate-tds.sh
+	./generate-tds.sh
 endif

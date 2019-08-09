@@ -30,3 +30,7 @@ fancyvrb
 upquote
 lineno
 framed
+float
+marginnote
+caption
+changepage
