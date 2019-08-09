@@ -16,6 +16,7 @@ script:
 branches:
   only:
     - master
+    - /\d+\.\d+\.\d+/
 deploy:
   provider: releases
   api_key:
