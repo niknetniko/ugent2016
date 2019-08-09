@@ -47,7 +47,7 @@ cp "$in/ugent2016-en.pdf" ${doc}
 # Fix all permissions
 find ${out} -type f -exec chmod 644 "{}" ";"
 
-cd ${out}
+cd ${out} || exit
 zip --filesync -r ../ugent2016.tds.zip *
 
 chmod 644 ../ugent2016.tds.zip

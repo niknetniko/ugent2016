@@ -12,7 +12,7 @@ if ! command -v texlua > /dev/null; then
   # Obtain TeX Live
   wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
   tar -xzf install-tl-unx.tar.gz
-  cd install-tl-20*
+  cd install-tl-20* || exit
 
   # Install a minimal system
   ./install-tl --profile=../texlive/texlive.profile
@@ -29,7 +29,8 @@ tlmgr install luatex
 
 # Then you can add one package per line in the texlive_packages file
 # We need to change the working directory before including a file
-cd "$(dirname "${BASH_SOURCE[0]}")"
+# shellcheck disable=SC2039
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit
 tlmgr install $(cat texlive_packages)
 
 # Keep no backups (not required, simply makes cache bigger)
@@ -37,3 +38,6 @@ tlmgr option -- autobackup 0
 
 # Update the TL install but add nothing new
 tlmgr update --self --all --no-auto-install
+
+# Regenerate the format files
+fmtutil --all
