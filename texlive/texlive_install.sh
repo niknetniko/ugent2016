@@ -40,4 +40,4 @@ tlmgr option -- autobackup 0
 tlmgr update --self --all --no-auto-install
 
 # Regenerate the format files
-fmtutil -sys --all
+fmtutil-sys --all
