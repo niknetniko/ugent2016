@@ -13,6 +13,7 @@ ulem
 lm
 babel
 babel-dutch
+hyphen-dutch
 minted
 graphics
 oberdiek
@@ -26,3 +27,4 @@ koma-script
 epstopdf
 fvextra
 fancyvrb
+upquote
