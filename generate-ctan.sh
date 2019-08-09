@@ -37,7 +37,9 @@ if [[ ${EXCLUDE_TDS} = false ]]; then
     cp ugent2016.tds.zip ${out}
 fi
 
-zip --filesync -r ugent2016.zip $out/*
+cd "$out" || exit
+zip --filesync -r ../ugent2016.zip *
+cd ..
 
 if [[ "$REMOVE_OUT" = true ]]; then
     rm -rf ${out}
