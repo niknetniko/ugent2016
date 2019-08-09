@@ -4,6 +4,7 @@ addons:
   apt:
     packages:
       - ghostscript
+      - python-pygments
 
 # Dependency of the minted package
 #before_install:
