@@ -1,4 +1,4 @@
-# UGent 2016 styles
+# UGent 2016 styles [![Build Status](https://travis-ci.com/niknetniko/ugent2016.svg?branch=master)](https://travis-ci.com/niknetniko/ugent2016)
 
 Unofficial packages to create documents in the official Ghent University style. Three document classes are provided that work out of the box:
 

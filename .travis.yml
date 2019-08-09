@@ -1,34 +1,26 @@
 language: generic
-
 addons:
   apt:
     packages:
       - ghostscript
       - python-pygments
-
-# Dependency of the minted package
-#before_install:
-# - sudo apt-get install python-pygments
 install:
   - source ./texlive/texlive_install.sh
 cache:
   directories:
-    - /tmp/texlive
-    - $HOME/.texlive
-# Change working directory so including files will work
+    - "/tmp/texlive"
+    - "$HOME/.texlive"
 before_script: cd $TRAVIS_BUILD_DIR
 script:
   - make ugent2016.zip
-
-  # But you could use any other compiler as well instead of latexmk. Example:
-#  - pdflatex main.tex
-#  - bibtex main
-#  - pdflatex main.tex
-#  - pdflatex main.tex # Compile twice to fix references
-
-  # You can also pass arguments to texliveonfly:
-#  - texliveonfly --arguments='-shell-escape' main.tex
-
 branches:
   only:
     - master
+deploy:
+  provider: releases
+  api_key:
+    secure: VxJIOC08N/oCzYM6fxgZmtp0/utZX9zfrv4buREhcKu0aG9zCPb5JKbYtzz0wiNjTPhJxllj02H3ufarUaXk3eQk6YejWiduOC8/QXdwfavJgvJXK0EyALwS1Dlsd7mkRfrHQ752D+OZQBffb3gi7nVaoXHVrFhz1m6u+QDjc4HljFM+GVwhuluUdPQ7HJkj/4loe1nNOyOx8l9cur/5mRBhuD0M/cOR4/AtRStXo/b3HTSNH6EucHdGCza4IUaTJ9EA/rK8DNKBdw+0oHj60dlTkgx6L2YrpFfJK6h0BCA3ToFyDKmmdFem90bQE9w+ed1Yn6QcGaQ8MFBSYDjRC00kDD4OsuYtqV06NMe9UhU9Y9JuNezVXu5bF19HoOShMvn68YvDfCFTsdgRj71xdVHpEMlCsLi28aBC+hz/xzZ76ccy6of18znkc54FgL3deGoFY/wo3FUz4LAZuxx4f3kohMVXTBdYWoajBseqO0L6Kz8fMl+mTwJuEr4GSeb7npsrSiqZXiLtU8mMSRZt8xAe6RP+kh4mS+gcnpEtziu2fMuBOyAKUHH8PEl/TqDxDDIF//51Ethjlh4hnnsgY3SKnxC/XK4Kr7yDtGqZWQF2jK/eavwekWf5FDuYiekJP548O9kLidHS9NFlJIO91b5DBcuNc288G8hFNb5jaiI=
+  file: ugent2016.zip
+  skip_cleanup: true
+  on:
+    tags: true
