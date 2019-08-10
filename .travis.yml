@@ -5,8 +5,7 @@ addons:
       - ghostscript
       - python-pygments
 before_install:
-  - openssl aes-256-cbc -K $encrypted_e78ee18d072a_key -iv $encrypted_e78ee18d072a_iv
-  - in panno_3.00.zip.enc -out panno_3.00.zip -d
+  - openssl aes-256-cbc -K $encrypted_e78ee18d072a_key -iv $encrypted_e78ee18d072a_iv -in panno_3.00.zip.enc -out panno_3.00.zip -d
   - mkdir $HOME/.fonts && unzip panno_3.00.zip -d $HOME/.fonts
   - fc-cache -f -v
 install:
