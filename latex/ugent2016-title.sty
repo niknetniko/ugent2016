@@ -198,7 +198,7 @@
 					\node[anchor=north west] (faculty) at ([shift={(\smallblock,0)}]current page.north west) {
 						% Don't display the faculty logo if we don't have one.
 						% We can still keep the node, it doesn't matter.
-						\IfStrEq{\ugent@faculty}{none}{}{
+						\IfStrEq{\ugent@faculty}{none}{}{%
 							\includegraphics[height=3\smallblock]{\@facultyimage}
 						}
 					};
