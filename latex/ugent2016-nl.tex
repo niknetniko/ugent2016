@@ -50,7 +50,7 @@
 
     \dictum[Larry Wall, auteur van Perl.]{``Easy things should be easy, and hard things should be possible.''}
 
-    Deze pakketten willen nuttig zijn voor ieder die documenten wilt opstellen in de officiële huisstijl van de UGent. Zoals het citaat aangeeft hebben de pakketten de bedoeling een kant-en-klare oplossing te bieden die werkt in de meeste gevallen. Niettegenstaande zijn de meeste opties in te stellen, zodat de gebruiker alles kan instellen naar wens. Is iets niet instelbaar, rapporteer dit dan als een fout in het pakket zodat we het kunnen oplossen.
+    Deze pakketten willen nuttig zijn voor ieder die documenten wilt opstellen in de officiële huisstijl van de UGent. Zoals het citaat aangeeft hebben de pakketten de bedoeling een kant-en-klare oplossing te bieden die werkt in de meeste gevallen. Niettegenstaande zijn de meeste opties in te stellen, zodat de gebruiker deze kan instellen naar wens. Is iets niet instelbaar, rapporteer dit dan als een fout in het pakket, zodat we het kunnen oplossen.
 
     Deze handleiding volgt een \emph{top-down}-aanpak; we beginnen met de klassen die het vaakst gebruikt zullen worden, en gaan dan verder met de onderliggende pakketten.
 
@@ -109,9 +109,9 @@
 
     De hoofdmanier om een document te bekomen in de officiële huisstijl is het gebruik van de klassen \texttt{ugent2016-article}, \texttt{ugent2016-book} en \texttt{ugent2016-report}. Deze klassen verzamelen alle andere functionaliteit.
 
-    De klasse gebruikt de \KOMAScript-klassen als basis. Dit betekent de alle functionaliteit uit de \KOMAScript-klassen ook beschikbaar is.
+    De klasse gebruikt de \KOMAScript-klassen als basis. Dit betekent dat alle functionaliteit uit de \KOMAScript-klassen ook beschikbaar is.
 
-    Snel op weg is mogelijk door het \texttt{example.tex}-bestand te gebruiken of bekijk het voorbeeld hieronder:
+    Snel op weg door het \texttt{example.tex}-bestand te gebruiken of bekijk het voorbeeld hieronder:
 
 \begin{minted}{latex}
 \documentclass[11pt]{ugent2016-report}
@@ -257,7 +257,7 @@
     \end{itemize}
 
     \subsection{Metagegevens}\label{subsec:metagegevens}
-    Om het voorblad van data te voorzien zijn er een heleboel commando's analoog aan \mintinline{latex}{\author{}} en verwanten. Afhankelijk van het type voorblad worden gegevens op een andere plaats getoond of zelfs niet getoond. Een visueel overzicht wordt gegeven in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} en~\ref{sec:voorblad-met-stijl-notes}. Tabel~\ref{table:titlemeta} bevat een beschrijving van alle beschikbare commando's.
+    Om het voorblad van data te voorzien zijn er veel commando's analoog aan \mintinline{latex}{\author{}} en verwanten. Afhankelijk van het type voorblad worden gegevens op een andere plaats getoond of zelfs niet getoond. Een visueel overzicht wordt gegeven in bijlagen~\ref{sec:voorblad-met-stijl-course},~\ref{sec:voorblad-met-stijl-report} en~\ref{sec:voorblad-met-stijl-notes}. Tabel~\ref{table:titlemeta} bevat een beschrijving van alle beschikbare commando's.
 
     \begin{table}
         \begin{center}
@@ -387,9 +387,9 @@
 
     \subsection{Grid}\label{subsec:grid}
 
-    De huisstijl definieert een typografisch grid over de pagina\footnote{Zie \url{https://styleguide.ugent.be/basisprincipes/grid-en-lay-out.html}}, dat bekomen wordt door de lengte door 7 te delen.
+    De huisstijl definieert een typografisch grid over de pagina\footnote{Zie \url{https://styleguide.ugent.be/basisprincipes/grid-en-lay-out.html}}, dat verkregen wordt door de lengte door zeven te delen.
     Dat zijn de grote blokken.
-    De lengte van een groot blok wordt dan gedeeld door 4 om een klein blok te krijgen.
+    De lengte van een groot blok wordt dan gedeeld door vier om een klein blok te krijgen.
     Het kleine blok is de basisgrootte van het document.
     Pakketten zoals \texttt{ugent2016-title} gebruiken deze basisgrootte om de positie van onderdelen te bepalen.
     Er zijn twee macro's beschikbaar, \mintinline{latex}{\bigblock} en \mintinline{latex}{\smallblock}, die de lengte van respectievelijk het grote en het kleine blok geven.
