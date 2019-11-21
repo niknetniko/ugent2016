@@ -192,7 +192,7 @@
 		\renewcommand{\ULdepth}{0.4ex}
 
 		\IfStrEq{\ugent@type}{report}{
-			\newgeometry{margin=2\smallblock} % adjust margins, restored later
+			\newgeometry{margin=2\smallblock,bottom=4\smallblock,top=3\smallblock} % adjust margins, restored later
 			\begin{titlepage}
 				\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
 					\node[anchor=north west] (faculty) at ([shift={(\smallblock,0)}]current page.north west) {
@@ -208,10 +208,13 @@
 				\end{tikzpicture}
 
 				\vspace{\fill}
-				\begin{spacing}{2.3}
-					\noindent{\fontsize{2.5\@basesize}{3\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
-					\noindent{\fontsize{1.5\@basesize}{1.8\@basesize}\panno\color{ugent-blue}\MakeTextUppercase{\@subtitle}}
-				\end{spacing}
+				\noindent
+				\begin{minipage}{\textwidth}
+					\raggedright
+					\fontsize{2.5\@basesize}{3\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}} \par
+					\vspace{0.3\baselineskip}
+					\fontsize{1.5\@basesize}{1.8\@basesize}\panno\color{ugent-blue}\MakeTextUppercase{\@subtitle}
+				\end{minipage}
 
 				% Add word count if necessary
 				\ifdefempty{\@wordcount}{%
