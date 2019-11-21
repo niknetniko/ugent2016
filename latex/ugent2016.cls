@@ -45,6 +45,9 @@
 % This is off by default; the underlining has some issues with thickness and spacing.
 \DeclareBoolOption{underline}
 
+% Define if spacing should be applied to text, titles, etc.
+\DeclareBoolOption{spacing}
+
 % Other options are passed to the underlying class, allowing it to be configured as well.
 \ProcessKeyvalOptions*
 
@@ -120,7 +123,11 @@
 
     % Applied when the user wants the titles in the correct colours, but nothing else.
     \IfStringInList{\ugentcls@layout}{colours,titlestyle,titlefont}{
-        \addtokomafont{disposition}{\color{ugent-blue}}
+        \ifcsdef{chapter}{%
+            \addtokomafont{chapter}{\color{ugent-blue}}
+        }{%
+            \addtokomafont{section}{\color{ugent-blue}}
+        }
     }{}
 
     \IfStringInList{\ugentcls@layout}{titlestyle,titlefont}{
@@ -147,6 +154,18 @@
         \newcommand*\tocentryformat[1]{{\panno#1}}
         \RedeclareSectionCommands[tocentryformat=\tocentryformat, tocpagenumberformat=\tocentryformat]
             {section,subsection,subsubsection,paragraph,subparagraph}
+    }{}
+
+
+    % Set the size and spacing of the titles.
+    \ifbool{ugentcls@spacing}{%
+        \ifcsdef{chapter}{%
+            \RedeclareSectionCommand[
+                beforeskip=20pt,
+                afterskip=22pt,
+                afterindent=false% <- added
+            ]{chapter}
+        }{}
     }{}
 
     \NewTranslationFallback{title}{Titel}
@@ -178,11 +197,11 @@
                     \begin{minipage}[c][1\smallblock][s]{7\smallblock}
                         \raggedright
                         {\fontsize{8pt}{10pt}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\foot@title}} \\
-                        {\fontsize{10pt}{15pt}\bfseries\panno\@title}
+                        {\fontsize{10pt}{15pt}\bfseries\panno\@subtitle}
                     \end{minipage}
                 };
-                \node[anchor=north west, align=left] (title) at ([shift={(14\smallblock,2\smallblock)}]current page.south west) {
-                    \begin{minipage}[c][1\smallblock][s]{2\smallblock}
+                \node[anchor=north west, align=left] (title) at ([shift={(13\smallblock,2\smallblock)}]current page.south west) {
+                    \begin{minipage}[c][1\smallblock][s]{3\smallblock}
                         \raggedright
                         {\fontsize{8pt}{10pt}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\foot@date}} \\
                         {\fontsize{10pt}{15pt}\panno\@date}
