@@ -254,7 +254,7 @@
 			\restoregeometry % restore margins
 		}{}
 		\IfStrEq{\ugent@type}{notes}{
-			\newgeometry{margin=2\smallblock} % adjust margins, restored later
+		\newgeometry{margin=2\smallblock,bottom=4\smallblock,top=3\smallblock} % adjust margins, restored later
 			\begin{titlepage}
 				\IfStrEq{\ugent@faculty}{none}{%
 					\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
@@ -274,10 +274,17 @@
 				}
 
 				\vspace{\fill}
-				\begin{spacing}{2.3}
-					\noindent{\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
-					\noindent{\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\MakeTextUppercase\@subtitle}
-				\end{spacing}
+				\noindent
+				\begin{minipage}{\textwidth}
+					\raggedright
+					\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}} \par
+					\vspace{0.3\baselineskip}
+					\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\MakeTextUppercase{\@subtitle}
+				\end{minipage}
+%				\begin{spacing}{2.3}
+%					\noindent{\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
+%					\noindent{\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\MakeTextUppercase\@subtitle}
+%				\end{spacing}
 
 				\vspace{1\baselineskip}
 
