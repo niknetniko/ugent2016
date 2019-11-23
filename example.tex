@@ -11,17 +11,24 @@
 %% example.tex
 %% Shows how to use the UGent 2016 styles. See the manuel for more information.
 %%
-\documentclass[11pt,campus=default,faculty=we,layout=all,dutch]{ugent2016-book}
 
+% Alternative classes are ugent2016-book or ugent2016-article
+\documentclass[11pt,dutch,faculty=we,layout=titlefont]{ugent2016-report}
+% The layout parameter controls how much of the UGent layout we want to apply.
+% Currently we apply as much as possible, but see the manual for more information.
+% Note that this will not set the main font of your text; this is something you must
+% do yourself (the style guide recommends either UGent Panno Tekst or Arial).
+
+% Babel for language facilities.
 \usepackage{babel}
-% Provide example text
+% Provide example text.
 \usepackage{lipsum}
 
 % Some meta data. See the manual for an overview for everything.
 \author{Jan Jaap}
 \title{Supermooie cursus die een hele lange titel heeft}
 %\subtitle{Hello}
-\academyyear{2018--2019}
+\academicyear{2018--2019}
 \programme{Informatica}
 \wordcount{10000}
 \studentnumber{12356}

@@ -116,7 +116,7 @@
 
 % Define front page attributes.
 % See the manual for a description and the intended use.
-\newcommand*{\@academyyear}{}
+\newcommand*{\@academicyear}{}
 \newcommand*{\@programme}{}
 \newcommand*{\@studentnumber}{}
 \newcommand*{\@wordcount}{}
@@ -133,7 +133,7 @@
 % Create the command that will make them available to the package.
 \newcommand*{\professor}[1]{\author{#1}}
 \newcommand*{\programme}[1]{\gdef\@programme{#1}}
-\newcommand*{\academyyear}[1]{\gdef\@academyyear{#1}}
+\newcommand*{\academicyear}[1]{\gdef\@academicyear{#1}}
 \newcommand*{\studentnumber}[1]{\gdef\@studentnumber{#1}}
 \newcommand*{\wordcount}[1]{\gdef\@wordcount{#1}}
 \newcommand*{\titletext}[1]{\gdef\@titletext{#1}}
@@ -172,8 +172,8 @@
 	\NewTranslation{english}{wordcounttext}{Word count:}
 	\NewTranslationFallback{numbertext}{Studentennummer:}
 	\NewTranslation{english}{numbertext}{Student number:}
-	\NewTranslationFallback{academyyear}{Academiejaar:}
-	\NewTranslation{english}{academyyear}{Academic year:}
+	\NewTranslationFallback{academicyear}{Academiejaar:}
+	\NewTranslation{english}{academicyear}{Academic year:}
 
 	% For the course title page, we differ slightly from the Word templates; our title page is aligned to the grid,
 	% theirs is not.
@@ -246,8 +246,8 @@
 				}
 
 				\vspace{1\baselineskip}
-				\ifdefempty{\@academyyear}{}{%
-					\noindent{\GetTranslation{academyyear} \@academyyear}
+				\ifdefempty{\@academicyear}{}{%
+					\noindent{\GetTranslation{academicyear} \@academicyear}
 				}
 				\vspace{\fill}
 			\end{titlepage}
@@ -351,7 +351,7 @@
 						{\fontsize{18bp}{22bp}\panno\@author} \par
 						\vspace{\smallblock}
 						{\fontsize{15bp}{18bp}\panno\@programme} \par
-						{\fontsize{15bp}{18bp}\panno\@academyyear}
+						{\fontsize{15bp}{18bp}\panno\@academicyear}
 					\end{minipage}
 					};
 				\end{tikzpicture}

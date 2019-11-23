@@ -2,10 +2,10 @@
 # Base definitions for the UGent 2016 script layouts.
 # Niko Strijbol <strijbol.niko@gmail.com>, 2019/04/29.
 
-Style AcademyYear
-	LabelString		"Academy year (academiejaar)"
+Style AcademicYear
+	LabelString		"Academic year (academiejaar)"
 	CopyStyle		Author
-	LatexName		academyyear
+	LatexName		academicyear
 End
 
 Style Programme
