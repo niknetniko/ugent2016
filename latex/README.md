@@ -30,6 +30,8 @@ Current maintainer(s):
     - Copy `ugent2016-nl.pdf` and `ugent2016-en.pdf` to `doc/latex/ugent2016`.
     - Copy `ugent2016-nl.tex` and `ugent2016-en.tex` to `source/latex/ugent2016`.
     - Copy `ugent2016-title-*.tex` to `source/latex/ugent2016`. These are some source files needed for the documentation and can also server as an example.
+    
+Note that you need to download and install the UGent font manually.
 
 ## Documentation
 
