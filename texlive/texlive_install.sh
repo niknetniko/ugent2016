@@ -23,21 +23,11 @@ fi
 # Just including texlua so the cache check above works
 tlmgr install luatex
 
-# In the case you have to install packages manually, you can use an index of packages like
-# http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
-# Or better, check https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained.
-
-# Then you can add one package per line in the texlive_packages file
-# We need to change the working directory before including a file
-# shellcheck disable=SC2039
-cd "$(dirname "${BASH_SOURCE[0]}")" || exit
-tlmgr install $(cat texlive_packages)
+# We specify the directory in which it is located texlive_packages
+tlmgr install $(sed 's/\s*#.*//;/^\s*$/d' texlive/texlive_packages)
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
 
 # Update the TL install but add nothing new
 tlmgr update --self --all --no-auto-install
-
-# Regenerate the format files
-# fmtutil-sys --all
