@@ -39,8 +39,8 @@ See the manual `ugent2016-[nl|en].pdf` for more information.
 
 ## License
 
-All code is licensed under the LaTeX Project Public License, version 1.3c or later.
+All code is licensed under the LaTeX Project Public Licence, version 1.3c or later.
 
-The license of the included images should be CC BY-SA 4.0 according to [Wikipedia](https://commons.wikimedia.org/wiki/File:Logo_UGent_NL_RGB_2400_kleur-op-wit.png), but I'm the process of verifying this.
+The licence of the included images should be CC BY-SA 4.0 according to [Wikipedia](https://commons.wikimedia.org/wiki/File:Logo_UGent_NL_RGB_2400_kleur-op-wit.png), but the legal department disagreed when I contacted them.
 
 See the main readme file (in the parent directory of the source code repository) for more details.
