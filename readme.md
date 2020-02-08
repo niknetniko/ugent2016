@@ -44,4 +44,4 @@ The packages are still in beta! Please report issues. The three main classes are
 
 All files except those mentioned below are licensed under the LaTeX Project Public License, version 1.3c or later. See the `LICENSE` file.
 
-All files in the folders `assets` and `latex/logos` are propably licensed under CC BY-SA 4.0; this is in process of being verified.
+The license of the files in the folders `assets` and `latex/logos` is unclear. Wikipedia claims that the UGent logo (main one) is CC BY-SA 4.0; but the legal department disagreed when I contacted them.
