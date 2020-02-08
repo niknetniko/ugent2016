@@ -52,7 +52,7 @@ latex/ugent2016-title-%.pdf: latex/ugent2016-title-%.tex
 
 # Create the example file
 example.pdf: example.tex
-	latexmk -cd lualatex -interaction=nontopmode -use-make $<
+	latexmk -cd -lualatex -interaction=nontopmode -use-make $<
 
 # Create all assets
 all_pdf_assets: $(pdf_assets) latex/ugent2016-logo-global-nl.pdf latex/ugent2016-logo-kortrijk-en.pdf
