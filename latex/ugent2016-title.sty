@@ -50,8 +50,8 @@
 
 % Set-up for our options.
 \SetupKeyvalOptions{
- family=ugent,
- prefix=ugent@
+ family=ugenttitle,
+ prefix=ugenttitle@
 }
 
 % Defines the style of the title page.
@@ -60,6 +60,14 @@
 \DeclareStringOption[we]{faculty}
 % Which campus
 \DeclareStringOption[ugent]{campus}
+
+% Styling options
+% Define whether the titles should be underlined or not.
+% This is on by default; the underlining has some issues with thickness and spacing.
+\DeclareBoolOption[true]{underline}
+% Define whether the titles should be forced to uppercase or not.
+% This is on by default; there should be no issues.
+\DeclareBoolOption[true]{uppercase}
 
 \DeclareDefaultOption{%
 	\@unknownoptionerror
@@ -72,27 +80,27 @@
 \providecommand*{\IfStringInList}[2]{\IfSubStr{,#2,}{,#1,}}
 
 % Check if the faculty is valid.
-\IfStringInList{\ugent@faculty}{bw,di,ea,eb,fw,ge,lw,pp,ps,re,we,none}{}{%
-	\PackageError{\@currname}{Unknown faculty provided: \ugent@faculty}{%
+\IfStringInList{\ugenttitle@faculty}{bw,di,ea,eb,fw,ge,lw,pp,ps,re,we,none}{}{%
+	\PackageError{\@currname}{Unknown faculty provided: \ugenttitle@faculty}{%
 		The faculty must be one of [bw,di,ea,eb,fw,ge,lw,pp,ps,re,we,none].
 	}
 }
 % Check if the campus is valid.
-\IfStringInList{\ugent@campus}{ugent,global,kortrijk}{}{%
-	\PackageError{\@currname}{Unknown campus provided: \ugent@campus}{%
+\IfStringInList{\ugenttitle@campus}{ugent,global,kortrijk}{}{%
+	\PackageError{\@currname}{Unknown campus provided: \ugenttitle@campus}{%
 		The campus must be one of [ugent,global,kortrijk].
 	}
 }
 % Check if the style is valid.
-\IfStringInList{\ugent@type}{course,report,notes}{}{%
-	\PackageError{\@currname}{Unknown document type provided: \ugent@type}{%
+\IfStringInList{\ugenttitle@type}{course,report,notes}{}{%
+	\PackageError{\@currname}{Unknown document type provided: \ugenttitle@type}{%
 		The document type must be one of [course,report,notes].
 	}
 }
 
 % Some combinations of options are not possible.
-\IfStrEq{\ugent@type}{course}{%
-	\IfStrEq{\ugent@faculty}{none}{%
+\IfStrEq{\ugenttitle@type}{course}{%
+	\IfStrEq{\ugenttitle@faculty}{none}{%
 		\PackageError{\@currname}{The faculty is mandatory when using course title page}{%
 			If the course document type is selected, the faculty is necessary to determine the colours.
 		}
@@ -100,13 +108,13 @@
 }{}
 
 % Define a shortcut for the faculty color
-\newcommand*{\@facultycolor}{ugent-\ugent@faculty}
+\newcommand*{\@facultycolor}{ugent-\ugenttitle@faculty}
 % Define a shortcut for the faculty logo
-\newcommand*{\@facultyimage}{\ugentlogo{\ugent@faculty}}
+\newcommand*{\@facultyimage}{\ugentlogo{\ugenttitle@faculty}}
 % Define a shortcut for the campus name
-\newcommand*{\@campusimage}{\ugentlogo{\ugent@campus}}
+\newcommand*{\@campusimage}{\ugentlogo{\ugenttitle@campus}}
 % Define a shortcut for the faculty code.
-\newcommand*{\@facultycode}{\ugent@faculty}
+\newcommand*{\@facultycode}{\ugenttitle@faculty}
 
 % If subtitle does not exist
 \ifcsundef{subtitle}{%
@@ -146,19 +154,19 @@
 \newcommand*{\facultish}[1]{\gdef\@facultish{#1}}
 \newcommand*{\promotors}[1]{\gdef\@promotors{#1}}
 
-\IfStrEq{\ugent@type}{notes}{
+\IfStrEq{\ugenttitle@type}{notes}{
 % By default and if possible, we use the faculty name.
 	\IfStrEq{\@facultish}{}{
-		\IfStrEq{\ugent@faculty}{none}{
+		\IfStrEq{\ugenttitle@faculty}{none}{
 			\PackageError{\@currname}{If no faculty is set, provide a name using \\@facultish{name}}{Consult the manual for more information.}%
 		}{
-			\facultish{\facultyname{\ugent@faculty}}
+			\facultish{\facultyname{\ugenttitle@faculty}}
 		}
 	}{}
 }{}
 
 \AtBeginDocument{
-	\IfStrEq{\ugent@type}{notes}{
+	\IfStrEq{\ugenttitle@type}{notes}{
 		\@ifpackageloaded{hyperref}{}{%
 			\PackageError{\@currname}{Package 'hyperref' is not loaded}{Please add \\usepackage{hyperref}}
 		}
@@ -166,6 +174,22 @@
 }
 
 \AtEndPreamble{
+
+	\newcommand*{\ugenttitle@maybeUnderline}[1]{%
+		\ifbool{ugenttitle@underline}{%
+			\uline{#1}%
+		}{%
+			#1%
+		}%
+	}
+
+	\newcommand*{\ugenttitle@maybeUppercase}[1]{%
+		\ifbool{ugenttitle@uppercase}{%
+			\MakeUppercase{#1}%
+		}{%
+			#1%
+		}%
+	}
 
 	% Do translations
 	\NewTranslationFallback{wordcounttext}{Aantal woorden:}
@@ -191,14 +215,14 @@
 		\renewcommand{\ULthickness}{0.2ex}
 		\renewcommand{\ULdepth}{0.4ex}
 
-		\IfStrEq{\ugent@type}{report}{
+		\IfStrEq{\ugenttitle@type}{report}{
 			\newgeometry{margin=2\smallblock,bottom=4\smallblock,top=3\smallblock} % adjust margins, restored later
 			\begin{titlepage}
 				\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
 					\node[anchor=north west] (faculty) at ([shift={(\smallblock,0)}]current page.north west) {
 						% Don't display the faculty logo if we don't have one.
 						% We can still keep the node, it doesn't matter.
-						\IfStrEq{\ugent@faculty}{none}{}{%
+						\IfStrEq{\ugenttitle@faculty}{none}{}{%
 							\includegraphics[height=3\smallblock]{\@facultyimage}
 						}
 					};
@@ -211,9 +235,9 @@
 				\noindent
 				\begin{minipage}{\textwidth}
 					\raggedright
-					\fontsize{2.5\@basesize}{3\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}} \par
+					\fontsize{2.5\@basesize}{3\@basesize}\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
 					\vspace{0.3\baselineskip}
-					\fontsize{1.5\@basesize}{1.8\@basesize}\panno\color{ugent-blue}\MakeTextUppercase{\@subtitle}
+					\fontsize{1.5\@basesize}{1.8\@basesize}\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
 				\end{minipage}
 
 				% Add word count if necessary
@@ -253,10 +277,10 @@
 			\end{titlepage}
 			\restoregeometry % restore margins
 		}{}
-		\IfStrEq{\ugent@type}{notes}{
+		\IfStrEq{\ugenttitle@type}{notes}{
 		\newgeometry{margin=2\smallblock,bottom=4\smallblock,top=3\smallblock} % adjust margins, restored later
 			\begin{titlepage}
-				\IfStrEq{\ugent@faculty}{none}{%
+				\IfStrEq{\ugenttitle@faculty}{none}{%
 					\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
 						\node[anchor=north west] (faculty) at ([shift={(\smallblock,0)}]current page.north west) {
 							\includegraphics[height=4\smallblock]{\@campusimage}
@@ -277,14 +301,11 @@
 				\noindent
 				\begin{minipage}{\textwidth}
 					\raggedright
-					\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}} \par
+
+					\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
 					\vspace{0.3\baselineskip}
-					\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\MakeTextUppercase{\@subtitle}
+					\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
 				\end{minipage}
-%				\begin{spacing}{2.3}
-%					\noindent{\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\MakeTextUppercase{\uline{\@title}}} \par
-%					\noindent{\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\MakeTextUppercase\@subtitle}
-%				\end{spacing}
 
 				\vspace{1\baselineskip}
 
@@ -319,7 +340,7 @@
 			\end{titlepage}
 			\restoregeometry % restore margins
 		}{}
-		\IfStrEq{\ugent@type}{course}{
+		\IfStrEq{\ugenttitle@type}{course}{
 			\begin{titlepage}
 				\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
 					\coordinate (big-top-right) at ([shift={(0,-3\smallblock)}]current page.north east);
@@ -344,7 +365,7 @@
 						\raggedright
 						\color{white}
 						\begin{spacing}{3}
-							{\fontsize{35bp}{42bp}\bfseries\panno\MakeTextUppercase{\uline{\@title}}} \par
+							{\fontsize{35bp}{42bp}\bfseries\panno\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}}} \par
 							{\fontsize{30bp}{36bp}\bfseries\panno\@subtitle}
 						\end{spacing}
 						\vfill

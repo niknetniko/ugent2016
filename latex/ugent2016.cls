@@ -1,3 +1,4 @@
+%! Suppress = FileNotFound
 %%----------------------------------------------------------------------------------------------------------------------
 %% Copyright (C) 2019 by Niko Strijbol
 %%
@@ -42,8 +43,19 @@
 % Define the underlying class
 \DeclareStringOption[auto]{baseclass}
 % Define whether the titles should be underlined or not.
-% This is off by default; the underlining has some issues with thickness and spacing.
-\DeclareBoolOption{underline}
+% This is on by default; the underlining has some issues with thickness and spacing.
+\DeclareBoolOption[false]{underline}
+% Define whether the titles should be forced to uppercase or not.
+% This is on by default; there should be no issues.
+\DeclareBoolOption[true]{uppercase}
+
+% Options for the title pages.
+% Define whether the titles should be underlined or not.
+% This is on by default; the underlining has some issues with thickness and spacing.
+\DeclareBoolOption[true]{titleUnderline}
+% Define whether the titles should be forced to uppercase or not.
+% This is on by default; there should be no issues.
+\DeclareBoolOption[true]{titleUppercase}
 
 % Define if spacing should be applied to text, titles, etc.
 \DeclareBoolOption{spacing}
@@ -96,8 +108,20 @@
     \toggletrue{showfooter}
 }{}
 
+% Pass styling options
+\ifbool{ugentcls@titleUnderline}{%
+    \PassOptionsToPackage{underline=true}{ugent2016-title}%
+}{%
+    \PassOptionsToPackage{underline=false}{ugent2016-title}%
+}
+
 % Load our style package with the required options.
-\RequirePackage[type=\ugentcls@type,faculty=\ugentcls@faculty,campus=\ugentcls@campus]{ugent2016-title}
+\RequirePackage[
+    type=\ugentcls@type,
+    faculty=\ugentcls@faculty,
+    campus=\ugentcls@campus,
+    uppercase=\ifbool{ugentcls@titleUppercase}{true}{false}
+]{ugent2016-title}
 
 
 % Load packages at the end of the preamble, allowing overrides.
@@ -111,6 +135,22 @@
 
 % Change settings once we are in the document.
 \AtBeginDocument{
+
+    \newcommand*{\ugentcls@maybeUnderline}[1]{%
+        \ifbool{ugentcls@underline}{%
+            \uline{#1}%
+        }{%
+            #1%
+        }%
+    }
+
+    \newcommand*{\ugentcls@maybeUppercase}[1]{%
+        \ifbool{ugentcls@uppercase}{%
+            \MakeUppercase{#1}%
+        }{%
+            #1%
+        }
+    }
 
     % Applied when the user wants the margins to be set, but nothing else.
     \IfStringInList{\ugentcls@layout}{margins,colours,titlestyle,titlefont}{
@@ -131,15 +171,10 @@
     }{}
 
     \IfStringInList{\ugentcls@layout}{titlestyle,titlefont}{
-        \renewcommand\partlineswithprefixformat[3]{#2{\MakeUppercase{#3}}}
+        \renewcommand\partlineswithprefixformat[3]{#2{\ugentcls@maybeUppercase{#3}}}
         \ifcsdef{chapter}{%
-            \ifbool{ugentcls@underline}{%
-                \renewcommand\chapterlineswithprefixformat[3]{#2{\MakeUppercase{\uline{#3}}}}
-                \renewcommand{\chapterlinesformat}[3]{\@hangfrom{#2}{\MakeUppercase{\uline{#3}}}}
-            }{%
-                \renewcommand\chapterlineswithprefixformat[3]{#2{\MakeUppercase{#3}}}
-                \renewcommand{\chapterlinesformat}[3]{\@hangfrom{#2}{\MakeUppercase{#3}}}
-            }
+            \renewcommand\chapterlineswithprefixformat[3]{#2{\ugentcls@maybeUppercase{\ugentcls@maybeUnderline{#3}}}}
+            \renewcommand{\chapterlinesformat}[3]{\@hangfrom{#2}{\ugentcls@maybeUppercase{\ugentcls@maybeUnderline{#3}}}}
         }{}
         \addtokomafont{section}{\bfseries}
         \addtokomafont{subsection}{\bfseries}
