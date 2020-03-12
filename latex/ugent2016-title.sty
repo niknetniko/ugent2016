@@ -165,15 +165,14 @@
 	}{}
 }{}
 
-\AtBeginDocument{
-	\IfStrEq{\ugenttitle@type}{notes}{
-		\@ifpackageloaded{hyperref}{}{%
-			\PackageError{\@currname}{Package 'hyperref' is not loaded}{Please add \\usepackage{hyperref}}
-		}
-	}
-}
 
 \AtEndPreamble{
+
+	\IfStrEq{\ugenttitle@type}{notes}{%
+		\@ifpackageloaded{hyperref}{}{%
+			\PackageError{\@currname}{Package 'hyperref' is not loaded}{Please add \\usepackage{hyperref}}%
+		}%
+	}
 
 	\newcommand*{\ugenttitle@maybeUnderline}[1]{%
 		\ifbool{ugenttitle@underline}{%
@@ -278,7 +277,7 @@
 			\restoregeometry % restore margins
 		}{}
 		\IfStrEq{\ugenttitle@type}{notes}{
-		\newgeometry{margin=2\smallblock,bottom=4\smallblock,top=3\smallblock} % adjust margins, restored later
+			\newgeometry{margin=2\smallblock,bottom=4\smallblock,top=3\smallblock} % adjust margins, restored later
 			\begin{titlepage}
 				\IfStrEq{\ugenttitle@faculty}{none}{%
 					\begin{tikzpicture}[remember picture,overlay,every node/.style={inner sep=0,outer sep=0}]
