@@ -309,6 +309,20 @@ Ze worden gebruikt zoals de normale \LaTeX-commando's:
 \subtitle{Zonder toegevoegde data}
 \end{minted}
 
+De voorbladen ondersteunen ook het \KOMAScript-commando \texttt{\textbackslash and} om meerdere auteurs aan te duiden.
+Omdat de huisstijl niet voorschrijft wat er moet gebeuren met meerdere auteurs, wordt standaard een komma gebruikt tussen de namen.
+Dit kan gewijzigd worden door het commando opnieuw te definiëren:
+
+\begin{minted}{latex}
+\renewcommand*{\and}{plaats hier wat tussen de namen moet komen}
+\end{minted}
+
+Het is ook altijd mogelijk om doorlopende tekst te gebruiken voor meer uitgebreide dingen:
+
+\begin{minted}{latex}
+\author{Jan Jansens, Piet Pieterszoon en Jacques Jackman}
+\end{minted}
+
 \section{Pakket \texttt{ugent2016-assets}}\label{sec:pakkettexttt2}
 Dit pakket voorziet de logo's, kleuren en andere \emph{assets}. Als voorbeeld wordt in dit deel vaak de Faculteit Wetenschappen gebruikt. Dit pakket wordt door de andere klassen en pakketten achter de schermen gebruikt, maar kan ook onafhankelijk nuttig zijn als een document logo's of kleuren van de UGent moet bevatten.
 

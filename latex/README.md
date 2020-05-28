@@ -1,7 +1,6 @@
 # The UGent2016 packages
 
-Version: 0.2   
-Date: 2019/06/12
+Create documents using the official UGent style.
 
 ## Description
 

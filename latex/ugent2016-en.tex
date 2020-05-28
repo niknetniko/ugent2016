@@ -309,6 +309,20 @@ They are used like the regular \LaTeX commands:
 \subtitle{No added data}
 \end{minted}
 
+The title pages also support the \KOMAScript command \texttt{\textbackslash and} to specify multiple authors.
+As the house style does not specify what should happen with multiple authors, we insert a comma by default.
+This can be modified by redefining the command:
+
+\begin{minted}{latex}
+\renewcommand*{\and}{put the between names content here}
+\end{minted}
+
+It's also possible to use plain text if more advanced stuff is required:
+
+\begin{minted}{latex}
+\author{Jan Jansens, Piet Pieterszoon and Jacques Jackman}
+\end{minted}
+
 \section{Package \texttt{ugent2016-assets}}\label{sec:pakkettexttt2}
 
 This package provides the logos, colours and other assets. We often use the Faculty of Sciences in this section to illustrate the options and commands. This packages is used by the other packages behind the scenes, but can also be useful for use in other packages (e.g.\ document classes not covered by this package).

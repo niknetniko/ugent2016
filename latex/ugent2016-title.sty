@@ -165,6 +165,10 @@
 	}{}
 }{}
 
+% Redefine the /and command to prevent issues.
+% The UGent theme does not specify how multiple authors should be listed, so we just use a comma.
+\renewcommand*{\and}{\leavevmode\unskip{}, \ignorespaces}
+
 
 \AtEndPreamble{
 
