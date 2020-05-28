@@ -14,7 +14,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}[2017/01/01]
-\ProvidesPackage{ugent2016-article}[2019/05/19 UGent2016 Article Class]
+\ProvidesPackage{ugent2016-article}[2020/05/28 UGent2016 Article Class]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ugent2016}}
 \ProcessOptions\relax
