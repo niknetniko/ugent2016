@@ -36,6 +36,14 @@ Hallo.
 
 ```
 
+## Examples
+
+A list of theses and documents using this package, with source available:
+
+- https://github.com/niknetniko/universal-judge/tree/master/thesis (my thesis)
+
+Feel free to add yourself.
+
 ## Warning
 
 The packages are still in beta! Please report issues. The three main classes are considered stable, meaning they should continue to work (barring any serious issues that need resolving). Other packages and classes might change in the future.
