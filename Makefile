@@ -51,7 +51,7 @@ latex/ugent2016-title-%.pdf: latex/ugent2016-title-%.tex
 	latexmk -cd -lualatex -interaction=nonstopmode -use-make $<
 
 # Create the example file
-example.pdf: example.tex
+latex/example.pdf: latex/example.tex
 	latexmk -cd -lualatex -interaction=nontopmode -use-make $<
 
 # Create all assets

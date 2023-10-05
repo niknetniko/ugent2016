@@ -13,7 +13,7 @@ jobs:
       - uses: teatimeguest/setup-texlive-action@v2
         with:
           package-file: texlive/texlive_packages
-      - run: make example.pdf
+      - run: make latex/example.pdf
       - uses: actions/upload-artifact@v3
         with:
           name: example.pdf
