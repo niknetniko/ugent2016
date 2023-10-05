@@ -3,11 +3,7 @@ scheme-basic
 
 # Base tools to compile
 latexmk
-
-# LuaTeX
 luaotfload
-
-# texliveonfly does not detect the following packages automatically
 etoolbox
 xstring
 xcolor
