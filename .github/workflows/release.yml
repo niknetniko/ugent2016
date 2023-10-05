@@ -1,0 +1,25 @@
+name: "Release"
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: mkdir $HOME/.fonts && unzip panno_3.00.zip -d $HOME/.fonts
+      - run: fc-cache -f -v
+      - uses: teatimeguest/setup-texlive-action@v2
+        with:
+          package-file: texlive/texlive_packages
+      - run: sudo apt-get install -y ghostscript python3-pygments
+      - run: make ugent2016.zip
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: ugent2016.zip
