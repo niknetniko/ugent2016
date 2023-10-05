@@ -1,0 +1,18 @@
+name: "CI"
+
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: mkdir $HOME/.fonts && unzip panno_3.00.zip -d $HOME/.fonts
+      - run: fc-cache -f -v
+      - run: source ./texlive/texlive_install.sh
+      - run: make example.pdf
+      - uses: actions/upload-artifact@v3
+        with:
+          name: example.pdf
+          path: example.pdf

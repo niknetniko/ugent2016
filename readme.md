@@ -1,6 +1,7 @@
-# UGent 2016 styles [![Build Status](https://travis-ci.com/niknetniko/ugent2016.svg?branch=master)](https://travis-ci.com/niknetniko/ugent2016)
+# UGent 2016 styles
 
-Unofficial packages to create documents in the official Ghent University style. Three document classes are provided that work out of the box:
+Unofficial packages to create documents in the official Ghent University style.
+Three document classes are provided which work out of the box:
 
 - `ugent2016-article`
 - `ugent2016-book`
@@ -46,10 +47,16 @@ Feel free to add yourself.
 
 ## Warning
 
-The packages are still in beta! Please report issues. The three main classes are considered stable, meaning they should continue to work (barring any serious issues that need resolving). Other packages and classes might change in the future.
+The packages are still in beta! Please report issues. The three main classes are considered stable, meaning they should continue to work (barring any serious issues that need resolving). 
+Other packages and classes might change in the future.
 
 ## License
 
 All files except those mentioned below are licensed under the LaTeX Project Public Licence, version 1.3c or later. See the `LICENSE` file.
 
-The licence of the files in the folders `assets` and `latex/logos` is unclear. Wikipedia claims that the UGent logo (main one) is CC BY-SA 4.0; but the legal department disagreed when I contacted them.
+The licence of the files in the folders `assets` and `latex/logos` is unclear. Wikipedia claims that the UGent logo (main one) is CC BY-SA 4.0;
+but the legal department disagreed when I contacted them.
+
+The file `panno_3.00.zip` contains the UGent Panno fonts.
+These are commercially licensed fonts.
+You can only use them if covered by the UGent's license.
