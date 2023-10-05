@@ -238,9 +238,9 @@
 				\noindent
 				\begin{minipage}{\textwidth}
 					\raggedright
-					\fontsize{2.5\@basesize}{3\@basesize}\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
+					\fontsize{2.5\@basesize}{3\@basesize}\selectfont\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
 					\vspace{0.3\baselineskip}
-					\fontsize{1.5\@basesize}{1.8\@basesize}\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
+					\fontsize{1.5\@basesize}{1.8\@basesize}\selectfont\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
 				\end{minipage}
 
 				% Add word count if necessary
@@ -252,7 +252,7 @@
 					\vspace{4\baselineskip}
 				}
 
-				\noindent{\fontsize{1.5\@basesize}{1.8\@basesize}\@author} \par
+				\noindent{\fontsize{1.5\@basesize}{1.8\@basesize}\selectfont\@author} \par
 				\ifdefempty{\@studentnumber}{%
 					\vspace{1\baselineskip}
 				}{%
@@ -264,7 +264,7 @@
 				\ifdefempty{\@promotors}{%
 					\vspace{2\baselineskip}
 				}{%
-					\noindent{\fontsize{1.2\@basesize}{1.44\@basesize}\@promotors}
+					\noindent{\fontsize{1.2\@basesize}{1.44\@basesize}\selectfont\@promotors}
 					\vspace{1\baselineskip}
 				}
 
@@ -305,9 +305,9 @@
 				\begin{minipage}{\textwidth}
 					\raggedright
 
-					\fontsize{3\@basesize}{3.63\@basesize}\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
+					\fontsize{3\@basesize}{3.63\@basesize}\selectfont\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
 					\vspace{0.3\baselineskip}
-					\fontsize{2\@basesize}{2.4\@basesize}\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
+					\fontsize{2\@basesize}{2.4\@basesize}\selectfont\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
 				\end{minipage}
 
 				\vspace{1\baselineskip}
@@ -368,14 +368,14 @@
 						\raggedright
 						\color{white}
 						\begin{spacing}{3}
-							{\fontsize{35bp}{42bp}\bfseries\panno\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}}} \par
-							{\fontsize{30bp}{36bp}\bfseries\panno\@subtitle}
+							{\fontsize{35bp}{42bp}\selectfont\bfseries\panno\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}}} \par
+							{\fontsize{30bp}{36bp}\selectfont\bfseries\panno\@subtitle}
 						\end{spacing}
 						\vfill
-						{\fontsize{18bp}{22bp}\panno\@author} \par
+						{\fontsize{18bp}{22bp}\selectfont\panno\@author} \par
 						\vspace{\smallblock}
-						{\fontsize{15bp}{18bp}\panno\@programme} \par
-						{\fontsize{15bp}{18bp}\panno\@academicyear}
+						{\fontsize{15bp}{18bp}\selectfont\panno\@programme} \par
+						{\fontsize{15bp}{18bp}\selectfont\panno\@academicyear}
 					\end{minipage}
 					};
 				\end{tikzpicture}
