@@ -18,4 +18,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: example.pdf
-          path: example.pdf
+          path: latex/example.pdf
