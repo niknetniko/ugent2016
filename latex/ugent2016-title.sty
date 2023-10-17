@@ -214,7 +214,7 @@
 	\setlength{\@basesize}{\f@size pt}
 
 	\renewcommand*{\maketitle}{%
-		\pagenumbering{gobble} % Numbers are restored later
+		\thispagestyle{empty}
 		\renewcommand{\ULthickness}{0.2ex}
 		\renewcommand{\ULdepth}{0.4ex}
 
@@ -381,7 +381,6 @@
 				\end{tikzpicture}
 			\end{titlepage}
 		}{}
-		\pagenumbering{arabic} % Restore page numbering
 	}
 }
 
