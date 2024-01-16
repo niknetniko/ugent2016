@@ -35,24 +35,27 @@
     % Used to simplify getting the correct resources for the language.
     \RequirePackage{translations}
 
-    % Show a warning if fontspec has not been loaded.
-    \@ifpackageloaded{fontspec}{
-        \PackageInfo{\@currname}{Package 'fontspec' is loaded, attempting to load UGent Panno}
-        % Provide the font family as \panno
-        \IfFontExistsTF{UGent Panno Text}{%
-            % The font exists, so load it.
-            \PackageInfo{\@currname}{UGent Panno is available, it will be available}
-            \newfontfamily\panno{UGent Panno Text}[
-                BoldFont	= UGent Panno Text SemiBold
-            ]
+    \@ifundefined{panno}{
+        % Show a warning if fontspec has not been loaded.
+        \@ifpackageloaded{fontspec}{
+            \PackageInfo{\@currname}{Package 'fontspec' is loaded, attempting to load UGent Panno}
+            % Provide the font family as \panno
+            \IfFontExistsTF{UGent Panno Text}{%
+                % The font exists, so load it.
+                \PackageInfo{\@currname}{UGent Panno is available, it will be available}
+                \newfontfamily\panno{UGent Panno Text}[
+                    BoldFont	= UGent Panno Text SemiBold
+                ]
+            }{%
+                % The font does not exist, so issue a warning and define a command that does nothing.
+                \PackageWarningNoLine{\@currname}{UGent Panno is not available, so it will not be available. Download and install it from https://www.ugent.be/intranet/nl/op-het-werk/huisstijl/panno-lettertype.htm}
+                \newcommand{\panno}{\sffamily}
+            }
         }{%
-            % The font does not exist, so issue a warning and define a command that does nothing.
-            \PackageWarningNoLine{\@currname}{UGent Panno is not available, so it will not be available. Download and install it from https://www.ugent.be/intranet/nl/op-het-werk/huisstijl/panno-lettertype.htm}
-            \newcommand{\panno}{\sffamily}
+            \PackageWarningNoLine{\@currname}{Package 'fontspec' is not defined. UGent Panno will not be available}
         }
-
     }{%
-        \PackageWarningNoLine{\@currname}{Package 'fontspec' is not defined. UGent Panno will not be available}
+        \PackageWarningNoLine{\@currname}{Command 'panno' is already defined. Assuming you configured the font yourself.}
     }
 
     % Global Ghent University colours
