@@ -41,9 +41,6 @@
 	% Used to adjust margins of the title page
 	\PassOptionsToPackage{pass}{geometry}
 	\RequirePackage{geometry}
-	% Fix compat with KomaScript
-	% Sets the spacing between lines.
-	\RequirePackage{setspace}
 	% Used for underlining the titles
 	\RequirePackage[normalem]{ulem}
 	% Position things within tikz.
@@ -369,10 +366,8 @@
 					\begin{minipage}[c][\dimexpr0.37\pageheight-2\smallblock\relax][s]{\dimexpr0.61\pagewidth-2\smallblock\relax}
 						\raggedright
 						\color{white}
-						\begin{spacing}{3}
-							{\fontsize{35bp}{42bp}\selectfont\bfseries\panno\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}}} \par
-							{\fontsize{30bp}{36bp}\selectfont\bfseries\panno\@subtitle}
-						\end{spacing}
+						{\fontsize{35bp}{42bp}\selectfont\bfseries\panno\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}}} \par
+						{\fontsize{30bp}{36bp}\selectfont\bfseries\panno\@subtitle}
 						\vfill
 						{\fontsize{18bp}{22bp}\selectfont\panno\@author} \par
 						\vspace{\smallblock}
