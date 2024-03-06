@@ -235,12 +235,12 @@
 
 				\vspace{\fill}
 				\noindent
-				\begin{minipage}{\textwidth}
-					\raggedright
+				{%
+					\raggedright%
 					\fontsize{2.5\@basesize}{3\@basesize}\selectfont\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
-					\vspace{0.3\baselineskip}
-					\fontsize{1.5\@basesize}{1.8\@basesize}\selectfont\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
-				\end{minipage}
+					\vspace{0.3\baselineskip}%
+					\fontsize{1.5\@basesize}{1.8\@basesize}\selectfont\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}%
+				}
 
 				% Add word count if necessary
 				\ifdefempty{\@wordcount}{%
