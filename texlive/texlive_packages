@@ -12,7 +12,6 @@ fontspec
 pgf
 textcase
 geometry
-setspace
 ulem
 lm
 babel

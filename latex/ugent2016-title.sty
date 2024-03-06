@@ -13,7 +13,7 @@
 % This package provides the three officially defined styles [1]: notes/report, thesis (any kind) and book.
 %
 % [1]: https://styleguide.ugent.be/sjablonen/drukwerk.html
-\ProvidesPackage{ugent2016-title}[2020/05/28 package ugent2016-title]
+\ProvidesPackage{ugent2016-title}[2024/03/06 package ugent2016-title]
 
 % Load our stuff at the end of the preamble. This allows the user to override loaded packages.
 \RequirePackage{etoolbox}
@@ -41,9 +41,6 @@
 	% Used to adjust margins of the title page
 	\PassOptionsToPackage{pass}{geometry}
 	\RequirePackage{geometry}
-	% Fix compat with KomaScript
-	% Sets the spacing between lines.
-	\RequirePackage{setspace}
 	% Used for underlining the titles
 	\RequirePackage[normalem]{ulem}
 	% Position things within tikz.
@@ -238,12 +235,12 @@
 
 				\vspace{\fill}
 				\noindent
-				\begin{minipage}{\textwidth}
-					\raggedright
+				{%
+					\raggedright%
 					\fontsize{2.5\@basesize}{3\@basesize}\selectfont\bfseries\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}} \par
-					\vspace{0.3\baselineskip}
-					\fontsize{1.5\@basesize}{1.8\@basesize}\selectfont\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}
-				\end{minipage}
+					\vspace{0.3\baselineskip}%
+					\fontsize{1.5\@basesize}{1.8\@basesize}\selectfont\panno\color{ugent-blue}\ugenttitle@maybeUppercase{\@subtitle}%
+				}
 
 				% Add word count if necessary
 				\ifdefempty{\@wordcount}{%
@@ -369,10 +366,8 @@
 					\begin{minipage}[c][\dimexpr0.37\pageheight-2\smallblock\relax][s]{\dimexpr0.61\pagewidth-2\smallblock\relax}
 						\raggedright
 						\color{white}
-						\begin{spacing}{3}
-							{\fontsize{35bp}{42bp}\selectfont\bfseries\panno\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}}} \par
-							{\fontsize{30bp}{36bp}\selectfont\bfseries\panno\@subtitle}
-						\end{spacing}
+						{\fontsize{35bp}{42bp}\selectfont\bfseries\panno\ugenttitle@maybeUppercase{\ugenttitle@maybeUnderline{\@title}}} \par
+						{\fontsize{30bp}{36bp}\selectfont\bfseries\panno\@subtitle}
 						\vfill
 						{\fontsize{18bp}{22bp}\selectfont\panno\@author} \par
 						\vspace{\smallblock}
